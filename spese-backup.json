@@ -1,9 +1,25 @@
 {
-  "timestamp": "2026-03-26T07:31:34.431Z",
-  "expenses": [],
-  "payments": [],
+  "timestamp": "2026-03-26T07:32:19.391Z",
+  "expenses": [
+    {
+      "description": "werg",
+      "category": "Attività",
+      "amount": 5000,
+      "day": 1,
+      "person": "Andrea"
+    }
+  ],
+  "payments": [
+    {
+      "from": "Andrea",
+      "to": "Monica",
+      "amount": 1000,
+      "description": "po",
+      "date": "26/03/2026"
+    }
+  ],
   "summary": {
-    "total": 0,
-    "count": 0
+    "total": 5000,
+    "count": 1
   }
 }
