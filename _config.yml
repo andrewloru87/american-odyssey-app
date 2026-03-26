@@ -1,0 +1,7 @@
+theme: jekyll-theme-minimal
+title: American Odyssey
+description: Travel Expense Manager + GitHub Backup
+
+# GitHub Pages settings
+remote_theme: jekyll/minima
+show_downloads: false
