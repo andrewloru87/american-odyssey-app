@@ -1,10 +1,12 @@
-<html lang="it"><head>
+<!DOCTYPE html>
+<html lang="it">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>American Odyssey</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
         
@@ -1017,15 +1019,15 @@
     </style>
 </head>
 <body>
-    <button class="menu-btn open" id="menuBtn" onclick="toggleMenu()">
+    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
     </button>
     
-    <div class="overlay open" id="overlay" onclick="toggleMenu()"></div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
     
-    <div class="sidebar open" id="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h2>American Odyssey</h2>
             <p>25 giorni • 5000+ km</p>
@@ -1045,7 +1047,7 @@
                     <div class="sidebar-day-item" onclick="goToDay(1, event)">Day 02 - Central Park</div>
                     <div class="sidebar-day-item" onclick="goToDay(2, event)">Day 03 - Statua Libertà</div>
                     <div class="sidebar-day-item" onclick="goToDay(3, event)">Day 04 - Broadway</div>
-                    <div class="sidebar-day-item" onclick="goToDay(4, event)">Day 05 - MoMA &amp; Top</div>
+                    <div class="sidebar-day-item" onclick="goToDay(4, event)">Day 05 - MoMA & Top</div>
                 </div>
             </div>
 
@@ -1087,11 +1089,11 @@
             <!-- UTAH & NEVADA -->
             <div class="sidebar-accordion-item">
                 <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
-                    <span>🎰 Utah &amp; Nevada (4 giorni)</span>
+                    <span>🎰 Utah & Nevada (4 giorni)</span>
                     <span class="sidebar-accordion-toggle">▼</span>
                 </div>
                 <div class="sidebar-accordion-content">
-                    <div class="sidebar-day-item" onclick="goToDay(20, event)">Day 21 - Bryce &amp; Zion</div>
+                    <div class="sidebar-day-item" onclick="goToDay(20, event)">Day 21 - Bryce & Zion</div>
                     <div class="sidebar-day-item" onclick="goToDay(21, event)">Day 22 - → Las Vegas</div>
                     <div class="sidebar-day-item" onclick="goToDay(22, event)">Day 23 - Las Vegas</div>
                     <div class="sidebar-day-item" onclick="goToDay(23, event)">Day 24 - Death Valley</div>
@@ -1142,49 +1144,14 @@
         <button class="tab" onclick="switchTab(event, 'summary')">📊 Riepilogo</button>
     </div>
     
-    <div class="content" id="content">
-                <div class="day-card">
-                    <div class="day-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        ⏳
-                    </div>
-                    <div class="day-content">
-                        <div class="day-header">
-                            <div class="day-number">00</div>
-                            <div class="day-info-block">
-                                <h2 id="countdownTitle">23 giorni, 0h 27m</h2><div class="countdown-seconds" id="countdownSeconds">22s</div>
-                                <div class="day-date">Giovedì 26 Marzo</div>
-                            </div>
-                        </div>
-                        <div class="day-desc">Mancano 23 giorni, 0 ore e 28 minuti al grande viaggio! Il decollo è previsto per le 10:45 da Vienna.</div>
-            <div class="day-expanded"><div class="section-label">Orari e Locazioni</div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">00:00</div>
-                            <div class="timeline-action">Countdown - Decollo alle 10:45</div>
-                            <button class="timeline-toggle" onclick="toggleDetails(this)">Dettagli ▼</button>
-                            <div class="timeline-details">
-                                <div class="detail-section">
-                                    <div class="detail-title">📍 Cosa fare</div>
-                                    <div class="detail-text">Il viaggio inizia il 18 Aprile 2026 alle 10:45. Mancano 23 giorni, 0 ore e 28 minuti!</div>
-                                </div>
-                                <div class="detail-section">
-                                    <div class="detail-title">⚠️ Tenere a mente</div>
-                                    <div class="detail-text">Documenti di viaggio, passaporto, visto ESTA pronto.</div>
-                                </div>
-                                <div class="detail-section">
-                                    <div class="detail-title">ℹ️ Dettagli</div>
-                                    <div class="detail-text">Controlla che tutto sia in ordine per il grande giorno! Presentarsi all'aeroporto 3 ore prima del decollo.</div>
-                                </div>
-                            </div>
-                            <button class="map-btn" onclick="openMap('Vienna')">📍 Vienna</button>
-                        </div>
-                    </div></div></div></div>
+    <div class="content" id="content"></div>
     
     <!-- CAROUSEL SWIPEABLE -->
     <div class="carousel-container" id="carouselContainer">
         <div class="carousel-indicators">
-            <span id="dayIndicator" class="day-indicator">Day 0 / 26</span>
+            <span id="dayIndicator" class="day-indicator">Day 1 / 25</span>
         </div>
-        <div class="carousel-swipe-area" id="swipeArea" style="opacity: 1;">
+        <div class="carousel-swipe-area" id="swipeArea">
             <div class="swipe-hint left">← Swipe</div>
             <div class="swipe-hint right">Swipe →</div>
         </div>
@@ -2550,88 +2517,34 @@
             currentDay = Math.min(dayDiff, days.length - 1);
         }
 
-        // ============================================
-        // FIREBASE SETUP - ZERO LOCALSTORAGE
-        // ============================================
-        
-        // Initialize realtime listener
-        let expenses = [];
-        let payments = [];
-        let editingIndex = -1;
-        let unsubscribe = null;
-        let unsubscribePayments = null;
-
-        function setupRealtimeListeners() {
-            console.log('🔄 Setting up Firebase realtime listeners...');
-            
-            // Listen to expenses
-            unsubscribe = db.collection("expenses")
-                .orderBy("createdAt", "desc")
-                .onSnapshot(
-                    (snapshot) => {
-                        expenses = [];
-                        snapshot.forEach(doc => {
-                            const data = doc.data();
-                            expenses.push({
-                                id: doc.id,
-                                description: data.description,
-                                category: data.category,
-                                amount: data.amount,
-                                person: data.person,
-                                createdAt: data.createdAt
-                            });
-                        });
-                        console.log('✅ Expenses updated:', expenses.length);
-                        renderExpenses();
-                    },
-                    (error) => {
-                        console.error('❌ Error loading expenses:', error);
-                    }
-                );
-            
-            // Listen to payments
-            unsubscribePayments = db.collection("payments")
-                .orderBy("createdAt", "desc")
-                .onSnapshot(
-                    (snapshot) => {
-                        payments = [];
-                        snapshot.forEach(doc => {
-                            const data = doc.data();
-                            payments.push({
-                                id: doc.id,
-                                from: data.from,
-                                to: data.to,
-                                amount: data.amount,
-                                description: data.description,
-                                date: data.date,
-                                createdAt: data.createdAt
-                            });
-                        });
-                        console.log('✅ Payments updated:', payments.length);
-                        renderExpenses();
-                    },
-                    (error) => {
-                        console.error('❌ Error loading payments:', error);
-                    }
-                );
+        // EXPENSES FUNCTIONS
+        function getDefaultExpenses() {
+            return [];
         }
 
-        // Legacy functions for backward compatibility
         function loadExpenses() {
-            return expenses;
+            const saved = localStorage.getItem('americanOdysseyExpenses');
+            return saved ? JSON.parse(saved) : getDefaultExpenses();
         }
 
         function saveExpenses(expenseList) {
-            // NON FARE NULLA - tutto va su Firebase
+            localStorage.setItem('americanOdysseyExpenses', JSON.stringify(expenseList));
         }
 
+        let expenses = loadExpenses();
+        let editingIndex = -1;
+
+        // PAYMENTS MANAGEMENT
         function loadPayments() {
-            return payments;
+            const saved = localStorage.getItem('americanOdysseyPayments');
+            return saved ? JSON.parse(saved) : [];
         }
 
         function savePayments(paymentList) {
-            // NON FARE NULLA - tutto va su Firebase
+            localStorage.setItem('americanOdysseyPayments', JSON.stringify(paymentList));
         }
+
+        let payments = loadPayments();
 
         function formatCurrency(amount) {
             return '€' + amount.toFixed(2);
@@ -3061,7 +2974,7 @@
             }
         }
 
-        async function addExpense() {
+        function addExpense() {
             const desc = document.getElementById('expDesc').value;
             const category = document.getElementById('expCategory').value;
             const amount = parseFloat(document.getElementById('expAmount').value);
@@ -3073,29 +2986,16 @@
                 return;
             }
 
-            try {
-                await db.collection("expenses").add({
-                    description: desc,
-                    category: category,
-                    amount: amount,
-                    day: day,
-                    person: person,
-                    createdAt: firebase.firestore.Timestamp.now()
-                });
-                
-                console.log('✅ Expense saved to Firebase');
-                
-                // Clear form
-                document.getElementById('expDesc').value = '';
-                document.getElementById('expAmount').value = '';
-                document.getElementById('expCategory').value = 'Attività';
-                document.getElementById('expPerson').value = 'Andrea';
-                
-                // renderExpenses() viene chiamato automaticamente dal listener Firebase
-            } catch (error) {
-                console.error('❌ Error saving expense:', error);
-                alert('Errore nel salvare: ' + error.message);
-            }
+            expenses.push({ description: desc, category, amount, day, person });
+            saveExpenses(expenses);
+            
+            // Clear form
+            document.getElementById('expDesc').value = '';
+            document.getElementById('expAmount').value = '';
+            document.getElementById('expCategory').value = 'Attività';
+            document.getElementById('expPerson').value = 'Andrea';
+            
+            renderExpenses();
         }
 
         function editExpense(idx) {
@@ -3111,21 +3011,15 @@
             document.querySelector('#expDesc').focus();
         }
 
-        async function deleteExpense(idx) {
+        function deleteExpense(idx) {
             if (confirm('Eliminare questa spesa?')) {
-                try {
-                    const expenseId = expenses[idx].id;
-                    await db.collection("expenses").doc(expenseId).delete();
-                    console.log('✅ Expense deleted from Firebase');
-                    // renderExpenses() viene chiamato automaticamente dal listener Firebase
-                } catch (error) {
-                    console.error('❌ Error deleting expense:', error);
-                    alert('Errore nell\'eliminare: ' + error.message);
-                }
+                expenses.splice(idx, 1);
+                saveExpenses(expenses);
+                renderExpenses();
             }
         }
 
-        async function addPayment() {
+        function addPayment() {
             const from = document.getElementById('payFrom').value;
             const to = document.getElementById('payTo').value;
             const amount = parseFloat(document.getElementById('payAmount').value);
@@ -3144,42 +3038,30 @@
             const today = new Date();
             const dateStr = today.toLocaleDateString('it-IT');
 
-            try {
-                await db.collection("payments").add({
-                    from: from,
-                    to: to,
-                    amount: amount,
-                    description: description || 'Pagamento',
-                    date: dateStr,
-                    createdAt: firebase.firestore.Timestamp.now()
-                });
-                
-                console.log('✅ Payment saved to Firebase');
-                
-                // Clear form
-                document.getElementById('payAmount').value = '';
-                document.getElementById('payDesc').value = '';
-                document.getElementById('payFrom').value = 'Andrea';
-                document.getElementById('payTo').value = 'Monica';
-                
-                // renderExpenses() viene chiamato automaticamente dal listener Firebase
-            } catch (error) {
-                console.error('❌ Error saving payment:', error);
-                alert('Errore nel salvare: ' + error.message);
-            }
+            payments.push({
+                from: from,
+                to: to,
+                amount: amount,
+                description: description || 'Pagamento',
+                date: dateStr
+            });
+
+            savePayments(payments);
+            
+            // Clear form
+            document.getElementById('payAmount').value = '';
+            document.getElementById('payDesc').value = '';
+            document.getElementById('payFrom').value = 'Andrea';
+            document.getElementById('payTo').value = 'Monica';
+            
+            renderExpenses();
         }
 
-        async function deletePayment(idx) {
+        function deletePayment(idx) {
             if (confirm('Eliminare questo pagamento?')) {
-                try {
-                    const paymentId = payments[idx].id;
-                    await db.collection("payments").doc(paymentId).delete();
-                    console.log('✅ Payment deleted from Firebase');
-                    // renderExpenses() viene chiamato automaticamente dal listener Firebase
-                } catch (error) {
-                    console.error('❌ Error deleting payment:', error);
-                    alert('Errore nell\'eliminare: ' + error.message);
-                }
+                payments.splice(idx, 1);
+                savePayments(payments);
+                renderExpenses();
             }
         }
 
@@ -3775,8 +3657,6 @@
             }
         }
 
-        // ========== FINE BACKUP FUNCTIONS ==========
-
         // ========== UPLOAD APP TO GITHUB PAGES ==========
         async function uploadAppToGitHub() {
             const token = document.getElementById('githubToken').value.trim();
@@ -3851,6 +3731,10 @@
             }
         }
         // ========== FINE UPLOAD APP ==========
+
+        // ========== FINE BACKUP FUNCTIONS ==========
+        
+        // Desktop mouse swipe simulation (drag) per il carosello
         const swipeArea = document.getElementById('swipeArea');
         let mouseDown = false;
         let mouseStartX = 0;
@@ -3882,29 +3766,22 @@
                 }
             });
         }
-
-        // ============================================
-        // STARTUP: Setup Firebase Realtime Listeners
-        // ============================================
-        console.log('🚀 Starting American Odyssey...');
-        setupRealtimeListeners();
-        render();
     </script>
 
     <!-- BACKUP MODAL -->
-    <div id="backupModal" class="backup-modal show">
+    <div id="backupModal" class="backup-modal">
         <div class="backup-modal-content">
             <button class="backup-modal-close" onclick="closeBackupModal()">✕</button>
             <div class="backup-modal-header">☁️ Backup Spese su GitHub</div>
             
-            <div id="backupStatusDiv"><div class="backup-status loading"><span class="loading-spinner"></span>Caricamento app.html su GitHub Pages...</div></div>
+            <div id="backupStatusDiv"></div>
 
             <div class="form-group" style="margin-bottom: 12px;">
                 <label style="font-size: 11px; font-weight: 600; margin-bottom: 4px; color: #666; text-transform: uppercase; display: block;">GitHub Personal Access Token</label>
                 <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" style="padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 12px; font-family: 'Montserrat', sans-serif; width: 100%; margin-top: 4px;">
                 <p style="font-size: 11px; color: #888; margin-top: 6px; line-height: 1.4;">
                     📝 Crea il token su: <a href="https://github.com/settings/tokens" target="_blank" style="color: #667eea; text-decoration: none;">github.com/settings/tokens</a>
-                    <br>✓ Seleziona scope: <code style="background: #f0f0f0; padding: 2px 4px; border-radius: 3px;">repo</code>
+                    <br/>✓ Seleziona scope: <code style="background: #f0f0f0; padding: 2px 4px; border-radius: 3px;">repo</code>
                 </p>
             </div>
 
@@ -3925,7 +3802,9 @@
 
             <div style="margin-bottom: 12px; padding: 8px; background: #f0f7ff; border-radius: 6px; border-left: 3px solid #667eea;">
                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-                    <span id="savedCredentialsLabel" style="font-size: 11px; color: rgb(21, 87, 36); font-weight: 500;">✓ Credenziali salvate nel browser</span>
+                    <span id="savedCredentialsLabel" style="font-size: 11px; color: #0c5460; font-weight: 500;">
+                        ✓ Credenziali salvate nel browser
+                    </span>
                     <button type="button" onclick="forgetCredentials()" style="padding: 4px 8px; background: #fff; border: 1px solid #667eea; border-radius: 4px; cursor: pointer; font-size: 10px; font-weight: 600; color: #667eea; transition: all 0.2s;">
                         🗑️ Dimentica
                     </button>
@@ -3933,12 +3812,12 @@
             </div>
 
             <div style="display: flex; gap: 8px; margin-top: 12px;">
-                <button id="backupBtn" onclick="performBackup()" style="flex: 1; padding: 10px; background: #2d2d2d; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; transition: all 0.2s;">💾 Backup Ora</button>
+                <button id="backupBtn" onclick="performBackup()" style="flex: 1; padding: 10px; background: #2d2d2d; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; transition: all 0.2s;">💾 Backup Spese su GitHub</button>
                 <button id="restoreBtn" onclick="restoreFromGitHub()" style="flex: 1; padding: 10px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; transition: all 0.2s;">📥 Ripristina</button>
             </div>
 
             <div style="display: flex; gap: 8px; margin-top: 8px;">
-                <button id="uploadAppBtn" onclick="uploadAppToGitHub()" style="flex: 1; padding: 10px; background: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; transition: all 0.2s;" disabled="">🚀 Aggiorna App su GitHub Pages</button>
+                <button id="uploadAppBtn" onclick="uploadAppToGitHub()" style="flex: 1; padding: 10px; background: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; transition: all 0.2s;">🚀 Aggiorna App su GitHub</button>
             </div>
 
             <div style="display: flex; gap: 8px; margin-top: 8px;">
@@ -3947,9 +3826,9 @@
 
             <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e0e0e0;">
                 <p style="font-size: 11px; color: #888; line-height: 1.6;">
-                    <strong>Sincronizzazione Multi-Dispositivo:</strong><br>
-                    📱 PC: Inserisci token → "💾 Backup Ora"<br>
-                    📲 iPhone: Inserisci token → "📥 Ripristina"<br>
+                    <strong>Sincronizzazione Multi-Dispositivo:</strong><br/>
+                    📱 PC: Inserisci token → "💾 Backup Ora"<br/>
+                    📲 iPhone: Inserisci token → "📥 Ripristina"<br/>
                     ✅ I dati sono sincronizzati!
                 </p>
             </div>
@@ -3957,6 +3836,5 @@
         </div>
     </div>
 
-
-
-</body></html>
+</body>
+</html>
