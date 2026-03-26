@@ -2676,7 +2676,10 @@
         }
 
         function savePayments(paymentList) {
+            // ✅ Salva pagamenti sia localmente che su GitHub
             localStorage.setItem('americanOdysseyPayments', JSON.stringify(paymentList));
+            lastSaveTime = Date.now();
+            syncExpensesToGitHub(expenses).catch(err => console.log('⏳ Sync fallito (ok offline):', err.message));
         }
 
         let payments = loadPayments();
@@ -3110,7 +3113,7 @@
             }
         }
 
-        function addExpense() {
+        async function addExpense() {
             const desc = document.getElementById('expDesc').value;
             const category = document.getElementById('expCategory').value;
             const amount = parseFloat(document.getElementById('expAmount').value);
@@ -3131,7 +3134,16 @@
                 expenses.push({ description: desc, category, amount, day, person });
             }
             
-            saveExpenses(expenses);
+            // 🔴 ASPETTA che il sync sia completato PRIMA di continuare
+            localStorage.setItem('americanOdysseyExpenses', JSON.stringify(expenses));
+            lastSaveTime = Date.now();
+            
+            try {
+                await syncExpensesToGitHub(expenses); // ⏳ ASPETTA
+                console.log('✅ Spesa salvata su GitHub');
+            } catch (err) {
+                console.log('⚠️ Sync non disponibile, salvata localmente');
+            }
             
             // Clear form
             document.getElementById('expDesc').value = '';
@@ -3168,10 +3180,19 @@
             renderExpenses(); // Aggiorna il bottone
         }
 
-        function deleteExpense(idx) {
+        async function deleteExpense(idx) {
             if (confirm('Eliminare questa spesa?')) {
                 expenses.splice(idx, 1);
-                saveExpenses(expenses);
+                localStorage.setItem('americanOdysseyExpenses', JSON.stringify(expenses));
+                lastSaveTime = Date.now();
+                
+                try {
+                    await syncExpensesToGitHub(expenses); // ⏳ ASPETTA
+                    console.log('✅ Spesa eliminata da GitHub');
+                } catch (err) {
+                    console.log('⚠️ Sync non disponibile, eliminata localmente');
+                }
+                
                 renderExpenses();
             }
         }
