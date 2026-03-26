@@ -1136,299 +1136,48 @@
             <span></span>
             <span></span>
         </button>
-        <button class="tab" onclick="switchTab(event, 'timeline')">⏰ Timeline</button>
+        <button class="tab active" onclick="switchTab(event, 'timeline')">⏰ Timeline</button>
         <button class="tab" onclick="switchTab(event, 'bookings')">🎫 Prenotazioni</button>
-        <button class="tab active" onclick="switchTab(event, 'costs')">💰 Spese</button>
+        <button class="tab" onclick="switchTab(event, 'costs')">💰 Spese</button>
         <button class="tab" onclick="switchTab(event, 'summary')">📊 Riepilogo</button>
     </div>
     
-    <div class="content" id="content"><div class="expense-container">
-                <div class="accordion-section">
-                    <div class="accordion-header active">
-                        <span>💰 Riepilogo Spese</span>
-                        <span class="accordion-toggle">▼</span>
+    <div class="content" id="content">
+                <div class="day-card">
+                    <div class="day-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        ⏳
                     </div>
-                    <div class="accordion-content active">
-                        <div class="accordion-inner">
-                            <div class="summary-cards">
-                                <div class="summary-card">
-                                    <div class="summary-card-label">Totale Spese</div>
-                                    <div class="summary-card-value">€7300.00</div>
-                                </div>
-                                <div class="summary-card andrea">
-                                    <div class="summary-card-label">Andrea</div>
-                                    <div class="summary-card-value">€7300.00</div>
-                                </div>
-                                <div class="summary-card monica">
-                                    <div class="summary-card-label">Monica</div>
-                                    <div class="summary-card-value">€0.00</div>
-                                </div>
-                            </div>
-                            <div style="margin-top: 16px; padding: 12px; background: #f5f5f5; border-radius: 8px; text-align: center;">
-                                <div style="font-size: 12px; color: #666; margin-bottom: 4px;">Saldo</div>
-                                <div style="font-size: 18px; font-weight: 700; color: #667eea;">
-                                    Monica deve a Andrea: €7300.00
-                                </div>
+                    <div class="day-content">
+                        <div class="day-header">
+                            <div class="day-number">00</div>
+                            <div class="day-info-block">
+                                <h2 id="countdownTitle">23 giorni, 0h 14m</h2><div class="countdown-seconds" id="countdownSeconds">22s</div>
+                                <div class="day-date">Giovedì 26 Marzo</div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            
-                <div class="accordion-section">
-                    <div class="accordion-header">
-                        <span>➕ Aggiungi Nuova Spesa</span>
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-inner">
-                            <div style="display: flex; flex-direction: column; gap: 12px;">
-                                <div>
-                                    <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Descrizione</label>
-                                    <input type="text" id="expDesc" placeholder="Es: Cena al ristorante" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
+                        <div class="day-desc">Mancano 23 giorni, 0 ore e 14 minuti al grande viaggio! Il decollo è previsto per le 10:45 da Vienna.</div>
+            <div class="day-expanded"><div class="section-label">Orari e Locazioni</div>
+                        <div class="timeline-item">
+                            <div class="timeline-time">00:00</div>
+                            <div class="timeline-action">Countdown - Decollo alle 10:45</div>
+                            <button class="timeline-toggle" onclick="toggleDetails(this)">Dettagli ▼</button>
+                            <div class="timeline-details">
+                                <div class="detail-section">
+                                    <div class="detail-title">📍 Cosa fare</div>
+                                    <div class="detail-text">Il viaggio inizia il 18 Aprile 2026 alle 10:45. Mancano 23 giorni, 0 ore e 14 minuti!</div>
                                 </div>
-                                <div>
-                                    <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Categoria</label>
-                                    <select id="expCategory" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                        <option>Voli</option>
-                                        <option>Hotel</option>
-                                        <option>Auto</option>
-                                        <option>Cibo</option>
-                                        <option>Drinks</option>
-                                        <option>Tour</option>
-                                        <option>Taxi</option>
-                                        <option>Biglietti</option>
-                                        <option>Trasporti</option>
-                                        <option selected="">Attività</option>
-                                        <option>Pasti</option>
-                                        <option>Altro</option>
-                                    </select>
+                                <div class="detail-section">
+                                    <div class="detail-title">⚠️ Tenere a mente</div>
+                                    <div class="detail-text">Documenti di viaggio, passaporto, visto ESTA pronto.</div>
                                 </div>
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                                    <div>
-                                        <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Importo (€)</label>
-                                        <input type="number" id="expAmount" placeholder="0.00" min="0" step="0.01" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                    </div>
-                                    <div>
-                                        <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Giorno</label>
-                                        <input type="number" id="expDay" value="1" min="1" max="25" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Chi ha speso?</label>
-                                    <select id="expPerson" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                        <option>Andrea</option>
-                                        <option>Monica</option>
-                                    </select>
-                                </div>
-                                <button onclick="addExpense()" style="padding: 12px; background: #667eea; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">
-                                    Aggiungi Spesa
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="accordion-section">
-                    <div class="accordion-header">
-                        <span>📊 Grafico Spese per Categoria</span>
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-inner">
-                            <table class="expense-table">
-                                <thead>
-                                    <tr>
-                                        <th>Categoria</th>
-                                        <th style="text-align: right;">Totale</th>
-                                        <th style="text-align: right;">% Totale</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-            
-                                    <tr>
-                                        <td><strong>🎫 Attività</strong></td>
-                                        <td style="text-align: right;">€7300.00</td>
-                                        <td style="text-align: right; color: #667eea;">100.0%</td>
-                                    </tr>
-                
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="accordion-section">
-                    <div class="accordion-header">
-                        <span>📋 Riepilogo per Categoria</span>
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-inner">
-            
-                    <div style="margin-bottom: 16px; padding: 12px; background: #f9f9f9; border-radius: 8px; border-left: 4px solid #667eea;">
-                        <div style="font-weight: 700; margin-bottom: 8px; font-size: 13px;">🎫 Attività</div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
-                            <div><span style="color: #666;">Andrea:</span> <strong>€7300.00</strong></div>
-                            <div><span style="color: #666;">Monica:</span> <strong>€0.00</strong></div>
-                        </div>
-                        <div style="margin-top: 8px; font-weight: 600; color: #2d2d2d; border-top: 1px solid #e0e0e0; padding-top: 8px;">
-                            Totale: €7300.00
-                        </div>
-                    </div>
-                
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="accordion-section">
-                    <div class="accordion-header">
-                        <span>📅 Spese Giornaliere e Totali Progressivi</span>
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-inner">
-                            <table class="expense-table">
-                                <thead>
-                                    <tr>
-                                        <th>Giorno</th>
-                                        <th style="text-align: right;">Andrea</th>
-                                        <th style="text-align: right;">Monica</th>
-                                        <th style="text-align: right;">Totale Progressivo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-            
-                                    <tr>
-                                        <td><strong>Day 01</strong></td>
-                                        <td style="text-align: right;">€7300.00</td>
-                                        <td style="text-align: right;">-</td>
-                                        <td style="text-align: right; color: #667eea; font-weight: 600;">€7300.00</td>
-                                    </tr>
-                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="accordion-section">
-                    <div class="accordion-header">
-                        <span>📝 Tutte le Spese</span>
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-inner">
-            
-                        <div style="margin-bottom: 12px; padding: 12px; background: white; border: 1px solid #e0e0e0; border-radius: 6px;">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-                                <div>
-                                    <div style="font-weight: 600; color: #2d2d2d;">33</div>
-                                    <div style="font-size: 12px; color: #666; margin-top: 4px;">
-                                        Day 01 • Attività • Andrea
-                                    </div>
-                                </div>
-                                <div style="text-align: right;">
-                                    <div style="font-size: 16px; font-weight: 700; color: #667eea;">€2300.00</div>
+                                <div class="detail-section">
+                                    <div class="detail-title">ℹ️ Dettagli</div>
+                                    <div class="detail-text">Controlla che tutto sia in ordine per il grande giorno! Presentarsi all'aeroporto 3 ore prima del decollo.</div>
                                 </div>
                             </div>
-                            <div style="display: flex; gap: 8px;">
-                                <button onclick="editExpense(0)" style="flex: 1; padding: 6px; background: #f0f0f0; border: 1px solid #d0d0d0; border-radius: 4px; cursor: pointer; font-size: 12px;">Modifica</button>
-                                <button onclick="deleteExpense(0)" style="flex: 1; padding: 6px; background: #ff6b6b; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Elimina</button>
-                            </div>
+                            <button class="map-btn" onclick="openMap('Vienna')">📍 Vienna</button>
                         </div>
-                    
-                        <div style="margin-bottom: 12px; padding: 12px; background: white; border: 1px solid #e0e0e0; border-radius: 6px;">
-                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-                                <div>
-                                    <div style="font-weight: 600; color: #2d2d2d;">zz</div>
-                                    <div style="font-size: 12px; color: #666; margin-top: 4px;">
-                                        Day 01 • Attività • Andrea
-                                    </div>
-                                </div>
-                                <div style="text-align: right;">
-                                    <div style="font-size: 16px; font-weight: 700; color: #667eea;">€5000.00</div>
-                                </div>
-                            </div>
-                            <div style="display: flex; gap: 8px;">
-                                <button onclick="editExpense(1)" style="flex: 1; padding: 6px; background: #f0f0f0; border: 1px solid #d0d0d0; border-radius: 4px; cursor: pointer; font-size: 12px;">Modifica</button>
-                                <button onclick="deleteExpense(1)" style="flex: 1; padding: 6px; background: #ff6b6b; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Elimina</button>
-                            </div>
-                        </div>
-                    
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="accordion-section">
-                    <div class="accordion-header">
-                        <span>💳 Saldo tra i due</span>
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-inner">
-                            <div style="padding: 16px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; color: white; text-align: center; margin-bottom: 16px;">
-                                <div style="font-size: 12px; opacity: 0.9; margin-bottom: 8px;">Saldo Attuale</div>
-                                <div style="font-size: 24px; font-weight: 700;">
-                                    Monica deve a Andrea: €7300.00
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="accordion-section">
-                    <div class="accordion-header">
-                        <span>💸 Pagamenti Registrati</span>
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-inner">
-                            <div style="text-align: center; color: #999; padding: 20px;">Nessun pagamento registrato</div>
-            
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="accordion-section">
-                    <div class="accordion-header">
-                        <span>➕ Aggiungi Pagamento</span>
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-inner">
-                            <div style="display: flex; flex-direction: column; gap: 12px;">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                                    <div>
-                                        <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Da (Chi Paga)</label>
-                                        <select id="payFrom" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                            <option>Andrea</option>
-                                            <option>Monica</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">A (Chi Riceve)</label>
-                                        <select id="payTo" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                            <option>Monica</option>
-                                            <option>Andrea</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Importo (€)</label>
-                                    <input type="number" id="payAmount" placeholder="0.00" min="0" step="0.01" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                </div>
-                                <div>
-                                    <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Descrizione (Bonifico, Contanti, ecc.)</label>
-                                    <input type="text" id="payDesc" placeholder="Es: Bonifico, Contanti, PayPal" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                </div>
-                                <button onclick="addPayment()" style="padding: 12px; background: #43e97b; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">
-                                    Registra Pagamento
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div></div>
+                    </div></div></div></div>
     
     <!-- CAROUSEL SWIPEABLE -->
     <div class="carousel-container" id="carouselContainer">
