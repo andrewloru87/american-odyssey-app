@@ -1,10 +1,12 @@
-<html lang="it"><head>
+<!DOCTYPE html>
+<html lang="it">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>American Odyssey</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
         
@@ -1017,15 +1019,15 @@
     </style>
 </head>
 <body>
-    <button class="menu-btn open" id="menuBtn" onclick="toggleMenu()">
+    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
     </button>
     
-    <div class="overlay open" id="overlay" onclick="toggleMenu()"></div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
     
-    <div class="sidebar open" id="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h2>American Odyssey</h2>
             <p>25 giorni • 5000+ km</p>
@@ -1045,7 +1047,7 @@
                     <div class="sidebar-day-item" onclick="goToDay(1, event)">Day 02 - Central Park</div>
                     <div class="sidebar-day-item" onclick="goToDay(2, event)">Day 03 - Statua Libertà</div>
                     <div class="sidebar-day-item" onclick="goToDay(3, event)">Day 04 - Broadway</div>
-                    <div class="sidebar-day-item" onclick="goToDay(4, event)">Day 05 - MoMA &amp; Top</div>
+                    <div class="sidebar-day-item" onclick="goToDay(4, event)">Day 05 - MoMA & Top</div>
                 </div>
             </div>
 
@@ -1087,11 +1089,11 @@
             <!-- UTAH & NEVADA -->
             <div class="sidebar-accordion-item">
                 <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
-                    <span>🎰 Utah &amp; Nevada (4 giorni)</span>
+                    <span>🎰 Utah & Nevada (4 giorni)</span>
                     <span class="sidebar-accordion-toggle">▼</span>
                 </div>
                 <div class="sidebar-accordion-content">
-                    <div class="sidebar-day-item" onclick="goToDay(20, event)">Day 21 - Bryce &amp; Zion</div>
+                    <div class="sidebar-day-item" onclick="goToDay(20, event)">Day 21 - Bryce & Zion</div>
                     <div class="sidebar-day-item" onclick="goToDay(21, event)">Day 22 - → Las Vegas</div>
                     <div class="sidebar-day-item" onclick="goToDay(22, event)">Day 23 - Las Vegas</div>
                     <div class="sidebar-day-item" onclick="goToDay(23, event)">Day 24 - Death Valley</div>
@@ -1142,49 +1144,14 @@
         <button class="tab" onclick="switchTab(event, 'summary')">📊 Riepilogo</button>
     </div>
     
-    <div class="content" id="content">
-                <div class="day-card">
-                    <div class="day-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        ⏳
-                    </div>
-                    <div class="day-content">
-                        <div class="day-header">
-                            <div class="day-number">00</div>
-                            <div class="day-info-block">
-                                <h2 id="countdownTitle">23 giorni, 0h 7m</h2><div class="countdown-seconds" id="countdownSeconds">46s</div>
-                                <div class="day-date">Giovedì 26 Marzo</div>
-                            </div>
-                        </div>
-                        <div class="day-desc">Mancano 23 giorni, 0 ore e 8 minuti al grande viaggio! Il decollo è previsto per le 10:45 da Vienna.</div>
-            <div class="day-expanded"><div class="section-label">Orari e Locazioni</div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">00:00</div>
-                            <div class="timeline-action">Countdown - Decollo alle 10:45</div>
-                            <button class="timeline-toggle" onclick="toggleDetails(this)">Dettagli ▼</button>
-                            <div class="timeline-details">
-                                <div class="detail-section">
-                                    <div class="detail-title">📍 Cosa fare</div>
-                                    <div class="detail-text">Il viaggio inizia il 18 Aprile 2026 alle 10:45. Mancano 23 giorni, 0 ore e 8 minuti!</div>
-                                </div>
-                                <div class="detail-section">
-                                    <div class="detail-title">⚠️ Tenere a mente</div>
-                                    <div class="detail-text">Documenti di viaggio, passaporto, visto ESTA pronto.</div>
-                                </div>
-                                <div class="detail-section">
-                                    <div class="detail-title">ℹ️ Dettagli</div>
-                                    <div class="detail-text">Controlla che tutto sia in ordine per il grande giorno! Presentarsi all'aeroporto 3 ore prima del decollo.</div>
-                                </div>
-                            </div>
-                            <button class="map-btn" onclick="openMap('Vienna')">📍 Vienna</button>
-                        </div>
-                    </div></div></div></div>
+    <div class="content" id="content"></div>
     
     <!-- CAROUSEL SWIPEABLE -->
     <div class="carousel-container" id="carouselContainer">
         <div class="carousel-indicators">
-            <span id="dayIndicator" class="day-indicator">Day 0 / 26</span>
+            <span id="dayIndicator" class="day-indicator">Day 1 / 25</span>
         </div>
-        <div class="carousel-swipe-area" id="swipeArea" style="opacity: 1;">
+        <div class="carousel-swipe-area" id="swipeArea">
             <div class="swipe-hint left">← Swipe</div>
             <div class="swipe-hint right">Swipe →</div>
         </div>
@@ -3791,6 +3758,20 @@
                 if (getResponse.ok) {
                     const fileData = await getResponse.json();
                     sha = fileData.sha;
+                    console.log('📝 File esiste, SHA:', sha);
+                } else {
+                    console.log('✨ File nuovo, nessun SHA necessario');
+                }
+
+                // Costruisci il body della richiesta
+                const requestBody = {
+                    message: `🚀 Update app.html - ${new Date().toLocaleString('it-IT')}`,
+                    content: base64Content
+                };
+                
+                // Aggiungi sha SOLO se il file esiste
+                if (sha) {
+                    requestBody.sha = sha;
                 }
 
                 // Upload/Update il file
@@ -3801,11 +3782,7 @@
                         'Accept': 'application/vnd.github.v3+json',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        message: `🚀 Update app.html - ${new Date().toLocaleString('it-IT')}`,
-                        content: base64Content,
-                        sha: sha // Solo se il file esiste
-                    })
+                    body: JSON.stringify(requestBody)
                 });
 
                 if (!updateResponse.ok) {
@@ -3865,19 +3842,19 @@
     </script>
 
     <!-- BACKUP MODAL -->
-    <div id="backupModal" class="backup-modal show">
+    <div id="backupModal" class="backup-modal">
         <div class="backup-modal-content">
             <button class="backup-modal-close" onclick="closeBackupModal()">✕</button>
             <div class="backup-modal-header">☁️ Backup Spese su GitHub</div>
             
-            <div id="backupStatusDiv"><div class="backup-status loading"><span class="loading-spinner"></span>Caricamento app.html su GitHub Pages...</div></div>
+            <div id="backupStatusDiv"></div>
 
             <div class="form-group" style="margin-bottom: 12px;">
                 <label style="font-size: 11px; font-weight: 600; margin-bottom: 4px; color: #666; text-transform: uppercase; display: block;">GitHub Personal Access Token</label>
                 <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" style="padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 12px; font-family: 'Montserrat', sans-serif; width: 100%; margin-top: 4px;">
                 <p style="font-size: 11px; color: #888; margin-top: 6px; line-height: 1.4;">
                     📝 Crea il token su: <a href="https://github.com/settings/tokens" target="_blank" style="color: #667eea; text-decoration: none;">github.com/settings/tokens</a>
-                    <br>✓ Seleziona scope: <code style="background: #f0f0f0; padding: 2px 4px; border-radius: 3px;">repo</code>
+                    <br/>✓ Seleziona scope: <code style="background: #f0f0f0; padding: 2px 4px; border-radius: 3px;">repo</code>
                 </p>
             </div>
 
@@ -3898,7 +3875,9 @@
 
             <div style="margin-bottom: 12px; padding: 8px; background: #f0f7ff; border-radius: 6px; border-left: 3px solid #667eea;">
                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-                    <span id="savedCredentialsLabel" style="font-size: 11px; color: rgb(133, 100, 4); font-weight: 500;">⚠️ Nessuna credenziale salvata</span>
+                    <span id="savedCredentialsLabel" style="font-size: 11px; color: #0c5460; font-weight: 500;">
+                        ✓ Credenziali salvate nel browser
+                    </span>
                     <button type="button" onclick="forgetCredentials()" style="padding: 4px 8px; background: #fff; border: 1px solid #667eea; border-radius: 4px; cursor: pointer; font-size: 10px; font-weight: 600; color: #667eea; transition: all 0.2s;">
                         🗑️ Dimentica
                     </button>
@@ -3911,7 +3890,7 @@
             </div>
 
             <div style="display: flex; gap: 8px; margin-top: 8px;">
-                <button id="uploadAppBtn" onclick="uploadAppToGitHub()" style="flex: 1; padding: 10px; background: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; transition: all 0.2s;" disabled="">🚀 Aggiorna App su GitHub</button>
+                <button id="uploadAppBtn" onclick="uploadAppToGitHub()" style="flex: 1; padding: 10px; background: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; transition: all 0.2s;">🚀 Aggiorna App su GitHub</button>
             </div>
 
             <div style="display: flex; gap: 8px; margin-top: 8px;">
@@ -3920,9 +3899,9 @@
 
             <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e0e0e0;">
                 <p style="font-size: 11px; color: #888; line-height: 1.6;">
-                    <strong>Sincronizzazione Multi-Dispositivo:</strong><br>
-                    📱 PC: Inserisci token → "💾 Backup Ora"<br>
-                    📲 iPhone: Inserisci token → "📥 Ripristina"<br>
+                    <strong>Sincronizzazione Multi-Dispositivo:</strong><br/>
+                    📱 PC: Inserisci token → "💾 Backup Ora"<br/>
+                    📲 iPhone: Inserisci token → "📥 Ripristina"<br/>
                     ✅ I dati sono sincronizzati!
                 </p>
             </div>
@@ -3930,6 +3909,5 @@
         </div>
     </div>
 
-
-
-</body></html>
+</body>
+</html>
