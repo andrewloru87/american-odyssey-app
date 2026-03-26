@@ -721,24 +721,25 @@ const db = firebase.firestore();
                 const backup = {
                     timestamp: timestamp,
                     lastSync: new Date().toISOString(),
-                    version: '1.0'
+                    version: '1.0',
+                    syncedBy: user.login
                 };
 
-                // Commit 1: Aggiorna index.html
+                // Commit 1: Aggiorna index.html nel repo american-odyssey-app
                 await commitFile(
                     token,
                     user.login,
-                    'american-odyssey',
+                    'american-odyssey-app',
                     'index.html',
                     htmlContent,
-                    `🔄 Sync via OAuth: ${timestamp}`
+                    `🔄 Sync: ${timestamp}`
                 );
 
-                // Commit 2: Backup JSON
+                // Commit 2: Backup JSON nella cartella backup
                 await commitFile(
                     token,
                     user.login,
-                    'american-odyssey',
+                    'american-odyssey-app',
                     'backup/sync-' + Date.now() + '.json',
                     JSON.stringify(backup, null, 2),
                     `💾 Backup: ${timestamp}`
