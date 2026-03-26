@@ -1399,20 +1399,27 @@ const db = firebase.firestore();
                 return;
             }
 
-            showStatus('⏳ Sincronizzazione...', 'info');
+            showStatus('⏳ Sincronizzazione in corso...', 'info');
 
             try {
                 const user = JSON.parse(localStorage.getItem('github_user') || '{}');
                 const timestamp = new Date().toLocaleString('it-IT');
                 const htmlContent = document.documentElement.outerHTML;
                 
+                // Backup con TUTTI i dati
                 const backup = {
                     timestamp: timestamp,
                     lastSync: new Date().toISOString(),
                     version: '1.0',
-                    syncedBy: user.login
+                    syncedBy: user.login,
+                    data: {
+                        expenses: expenses,
+                        totalExpenses: expenses.length,
+                        totalAmount: expenses.reduce((sum, e) => sum + e.amount, 0)
+                    }
                 };
 
+                // 1. Sincronizza HTML
                 await commitFile(
                     token,
                     user.login,
@@ -1422,17 +1429,28 @@ const db = firebase.firestore();
                     `🔄 Sync: ${timestamp}`
                 );
 
+                // 2. Salva backup con dati
                 await commitFile(
                     token,
                     user.login,
                     'american-odyssey-app',
                     'backup/sync-' + Date.now() + '.json',
                     JSON.stringify(backup, null, 2),
-                    `💾 Backup: ${timestamp}`
+                    `💾 Backup dati: ${timestamp}`
                 );
 
-                showStatus('✅ Sincronizzato! 🎉', 'success');
-                console.log('✅ Sync completato');
+                // 3. Salva anche backup.json aggiornato (ultimo)
+                await commitFile(
+                    token,
+                    user.login,
+                    'american-odyssey-app',
+                    'backup/latest.json',
+                    JSON.stringify(backup, null, 2),
+                    `⭐ Latest backup: ${timestamp}`
+                );
+
+                showStatus(`✅ Sincronizzato! ${expenses.length} spese salvate 🎉`, 'success');
+                console.log('✅ Sync completato - Spese:', expenses.length);
             } catch (error) {
                 console.error('Sync error:', error);
                 showStatus(`❌ Errore: ${error.message}`, 'error');
@@ -1579,10 +1597,38 @@ const db = firebase.firestore();
                 snapshot.forEach(doc => {
                     expenses.push(doc.data());
                 });
-                console.log('✅ Spese caricate:', expenses.length);
+                console.log('✅ Spese Firebase caricate:', expenses.length);
                 renderExpenses();
             } catch (error) {
                 console.error('❌ Errore Firebase:', error);
+                // Se Firebase non funziona, prova a caricare dal backup locale
+                loadExpensesFromBackup();
+            }
+        }
+
+        async function loadExpensesFromBackup() {
+            try {
+                const user = JSON.parse(localStorage.getItem('github_user') || '{}');
+                if (!user.login) return;
+
+                // Prova a caricare l'ultimo backup
+                const response = await fetch(`https://api.github.com/repos/${user.login}/american-odyssey-app/contents/backup/latest.json`);
+                
+                if (!response.ok) {
+                    console.log('Nessun backup trovato');
+                    return;
+                }
+
+                const data = await response.json();
+                const content = JSON.parse(atob(data.content));
+                
+                if (content.data && content.data.expenses) {
+                    expenses = content.data.expenses;
+                    console.log('✅ Spese caricate dal backup:', expenses.length);
+                    renderExpenses();
+                }
+            } catch (error) {
+                console.error('Errore caricamento backup:', error);
             }
         }
 
