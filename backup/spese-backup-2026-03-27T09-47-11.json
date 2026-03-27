@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-27T09:47:11.193Z",
+  "expenses": [
+    {
+      "id": "1774604831191ijqlicsax",
+      "description": "Voli",
+      "category": "Voli",
+      "amount": 1500,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774604831191
+    }
+  ],
+  "payments": [],
+  "summary": {
+    "total": 1500,
+    "count": 1
+  }
+}
