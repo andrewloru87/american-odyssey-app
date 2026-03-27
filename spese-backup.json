@@ -1,15 +1,6 @@
 {
-  "timestamp": "2026-03-27T14:50:14.101Z",
+  "timestamp": "2026-03-27T14:50:19.014Z",
   "expenses": [
-    {
-      "id": "1774622290079uanwxcxht",
-      "description": "Summit",
-      "category": "Attività",
-      "amount": 130,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774622290079
-    },
     {
       "id": "17746223857211zhvk9nx0",
       "description": "Bonifici ",
@@ -32,7 +23,7 @@
     }
   ],
   "summary": {
-    "total": -5458,
-    "count": 2
+    "total": -5588,
+    "count": 1
   }
 }
