@@ -1194,67 +1194,105 @@ const db = firebase.firestore();
     </header>
     
     <div class="tabs">
-        <button class="tab active" onclick="switchTab(event, 'timeline')">⏰ Timeline</button>
+        <button class="tab" onclick="switchTab(event, 'timeline')">⏰ Timeline</button>
         <button class="tab" onclick="switchTab(event, 'bookings')">🎫 Prenotazioni</button>
-        <button class="tab" onclick="switchTab(event, 'costs')">💰 Spese</button>
+        <button class="tab active" onclick="switchTab(event, 'costs')">💰 Spese</button>
         <button class="tab" onclick="switchTab(event, 'summary')">📊 Riepilogo</button>
     </div>
     
-    <div class="content" id="content">
-                    <div class="day-card">
-                        <div class="day-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">✈️</div>
-                        <div class="day-content">
-                            <div class="day-header">
-                                <div class="day-number">01</div>
-                                <div class="day-info-block">
-                                    <h2>Il grande salto</h2>
-                                    <div class="day-date">Sabato 18 Aprile</div>
+    <div class="content" id="content"><div class="expense-container">
+                <div class="accordion-section">
+                    <div class="accordion-header active">
+                        <span>💰 Riepilogo Spese</span>
+                        <span class="accordion-toggle">▼</span>
+                    </div>
+                    <div class="accordion-content active">
+                        <div class="summary-cards">
+                            <div class="summary-card total">
+                                <div class="summary-card-label">Totale</div>
+                                <div class="summary-card-value">0,00&nbsp;€</div>
+                            </div>
+                            <div class="summary-card andrea">
+                                <div class="summary-card-label">Andrea</div>
+                                <div class="summary-card-value">0,00&nbsp;€</div>
+                            </div>
+                            <div class="summary-card monica">
+                                <div class="summary-card-label">Monica</div>
+                                <div class="summary-card-value">0,00&nbsp;€</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="accordion-section">
+                    <div class="accordion-header">
+                        <span>📝 Tutte le Spese</span>
+                        <span class="accordion-toggle">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <table class="expense-table">
+                            <thead><tr><th>Descrizione</th><th>Categoria</th><th>Giorno</th><th>Persona</th><th style="text-align: right;">Importo</th><th style="text-align: center;">Azione</th></tr></thead>
+                            <tbody>
+            <tr><td colspan="6" style="text-align: center; color: #999; padding: 20px;">Nessuna spesa</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="accordion-section">
+                    <div class="accordion-header">
+                        <span>➕ Aggiungi Spesa</span>
+                        <span class="accordion-toggle">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="add-expense-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Descrizione</label>
+                                    <input type="text" id="expDesc" placeholder="es. Colazione">
+                                </div>
+                                <div class="form-group">
+                                    <label>Categoria</label>
+                                    <select id="expCategory">
+                                        <option>Voli</option>
+                                        <option>Hotel</option>
+                                        <option>Attività</option>
+                                        <option>Food</option>
+                                        <option>Trasporti</option>
+                                        <option>Shopping</option>
+                                        <option>Altro</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="day-desc">Vienna → New York, Newark. Primo giorno di questa avventura fantastica!</div>
-                <div class="day-expanded"><div class="section-label">Orari e Locazioni</div>
-                            <div class="timeline-item">
-                                <div class="timeline-time">07:05</div>
-                                <div class="timeline-action">Metro S7 → Vienna Airport</div>
-                                <button class="timeline-toggle" onclick="toggleDetails(this)">Dettagli ▼</button>
-                                <div class="timeline-details">
-                                    <div class="detail-section">
-                                        <div class="detail-title">📍 Cosa fare</div>
-                                        <div class="detail-text">Metro S7 dalla posizione a Vienna</div>
-                                    </div>
-                                    <div class="detail-section">
-                                        <div class="detail-title">⚠️ Tenere a mente</div>
-                                        <div class="detail-text">Biglietto, passaporto</div>
-                                    </div>
-                                    <div class="detail-section">
-                                        <div class="detail-title">ℹ️ Dettagli</div>
-                                        <div class="detail-text">25 minuti</div>
-                                    </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Importo (€)</label>
+                                    <input type="number" id="expAmount" placeholder="0.00" step="0.01">
                                 </div>
-                                <button class="map-btn" onclick="openMap('Vienna Airport')">📍 Vienna Airport</button>
-                            </div>
-                        
-                            <div class="timeline-item">
-                                <div class="timeline-time">10:45</div>
-                                <div class="timeline-action">DECOLLO OS37 VIE → EWR</div>
-                                <button class="timeline-toggle" onclick="toggleDetails(this)">Dettagli ▼</button>
-                                <div class="timeline-details">
-                                    <div class="detail-section">
-                                        <div class="detail-title">📍 Cosa fare</div>
-                                        <div class="detail-text">Imbarcarsi sul volo Austrian Airlines</div>
-                                    </div>
-                                    <div class="detail-section">
-                                        <div class="detail-title">⚠️ Tenere a mente</div>
-                                        <div class="detail-text">Passaporto, boarding pass</div>
-                                    </div>
-                                    <div class="detail-section">
-                                        <div class="detail-title">ℹ️ Dettagli</div>
-                                        <div class="detail-text">9h 50m Boeing 777</div>
-                                    </div>
+                                <div class="form-group">
+                                    <label>Giorno</label>
+                                    <select id="expDay">
+                                        <option value="1">G01 - Il grande salto</option><option value="2">G02 - Central Park</option><option value="3">G03 - Statua Libertà</option><option value="4">G04 - Broadway</option><option value="5">G05 - MoMA &amp; Top of Rock</option><option value="6">G06 - Coast to Coast</option><option value="7">G07 - San Francisco</option><option value="8">G08 - Road Trip!</option><option value="9">G09 - Yosemite</option><option value="10">G10 - Sequoie</option><option value="11">G11 - General Sherman</option><option value="12">G12 - Hollywood</option><option value="13">G13 - Disneyland</option><option value="14">G14 - Universal VIP</option><option value="15">G15 - California Adventure</option><option value="16">G16 - Route 66</option><option value="17">G17 - Grand Canyon</option><option value="18">G18 - Grand Canyon Alba</option><option value="19">G19 - Antelope Canyon</option><option value="20">G20 - Monument Valley</option><option value="21">G21 - Bryce &amp; Zion</option><option value="22">G22 - Las Vegas</option><option value="23">G23 - Vegas Show</option><option value="24">G24 - Death Valley</option><option value="25">G25 - Si torna a casa</option>
+                                    </select>
                                 </div>
-                                <button class="map-btn" onclick="openMap('Vienna Airport')">📍 Vienna Airport</button>
                             </div>
-                        </div></div></div></div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Persona</label>
+                                    <select id="expPerson">
+                                        <option value="Andrea">Andrea</option>
+                                        <option value="Monica">Monica</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn-primary" onclick="addExpense()">Salva Spesa</button>
+                                <button class="btn-secondary" onclick="clearExpenseForm()">Cancella</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div></div>
     
     <div class="nav-footer">
         <button class="nav-btn" onclick="previousDay()" disabled="">← Precedente</button>
