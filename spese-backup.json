@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T15:13:17.245Z",
+  "timestamp": "2026-03-27T15:13:26.444Z",
   "expenses": [
     {
       "id": "1774623261469zz4fo16d4",
@@ -74,13 +74,6 @@
       "updated": 1774624270141
     },
     {
-      "description": "Usa",
-      "category": "Voli",
-      "amount": 1714.36,
-      "day": 1,
-      "person": "Andrea"
-    },
-    {
       "id": "1774624364322lz3c1f13v",
       "description": "Cirque Du Soleil",
       "category": "Attività",
@@ -111,7 +104,7 @@
     }
   ],
   "summary": {
-    "total": -1215.1500000000012,
-    "count": 11
+    "total": -2929.5100000000016,
+    "count": 10
   }
 }
