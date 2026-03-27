@@ -3122,7 +3122,7 @@ function addTimestampToPayments(payments) {
             }
         }
 
-        function addPayment() {
+        async function addPayment() {
             const from = document.getElementById('payFrom').value;
             const to = document.getElementById('payTo').value;
             const amount = parseFloat(document.getElementById('payAmount').value);
@@ -3141,8 +3141,8 @@ function addTimestampToPayments(payments) {
             const today = new Date();
             const dateStr = today.toLocaleDateString('it-IT');
 
-            // ✅ Controlla se è EDIT o NUOVO
-            if (editingPaymentIndex !== -1) {
+            // ✅ Controlla se è EDIT o NUOVO (con controllo di sicurezza)
+            if (editingPaymentIndex >= 0 && editingPaymentIndex < payments.length) {
                 // MODIFICA pagamento esistente
                 payments[editingPaymentIndex].from = from;
                 payments[editingPaymentIndex].to = to;
@@ -3151,7 +3151,6 @@ function addTimestampToPayments(payments) {
                 payments[editingPaymentIndex].updated = new Date().getTime();
                 
                 console.log("✏️ Auto-sync dopo modifica pagamento...");
-                editingPaymentIndex = -1; // Reset
             } else {
                 // NUOVO pagamento
                 payments.push({
@@ -3167,6 +3166,9 @@ function addTimestampToPayments(payments) {
                 console.log("🚀 Auto-sync dopo aggiunta pagamento...");
             }
 
+            // ✅ Reset editingPaymentIndex
+            editingPaymentIndex = -1;
+
             savePayments(payments);
             
             // Clear form
@@ -3178,7 +3180,7 @@ function addTimestampToPayments(payments) {
             renderExpenses();
             
             // ⚡ Auto-sync in entrambi i casi (nuovo + modifica)
-            autoSyncNewExpense();
+            await autoSyncNewExpense();
         }
 
         function editPayment(idx) {
@@ -3753,8 +3755,8 @@ function addTimestampToPayments(payments) {
                 return;
             }
 
-            // ✅ Controlla se è EDIT o NUOVO
-            if (editingIndex !== -1) {
+            // ✅ Controlla se è EDIT o NUOVO (con controllo di sicurezza)
+            if (editingIndex >= 0 && editingIndex < expenses.length) {
                 // MODIFICA spesa esistente
                 expenses[editingIndex].description = desc;
                 expenses[editingIndex].category = category;
@@ -3764,7 +3766,6 @@ function addTimestampToPayments(payments) {
                 expenses[editingIndex].updated = new Date().getTime();
                 
                 console.log("✏️ Auto-sync dopo modifica spesa...");
-                editingIndex = -1; // Reset
             } else {
                 // NUOVA spesa
                 const newExpense = {
@@ -3781,6 +3782,9 @@ function addTimestampToPayments(payments) {
                 console.log("🚀 Auto-sync dopo aggiunta spesa...");
             }
 
+            // ✅ Reset editingIndex
+            editingIndex = -1;
+            
             saveExpenses(expenses);
             renderExpenses();
             
