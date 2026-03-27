@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>American Odyssey</title>
@@ -10,12 +10,16 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
         
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; touch-action: manipulation; }
         body {
             font-family: 'Martel Sans', sans-serif;
             font-weight: 400;
             background: #F5F5F5;
             color: #333333;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         /* ✅ Titoli ALL CAP BOLD */
@@ -3718,85 +3722,7 @@ function addTimestampToPayments(payments) {
                 </div>
             `;
 
-            // ===== SECTION 7: PAGAMENTI REGISTRATI =====
-            html += `
-                <div class="accordion-section">
-                    <div class="accordion-header-pagamenti" style="cursor: pointer; padding: 12px; background: #f5f5f5; border-bottom: 1px solid #e0e0e0; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
-                        <span>💸 Pagamenti Registrati</span>
-                        <span class="accordion-chevron-pagamenti" style="transition: transform 0.3s ease; transform: rotate(0deg);">▼</span>
-                    </div>
-                    <div class="accordion-content-pagamenti" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
-                        <div class="accordion-inner" style="padding: 12px;">
-                            ${payments.length === 0 ? '<div style="text-align: center; color: #999; padding: 20px;">Nessun pagamento registrato</div>' : ''}
-            `;
 
-            payments.forEach((p, idx) => {
-                html += `
-                    <div style="margin-bottom: 8px; padding: 8px; background: white; border: 2px solid #7FECE5; border-radius: 4px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                            <div>
-                                <div style="font-weight: 600; color: #2d2d2d; font-size: 13px;">${p.from} → ${p.to}</div>
-                                <div style="font-size: 11px; color: #999; margin-top: 2px;">${p.description}</div>
-                            </div>
-                            <div style="font-size: 14px; font-weight: 700; color: #7FECE5;">${formatCurrency(p.amount)}</div>
-                        </div>
-                        <div style="font-size: 10px; color: #bbb; margin-bottom: 4px;">Data: ${p.date}</div>
-                        <div style="display: flex; gap: 6px;">
-                            <button onclick="editPayment(${idx})" style="flex: 1; padding: 4px; background: #4dabf7; color: white; border: none; border-radius: 3px; cursor: pointer; font-size: 11px;">✏️ Modifica</button>
-                            <button onclick="deletePayment(${idx})" style="flex: 1; padding: 4px; background: #ff6b6b; color: white; border: none; border-radius: 3px; cursor: pointer; font-size: 11px;">❌ Elimina</button>
-                        </div>
-                    </div>
-                `;
-            });
-
-            html += `
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            // ===== SECTION 8: AGGIUNGI NUOVO PAGAMENTO =====
-            html += `
-                <div class="accordion-section">
-                    <div class="accordion-header-addpagamento" style="cursor: pointer; padding: 12px; background: #f5f5f5; border-bottom: 1px solid #e0e0e0; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
-                        <span>➕ Aggiungi Pagamento</span>
-                        <span class="accordion-chevron-addpagamento" style="transition: transform 0.3s ease; transform: rotate(0deg);">▼</span>
-                    </div>
-                    <div class="accordion-content-addpagamento" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
-                        <div class="accordion-inner" style="padding: 12px;">
-                            <div style="display: flex; flex-direction: column; gap: 12px;">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                                    <div>
-                                        <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Da (Chi Paga)</label>
-                                        <select id="payFrom" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                            <option>Andrea</option>
-                                            <option>Monica</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">A (Chi Riceve)</label>
-                                        <select id="payTo" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                            <option>Monica</option>
-                                            <option>Andrea</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Importo (€)</label>
-                                    <input type="number" id="payAmount" placeholder="0.00" min="0" step="0.01" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                </div>
-                                <div>
-                                    <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Descrizione (Bonifico, Contanti, ecc.)</label>
-                                    <input type="text" id="payDesc" placeholder="Es: Bonifico, Contanti, PayPal" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px;">
-                                </div>
-                                <button onclick="addPayment()" style="padding: 12px; background: #43e97b; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">
-                                    Registra Pagamento
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
 
             html += `</div>`;
             document.getElementById('content').innerHTML = html;
@@ -3916,41 +3842,7 @@ function addTimestampToPayments(payments) {
                 });
             }
 
-            // PAGAMENTI REGISTRATI ACCORDION
-            const pagamentiHeader = document.querySelector('.accordion-header-pagamenti');
-            if (pagamentiHeader) {
-                pagamentiHeader.addEventListener('click', function() {
-                    const content = document.querySelector('.accordion-content-pagamenti');
-                    const chevron = document.querySelector('.accordion-chevron-pagamenti');
-                    
-                    const isOpen = parseFloat(content.style.maxHeight) > 0;
-                    if (isOpen) {
-                        content.style.maxHeight = '0px';
-                        chevron.style.transform = 'rotate(0deg)';
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                        chevron.style.transform = 'rotate(180deg)';
-                    }
-                });
-            }
-
-            // AGGIUNGI PAGAMENTO ACCORDION
-            const addpagamentoHeader = document.querySelector('.accordion-header-addpagamento');
-            if (addpagamentoHeader) {
-                addpagamentoHeader.addEventListener('click', function() {
-                    const content = document.querySelector('.accordion-content-addpagamento');
-                    const chevron = document.querySelector('.accordion-chevron-addpagamento');
-                    
-                    const isOpen = parseFloat(content.style.maxHeight) > 0;
-                    if (isOpen) {
-                        content.style.maxHeight = '0px';
-                        chevron.style.transform = 'rotate(0deg)';
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                        chevron.style.transform = 'rotate(180deg)';
-                    }
-                });
-            }
+            // ===== END ACCORDION INIT =====
         }
 
         
