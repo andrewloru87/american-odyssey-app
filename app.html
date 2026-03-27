@@ -2598,6 +2598,7 @@ function addTimestampToPayments(payments) {
         let expenses = loadExpenses();
         let editingIndex = -1;
         let editingPaymentIndex = -1;
+        let isLoadingFromGitHub = false; // ← Flag per disabilitare auto-sync durante caricamento
 
         // PAYMENTS MANAGEMENT
         function loadPayments() {
@@ -2617,6 +2618,8 @@ function addTimestampToPayments(payments) {
             if (!saved) return; // Nessuna credenziale salvata
             
             try {
+                isLoadingFromGitHub = true; // ← Disabilita auto-sync
+                
                 const credentials = JSON.parse(saved);
                 const token = credentials.token?.trim();
                 const user = credentials.user?.trim();
@@ -2659,8 +2662,13 @@ function addTimestampToPayments(payments) {
                 
                 console.log(`✅ Auto-login completato! ${mergedExpenses.length} spese caricate`);
                 
+                // ✅ Ricarica la UI
+                render();
+                
             } catch (e) {
                 console.error("⚠️ Auto-login error:", e.message);
+            } finally {
+                isLoadingFromGitHub = false; // ← Riabilita auto-sync dopo caricamento
             }
         }
 
@@ -3822,6 +3830,12 @@ function addTimestampToPayments(payments) {
 
         // Upload SOLO la nuova spesa aggiunta (non fare merge, solo append)
         async function autoSyncNewExpense() {
+            // ✅ Salta auto-sync se in corso caricamento da GitHub
+            if (isLoadingFromGitHub) {
+                console.log("ℹ️ Auto-sync skippato: caricamento da GitHub in corso");
+                return;
+            }
+            
             const saved = localStorage.getItem('odysseyGitHubCredentials');
             if (!saved) {
                 console.log("ℹ️ Auto-sync skippato: nessuna credenziale salvata");
