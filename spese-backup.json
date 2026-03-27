@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T10:20:36.713Z",
+  "timestamp": "2026-03-27T10:21:39.961Z",
   "expenses": [
     {
       "id": "1774604614139c662xvd1h",
@@ -18,15 +18,6 @@
       "day": 1,
       "person": "Andrea",
       "updated": 1774604647741
-    },
-    {
-      "id": "1774605391204pw2igrye1",
-      "description": "Cc",
-      "category": "Attività",
-      "amount": 17171,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774605391204
     },
     {
       "id": "1774605371095qgxyerv2v",
@@ -49,7 +40,7 @@
   ],
   "payments": [],
   "summary": {
-    "total": 17295,
-    "count": 5
+    "total": 124,
+    "count": 4
   }
 }
