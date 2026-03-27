@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T15:06:55.068Z",
+  "timestamp": "2026-03-27T15:07:21.484Z",
   "expenses": [
     {
       "id": "1774623261469zz4fo16d4",
@@ -27,6 +27,15 @@
       "day": 22,
       "person": "Andrea",
       "updated": 1774623541815
+    },
+    {
+      "id": "1774624041481ffqwxflwo",
+      "description": "Moulin Rouge",
+      "category": "Tour",
+      "amount": 269.37,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774624041481
     }
   ],
   "payments": [
@@ -41,7 +50,7 @@
     }
   ],
   "summary": {
-    "total": -5246.570000000001,
-    "count": 3
+    "total": -4977.200000000001,
+    "count": 4
   }
 }
