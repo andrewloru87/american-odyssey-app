@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T15:10:02.248Z",
+  "timestamp": "2026-03-27T15:10:26.062Z",
   "expenses": [
     {
       "id": "1774623261469zz4fo16d4",
@@ -45,6 +45,15 @@
       "day": 1,
       "person": "Andrea",
       "updated": 1774624078270
+    },
+    {
+      "id": "1774624226059hz2do7q18",
+      "description": "Statua Libertà ",
+      "category": "Tour",
+      "amount": 58.73,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774624226059
     }
   ],
   "payments": [
@@ -59,7 +68,7 @@
     }
   ],
   "summary": {
-    "total": -4873.090000000001,
-    "count": 5
+    "total": -4814.3600000000015,
+    "count": 6
   }
 }
