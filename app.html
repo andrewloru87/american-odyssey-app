@@ -3665,12 +3665,12 @@ function addTimestampToPayments(payments) {
                 content: base64Content
             };
             
-            // Aggiungi SHA SOLO se il file esiste
-            if (sha) {
+            // Aggiungi SHA SOLO se il file esiste E sha è definito
+            if (sha && sha !== 'undefined' && sha !== null) {
                 uploadPayload.sha = sha;
-                console.log("🔄 Aggiornamento file esistente");
+                console.log("🔄 Aggiornamento file esistente con SHA:", sha);
             } else {
-                console.log("✨ Creazione nuovo file");
+                console.log("✨ Creazione nuovo file (nessun SHA)");
             }
 
             const response = await fetch(uploadUrl, {
@@ -3686,6 +3686,37 @@ function addTimestampToPayments(payments) {
             if (!response.ok) {
                 const error = await response.json();
                 console.error("❌ Errore upload:", error);
+                
+                // Se fallisce per SHA, prova SENZA SHA (creazione nuovo file)
+                if (error.message && error.message.includes('sha')) {
+                    console.log("🔄 Retry: tentativo creazione file SENZA SHA...");
+                    
+                    const retryPayload = {
+                        message: `Sincronizzazione spese - ${new Date().toLocaleString('it-IT')}`,
+                        content: base64Content
+                        // NO sha
+                    };
+                    
+                    const retryResponse = await fetch(uploadUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${token}`,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/vnd.github.v3+json'
+                        },
+                        body: JSON.stringify(retryPayload)
+                    });
+                    
+                    if (!retryResponse.ok) {
+                        const retryError = await retryResponse.json();
+                        throw new Error(retryError.message || 'Errore upload a GitHub');
+                    }
+                    
+                    const retryResult = await retryResponse.json();
+                    console.log("✅ Upload completato (retry):", retryResult.commit.message);
+                    return retryResult;
+                }
+                
                 throw new Error(error.message || 'Errore upload a GitHub');
             }
 
