@@ -3624,7 +3624,7 @@ function addTimestampToPayments(payments) {
 
         async function uploadToGitHub(token, user, repo, fileName, base64Content) {
             // URL SENZA .json - GitHub API lo aggiunge automaticamente
-            const uploadUrl = `https://api.github.com/repos/${user}/${repo}/contents/${fileName}`;
+            const uploadUrl = `https://api.github.com/repos/${user}/${repo}/contents/${fileName}.json`;
             
             console.log("📤 Tentativo upload su:", uploadUrl);
             
