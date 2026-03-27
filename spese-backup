@@ -1,9 +1,17 @@
 {
-  "timestamp": "2026-03-27T08:23:01.972Z",
-  "expenses": [],
+  "timestamp": "2026-03-27T08:23:19.314Z",
+  "expenses": [
+    {
+      "description": "weee",
+      "category": "Attività",
+      "amount": 1222,
+      "day": 1,
+      "person": "Andrea"
+    }
+  ],
   "payments": [],
   "summary": {
-    "total": 0,
-    "count": 0
+    "total": 1222,
+    "count": 1
   }
 }
