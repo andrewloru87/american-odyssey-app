@@ -1,15 +1,6 @@
 {
-  "timestamp": "2026-03-27T14:27:20.608Z",
+  "timestamp": "2026-03-27T14:27:22.970Z",
   "expenses": [
-    {
-      "id": "1774621114691r2415f22b",
-      "description": "Ii",
-      "category": "Attività",
-      "amount": 10,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774621114691
-    },
     {
       "id": "177462124326640ey8xq5i",
       "description": "Wy",
@@ -22,7 +13,7 @@
   ],
   "payments": [],
   "summary": {
-    "total": -10,
-    "count": 2
+    "total": -20,
+    "count": 1
   }
 }
