@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T15:11:32.049Z",
+  "timestamp": "2026-03-27T15:12:10.911Z",
   "expenses": [
     {
       "id": "1774623261469zz4fo16d4",
@@ -74,13 +74,11 @@
       "updated": 1774624270141
     },
     {
-      "id": "1774624292045lnz9l6zbp",
       "description": "Usa",
       "category": "Voli",
       "amount": 1714.36,
       "day": 1,
-      "person": "Monica",
-      "updated": 1774624292045
+      "person": "Andrea"
     }
   ],
   "payments": [
