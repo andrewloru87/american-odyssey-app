@@ -3616,6 +3616,27 @@ function addTimestampToPayments(payments) {
                 
                 // ==== STEP 3: SCRIVI SU GITHUB ====
                 const uploadUrl = `https://api.github.com/repos/${user}/${repo}/contents/${fileName}.json`;
+                
+                // ✅ CRITICO: Ottieni lo SHA del file esistente
+                let sha = null;
+                try {
+                    const shaResponse = await fetch(uploadUrl, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `token ${token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+                    
+                    if (shaResponse.ok) {
+                        const fileData = await shaResponse.json();
+                        sha = fileData.sha;
+                        console.log("✅ SHA ottenuto:", sha);
+                    }
+                } catch (e) {
+                    console.log("ℹ️ File non esiste ancora, sarà creato nuovo");
+                }
+                
                 const backupData = {
                     timestamp: new Date().toISOString(),
                     expenses: mergedExpenses,
@@ -3633,6 +3654,12 @@ function addTimestampToPayments(payments) {
                     message: `Sincronizzazione spese - ${new Date().toLocaleString('it-IT')}`,
                     content: base64Content
                 };
+                
+                // ✅ Aggiungi SHA se il file esiste
+                if (sha) {
+                    uploadPayload.sha = sha;
+                    console.log("🔄 Aggiornamento file con SHA");
+                }
                 
                 const putResponse = await fetch(uploadUrl, {
                     method: 'PUT',
