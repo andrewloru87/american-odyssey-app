@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-03-27T10:08:42.119Z",
+  "expenses": [
+    {
+      "id": "1774604614139c662xvd1h",
+      "description": "a",
+      "category": "Attività",
+      "amount": 1,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774604614139
+    },
+    {
+      "id": "17746046477411q8xzkdzb",
+      "description": "we",
+      "category": "Attività",
+      "amount": 2,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774604647741
+    },
+    {
+      "id": "1774605391204pw2igrye1",
+      "description": "Cc",
+      "category": "Attività",
+      "amount": 17171,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774605391204
+    },
+    {
+      "id": "1774605371095qgxyerv2v",
+      "description": "voloi",
+      "category": "Attività",
+      "amount": 111,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774605371095
+    },
+    {
+      "id": "1774605787469tzwtslg4h",
+      "description": "Ha",
+      "category": "Attività",
+      "amount": 10000,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774605787469
+    }
+  ],
+  "payments": [],
+  "summary": {
+    "total": 27285,
+    "count": 5
+  }
+}
