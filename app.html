@@ -2597,6 +2597,7 @@ function addTimestampToPayments(payments) {
 
         let expenses = loadExpenses();
         let editingIndex = -1;
+        let editingPaymentIndex = -1;
 
         // PAYMENTS MANAGEMENT
         function loadPayments() {
@@ -3011,7 +3012,10 @@ function addTimestampToPayments(payments) {
                             <div style="font-size: 16px; font-weight: 700; color: #667eea;">${formatCurrency(p.amount)}</div>
                         </div>
                         <div style="font-size: 11px; color: #999; margin-bottom: 8px;">Data: ${p.date}</div>
-                        <button onclick="deletePayment(${idx})" style="width: 100%; padding: 6px; background: #ff6b6b; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Elimina</button>
+                        <div style="display: flex; gap: 8px;">
+                            <button onclick="editPayment(${idx})" style="flex: 1; padding: 6px; background: #4dabf7; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">✏️ Modifica</button>
+                            <button onclick="deletePayment(${idx})" style="flex: 1; padding: 6px; background: #ff6b6b; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">❌ Elimina</button>
+                        </div>
                     </div>
                 `;
             });
@@ -3111,6 +3115,10 @@ function addTimestampToPayments(payments) {
                 expenses.splice(idx, 1);
                 saveExpenses(expenses);
                 renderExpenses();
+                
+                // ⚡ Auto-sync quando elimini
+                console.log("🗑️ Auto-sync dopo eliminazione spesa...");
+                autoSyncNewExpense();
             }
         }
 
@@ -3133,13 +3141,31 @@ function addTimestampToPayments(payments) {
             const today = new Date();
             const dateStr = today.toLocaleDateString('it-IT');
 
-            payments.push({
-                from: from,
-                to: to,
-                amount: amount,
-                description: description || 'Pagamento',
-                date: dateStr
-            });
+            // ✅ Controlla se è EDIT o NUOVO
+            if (editingPaymentIndex !== -1) {
+                // MODIFICA pagamento esistente
+                payments[editingPaymentIndex].from = from;
+                payments[editingPaymentIndex].to = to;
+                payments[editingPaymentIndex].amount = amount;
+                payments[editingPaymentIndex].description = description || 'Pagamento';
+                payments[editingPaymentIndex].updated = new Date().getTime();
+                
+                console.log("✏️ Auto-sync dopo modifica pagamento...");
+                editingPaymentIndex = -1; // Reset
+            } else {
+                // NUOVO pagamento
+                payments.push({
+                    id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+                    from: from,
+                    to: to,
+                    amount: amount,
+                    description: description || 'Pagamento',
+                    date: dateStr,
+                    updated: new Date().getTime()
+                });
+                
+                console.log("🚀 Auto-sync dopo aggiunta pagamento...");
+            }
 
             savePayments(payments);
             
@@ -3150,6 +3176,21 @@ function addTimestampToPayments(payments) {
             document.getElementById('payTo').value = 'Monica';
             
             renderExpenses();
+            
+            // ⚡ Auto-sync in entrambi i casi (nuovo + modifica)
+            autoSyncNewExpense();
+        }
+
+        function editPayment(idx) {
+            const p = payments[idx];
+            document.getElementById('payFrom').value = p.from;
+            document.getElementById('payTo').value = p.to;
+            document.getElementById('payAmount').value = p.amount;
+            document.getElementById('payDesc').value = p.description;
+            editingPaymentIndex = idx;
+            
+            // Scroll to form
+            document.querySelector('#payAmount').focus();
         }
 
         function deletePayment(idx) {
@@ -3157,6 +3198,10 @@ function addTimestampToPayments(payments) {
                 payments.splice(idx, 1);
                 savePayments(payments);
                 renderExpenses();
+                
+                // ⚡ Auto-sync quando elimini
+                console.log("🗑️ Auto-sync dopo eliminazione pagamento...");
+                autoSyncNewExpense();
             }
         }
 
@@ -3708,17 +3753,34 @@ function addTimestampToPayments(payments) {
                 return;
             }
 
-            const newExpense = {
-                id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
-                description: desc,
-                category,
-                amount,
-                day,
-                person,
-                updated: new Date().getTime()
-            };
+            // ✅ Controlla se è EDIT o NUOVO
+            if (editingIndex !== -1) {
+                // MODIFICA spesa esistente
+                expenses[editingIndex].description = desc;
+                expenses[editingIndex].category = category;
+                expenses[editingIndex].amount = amount;
+                expenses[editingIndex].day = day;
+                expenses[editingIndex].person = person;
+                expenses[editingIndex].updated = new Date().getTime();
+                
+                console.log("✏️ Auto-sync dopo modifica spesa...");
+                editingIndex = -1; // Reset
+            } else {
+                // NUOVA spesa
+                const newExpense = {
+                    id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+                    description: desc,
+                    category,
+                    amount,
+                    day,
+                    person,
+                    updated: new Date().getTime()
+                };
 
-            expenses.push(newExpense);
+                expenses.push(newExpense);
+                console.log("🚀 Auto-sync dopo aggiunta spesa...");
+            }
+
             saveExpenses(expenses);
             renderExpenses();
             
@@ -3728,8 +3790,7 @@ function addTimestampToPayments(payments) {
             document.getElementById('expCategory').value = 'Attività';
             document.getElementById('expPerson').value = 'Andrea';
             
-            // ⚡ Auto-sync: SOLO upload della spesa corrente (NON merge)
-            console.log("🚀 Auto-sync dopo aggiunta spesa...");
+            // ⚡ Auto-sync in entrambi i casi (nuovo + modifica)
             await autoSyncNewExpense();
         }
 
