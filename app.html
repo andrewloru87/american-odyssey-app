@@ -2610,6 +2610,89 @@ function addTimestampToPayments(payments) {
 
         let payments = loadPayments();
 
+        // ===== AUTO-LOGIN ALL'AVVIO =====
+        async function autoLoginOnStartup() {
+            const saved = localStorage.getItem('odysseyGitHubCredentials');
+            if (!saved) {
+                console.log("ℹ️ Nessuma credenziale salvata, login richiesto");
+                return;
+            }
+
+            try {
+                const credentials = JSON.parse(saved);
+                const token = credentials.token?.trim();
+                const user = credentials.user?.trim();
+                const repo = credentials.repo?.trim();
+
+                if (!token || !user || !repo) {
+                    console.log("⚠️ Credenziali incomplete");
+                    return;
+                }
+
+                console.log("🔄 Auto-login in corso...");
+
+                // Carica i credenziali nella form
+                document.getElementById('githubToken').value = token;
+                document.getElementById('githubUser').value = user;
+                document.getElementById('githubRepo').value = repo;
+
+                // Auto-carica i dati da GitHub
+                await autoLoadFromGitHubStartup(token, user, repo);
+
+            } catch (e) {
+                console.warn("⚠️ Errore auto-login:", e.message);
+            }
+        }
+
+        // Versione di autoLoadFromGitHub per l'avvio (silent)
+        async function autoLoadFromGitHubStartup(token, user, repo) {
+            const fileName = 'spese-backup';
+
+            try {
+                const fileUrl = `https://api.github.com/repos/${user}/${repo}/contents/${fileName}.json`;
+                
+                const response = await fetch(fileUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3.raw'
+                    }
+                });
+
+                if (!response.ok) {
+                    console.log("ℹ️ Primo login: nessun backup su GitHub");
+                    return;
+                }
+
+                const backupData = await response.json();
+
+                if (!backupData.expenses || !Array.isArray(backupData.expenses)) {
+                    console.warn("⚠️ Formato backup non valido");
+                    return;
+                }
+
+                // ===== MERGE INTELLIGENTE =====
+                const mergedExpenses = mergeExpenses(expenses, backupData.expenses);
+                const mergedPayments = mergePayments(payments, backupData.payments || []);
+
+                // Salva i dati merged
+                localStorage.setItem('americanOdysseyExpenses', JSON.stringify(mergedExpenses));
+                localStorage.setItem('americanOdysseyPayments', JSON.stringify(mergedPayments));
+
+                // Ricarica le variabili
+                expenses = mergedExpenses;
+                payments = mergedPayments;
+
+                console.log(`✅ Auto-login completato! ${mergedExpenses.length} spese caricate da GitHub`);
+
+                // Aggiorna la visualizzazione
+                render();
+
+            } catch (error) {
+                console.error("Errore auto-login:", error);
+            }
+        }
+
         function formatCurrency(amount) {
             return '€' + amount.toFixed(2);
         }
@@ -3387,6 +3470,9 @@ function addTimestampToPayments(payments) {
         // Inizializza il giorno corrente in base alla data odierna
         initializeCurrentDay();
         render();
+        
+        // ===== AUTO-LOGIN AL CARICAMENTO DELL'APP =====
+        autoLoginOnStartup();
         
         // Scroll event per nascondere/mostrare la header
         const header = document.getElementById('header');
