@@ -1210,11 +1210,11 @@ const db = firebase.firestore();
                         <div class="summary-cards">
                             <div class="summary-card total">
                                 <div class="summary-card-label">Totale</div>
-                                <div class="summary-card-value">0,00&nbsp;€</div>
+                                <div class="summary-card-value">333.333,00&nbsp;€</div>
                             </div>
                             <div class="summary-card andrea">
                                 <div class="summary-card-label">Andrea</div>
-                                <div class="summary-card-value">0,00&nbsp;€</div>
+                                <div class="summary-card-value">333.333,00&nbsp;€</div>
                             </div>
                             <div class="summary-card monica">
                                 <div class="summary-card-label">Monica</div>
@@ -1224,6 +1224,16 @@ const db = firebase.firestore();
                     </div>
                 </div>
             
+                    <div class="accordion-section">
+                        <div class="accordion-header">
+                            <span>📊 Per Categoria</span>
+                            <span class="accordion-toggle">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <table class="expense-table">
+                                <thead><tr><th>Categoria</th><th style="text-align: right;">Totale</th><th style="text-align: right;">%</th></tr></thead>
+                                <tbody>
+                <tr><td>Voli</td><td style="text-align: right;" class="expense-amount">333.333,00&nbsp;€</td><td style="text-align: right;">100.0%</td></tr></tbody></table></div></div>
                 <div class="accordion-section">
                     <div class="accordion-header">
                         <span>📝 Tutte le Spese</span>
@@ -1233,7 +1243,18 @@ const db = firebase.firestore();
                         <table class="expense-table">
                             <thead><tr><th>Descrizione</th><th>Categoria</th><th>Giorno</th><th>Persona</th><th style="text-align: right;">Importo</th><th style="text-align: center;">Azione</th></tr></thead>
                             <tbody>
-            <tr><td colspan="6" style="text-align: center; color: #999; padding: 20px;">Nessuna spesa</td></tr>
+            
+                        <tr>
+                            <td>ee</td>
+                            <td><span class="category-badge">Voli</span></td>
+                            <td>G01</td>
+                            <td><span class="person-badge andrea">Andrea</span></td>
+                            <td style="text-align: right;" class="expense-amount">333.333,00&nbsp;€</td>
+                            <td style="text-align: center;">
+                                <button class="btn-small" onclick="deleteExpense(0)" style="background: #ffebee; color: #c62828;">✕</button>
+                            </td>
+                        </tr>
+                    
                             </tbody>
                         </table>
                     </div>
