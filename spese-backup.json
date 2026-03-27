@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T14:39:12.170Z",
+  "timestamp": "2026-03-27T14:39:45.724Z",
   "expenses": [
     {
       "id": "1774622290079uanwxcxht",
@@ -9,6 +9,15 @@
       "day": 1,
       "person": "Andrea",
       "updated": 1774622290079
+    },
+    {
+      "id": "17746223857211zhvk9nx0",
+      "description": "Bonifici ",
+      "category": "💸 Pagamenti",
+      "amount": -5588,
+      "day": 1,
+      "person": "Monica",
+      "updated": 1774622385721
     }
   ],
   "payments": [
@@ -23,7 +32,7 @@
     }
   ],
   "summary": {
-    "total": 130,
-    "count": 1
+    "total": -5458,
+    "count": 2
   }
 }
