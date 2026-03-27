@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T20:13:03.380Z",
+  "timestamp": "2026-03-27T20:13:15.145Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -153,20 +153,11 @@
       "day": 25,
       "person": "Monica",
       "updated": 1774634915025
-    },
-    {
-      "id": "17746259629344q3rnc79j",
-      "description": "Hh",
-      "category": "💸 Pagamenti",
-      "amount": -5888,
-      "day": 1,
-      "person": "Monica",
-      "updated": 1774625962934
     }
   ],
   "payments": [],
   "summary": {
-    "total": -5024.39,
-    "count": 18
+    "total": 863.6099999999997,
+    "count": 17
   }
 }
