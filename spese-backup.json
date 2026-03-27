@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T10:32:04.326Z",
+  "timestamp": "2026-03-27T10:32:19.813Z",
   "expenses": [
     {
       "id": "1774604614139c662xvd1h",
@@ -27,20 +27,11 @@
       "day": 1,
       "person": "Andrea",
       "updated": 1774606133605
-    },
-    {
-      "id": "1774607524324cayg17lp6",
-      "description": "Auau",
-      "category": "Attività",
-      "amount": 100,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774607524324
     }
   ],
   "payments": [],
   "summary": {
-    "total": 113,
-    "count": 4
+    "total": 13,
+    "count": 3
   }
 }
