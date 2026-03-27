@@ -3639,7 +3639,7 @@ function addTimestampToPayments(payments) {
             
             console.log("📤 Tentativo upload su:", uploadUrl);
             
-            // Controlla se il file esiste
+            // Controlla se il file esiste e ottieni lo SHA
             let sha = null;
             try {
                 const checkResponse = await fetch(uploadUrl, {
@@ -3649,12 +3649,22 @@ function addTimestampToPayments(payments) {
                         'Accept': 'application/vnd.github.v3+json'
                     }
                 });
+                
+                console.log("GET Response status:", checkResponse.status);
+                
                 if (checkResponse.ok) {
                     const fileData = await checkResponse.json();
-                    sha = fileData.sha;
-                    console.log("✅ File esiste, SHA:", sha);
+                    console.log("GET Response data:", fileData);
+                    
+                    // Ottieni lo SHA - potrebbe essere in fileData.sha
+                    if (fileData.sha) {
+                        sha = fileData.sha;
+                        console.log("✅ File esiste, SHA ottenuto:", sha);
+                    } else {
+                        console.log("⚠️ File risponde ma SHA mancante, creeremo nuovo file");
+                    }
                 } else {
-                    console.log("ℹ️ File non esiste, sarà creato nuovo");
+                    console.log("ℹ️ File non esiste (status:", checkResponse.status, "), sarà creato");
                 }
             } catch (e) {
                 console.log("ℹ️ Errore check file (normale se primo upload):", e.message);
