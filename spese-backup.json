@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T15:34:29.372Z",
+  "timestamp": "2026-03-27T15:34:56.056Z",
   "expenses": [
     {
       "id": "1774623261469zz4fo16d4",
@@ -99,6 +99,15 @@
       "day": 1,
       "person": "Andrea",
       "updated": 1774625669365
+    },
+    {
+      "id": "1774625696051gmtqhdbm8",
+      "description": "Sixt",
+      "category": "Auto",
+      "amount": 1029.37,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774625696051
     }
   ],
   "payments": [
@@ -113,7 +122,7 @@
     }
   ],
   "summary": {
-    "total": -2490.750000000002,
-    "count": 11
+    "total": -1461.380000000002,
+    "count": 12
   }
 }
