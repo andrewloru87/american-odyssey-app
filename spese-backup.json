@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T10:22:44.607Z",
+  "timestamp": "2026-03-27T10:22:51.750Z",
   "expenses": [
     {
       "id": "1774604614139c662xvd1h",
@@ -20,15 +20,6 @@
       "updated": 1774604647741
     },
     {
-      "id": "1774605371095qgxyerv2v",
-      "description": "voloi",
-      "category": "Attività",
-      "amount": 111,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774605371095
-    },
-    {
       "id": "1774606133605ke0m4tew9",
       "description": "Ya",
       "category": "Attività",
@@ -40,7 +31,7 @@
   ],
   "payments": [],
   "summary": {
-    "total": 124,
-    "count": 4
+    "total": 13,
+    "count": 3
   }
 }
