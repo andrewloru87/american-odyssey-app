@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-27T09:43:56.783Z",
+  "expenses": [
+    {
+      "id": "1774604614139c662xvd1h",
+      "description": "a",
+      "category": "Attività",
+      "amount": 1,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774604614139
+    }
+  ],
+  "payments": [],
+  "summary": {
+    "total": 1,
+    "count": 1
+  }
+}
