@@ -3620,6 +3620,7 @@ function addTimestampToPayments(payments) {
                 // ✅ CRITICO: Ottieni lo SHA del file esistente
                 let sha = null;
                 try {
+                    console.log("📋 Tentativo GET per ottenere SHA...");
                     const shaResponse = await fetch(uploadUrl, {
                         method: 'GET',
                         headers: {
@@ -3628,13 +3629,23 @@ function addTimestampToPayments(payments) {
                         }
                     });
                     
+                    console.log("SHA GET Response status:", shaResponse.status);
+                    
                     if (shaResponse.ok) {
                         const fileData = await shaResponse.json();
-                        sha = fileData.sha;
-                        console.log("✅ SHA ottenuto:", sha);
+                        console.log("SHA GET Response data:", fileData);
+                        
+                        if (fileData.sha) {
+                            sha = fileData.sha;
+                            console.log("✅ SHA ottenuto:", sha);
+                        } else {
+                            console.log("⚠️ Response OK ma SHA mancante");
+                        }
+                    } else {
+                        console.log("ℹ️ File non esiste (status " + shaResponse.status + "), sarà creato nuovo");
                     }
                 } catch (e) {
-                    console.log("ℹ️ File non esiste ancora, sarà creato nuovo");
+                    console.log("ℹ️ Errore GET SHA (normale se primo upload):", e.message);
                 }
                 
                 const backupData = {
@@ -3655,11 +3666,15 @@ function addTimestampToPayments(payments) {
                     content: base64Content
                 };
                 
-                // ✅ Aggiungi SHA se il file esiste
-                if (sha) {
+                // ✅ Aggiungi SHA SOLO se è definito e non undefined
+                if (sha && sha !== 'undefined' && sha !== null) {
                     uploadPayload.sha = sha;
-                    console.log("🔄 Aggiornamento file con SHA");
+                    console.log("🔄 Aggiornamento file con SHA:", sha);
+                } else {
+                    console.log("✨ Creazione nuovo file (nessun SHA)");
                 }
+                
+                console.log("📤 PUT Payload:", uploadPayload);
                 
                 const putResponse = await fetch(uploadUrl, {
                     method: 'PUT',
