@@ -3635,53 +3635,17 @@ function addTimestampToPayments(payments) {
 
         async function uploadToGitHub(token, user, repo, fileName, base64Content) {
             // URL SENZA .json - GitHub API lo aggiunge automaticamente
-            const uploadUrl = `https://api.github.com/repos/${user}/${repo}/contents/${fileName}.json`;
-            
+            // NON cercare lo SHA - crea sempre nuovo file
+            // Questo evita i problemi di "sha wasn't supplied"
             console.log("📤 Tentativo upload su:", uploadUrl);
+            console.log("✨ Creazione/sovrascrittura file (sempre nuovo)");
             
-            // Controlla se il file esiste e ottieni lo SHA
-            let sha = null;
-            try {
-                const checkResponse = await fetch(uploadUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `token ${token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                console.log("GET Response status:", checkResponse.status);
-                
-                if (checkResponse.ok) {
-                    const fileData = await checkResponse.json();
-                    console.log("GET Response data:", fileData);
-                    
-                    // Ottieni lo SHA - potrebbe essere in fileData.sha
-                    if (fileData.sha) {
-                        sha = fileData.sha;
-                        console.log("✅ File esiste, SHA ottenuto:", sha);
-                    } else {
-                        console.log("⚠️ File risponde ma SHA mancante, creeremo nuovo file");
-                    }
-                } else {
-                    console.log("ℹ️ File non esiste (status:", checkResponse.status, "), sarà creato");
-                }
-            } catch (e) {
-                console.log("ℹ️ Errore check file (normale se primo upload):", e.message);
-            }
-
+            // Payload SENZA SHA - GitHub creerà o sovrascriverà il file
             const uploadPayload = {
                 message: `Sincronizzazione spese - ${new Date().toLocaleString('it-IT')}`,
                 content: base64Content
+                // NO sha - forziamo creazione/overwrite
             };
-            
-            // Aggiungi SHA SOLO se il file esiste E sha è definito
-            if (sha && sha !== 'undefined' && sha !== null) {
-                uploadPayload.sha = sha;
-                console.log("🔄 Aggiornamento file esistente con SHA:", sha);
-            } else {
-                console.log("✨ Creazione nuovo file (nessun SHA)");
-            }
 
             const response = await fetch(uploadUrl, {
                 method: 'PUT',
