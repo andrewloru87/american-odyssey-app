@@ -3514,8 +3514,8 @@ function addTimestampToPayments(payments) {
             const credentials = {
                 token: document.getElementById('githubToken').value.trim(),
                 user: document.getElementById('githubUser').value.trim(),
-                repo: document.getElementById('githubRepo').value.trim(),
-                fileName: document.getElementById('backupFileName').value.trim()
+                repo: document.getElementById('githubRepo').value.trim()
+                // fileName rimosso - usa sempre 'spese-backup'
             };
             localStorage.setItem('odysseyGitHubCredentials', JSON.stringify(credentials));
             console.log("✅ Credenziali salvate nel browser");
@@ -3529,7 +3529,7 @@ function addTimestampToPayments(payments) {
                     document.getElementById('githubToken').value = credentials.token || '';
                     document.getElementById('githubUser').value = credentials.user || '';
                     document.getElementById('githubRepo').value = credentials.repo || 'american-odyssey-expenses';
-                    document.getElementById('backupFileName').value = credentials.fileName || 'spese-backup';
+                    // fileName rimosso - non necessario, sempre 'spese-backup'
                     console.log("✅ Credenziali caricate da localStorage");
                 } catch (e) {
                     console.warn("⚠️ Errore caricamento credenziali");
@@ -3855,8 +3855,12 @@ function addTimestampToPayments(payments) {
             </div>
 
             <div class="form-group" style="margin-bottom: 12px;">
-                <label style="font-size: 11px; font-weight: 600; margin-bottom: 4px; color: #666; text-transform: uppercase; display: block;">Nome File</label>
-                <input type="text" id="backupFileName" placeholder="es. spese-backup" style="padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 12px; font-family: 'Montserrat', sans-serif; width: 100%; margin-top: 4px; background-color: #f5f5f5; color: #999; cursor: not-allowed;" value="spese-backup" disabled readonly>
+                <label style="font-size: 11px; font-weight: 600; margin-bottom: 4px; color: #666; text-transform: uppercase; display: block;">📌 Nome File (Fisso)</label>
+                <div style="padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 12px; font-family: 'Montserrat', sans-serif; width: 100%; margin-top: 4px; background-color: #f5f5f5; color: #2d2d2d; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-weight: 600;">spese-backup.json</span>
+                    <span style="color: #888; font-size: 10px;">(automatico, non modificabile)</span>
+                </div>
+                <p style="font-size: 10px; color: #888; margin-top: 6px;">✓ Usa SEMPRE lo stesso file su GitHub per la sincronizzazione</p>
             </div>
 
             <div style="margin-bottom: 12px; padding: 8px; background: #f0f7ff; border-radius: 6px; border-left: 3px solid #667eea;">
