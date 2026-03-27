@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T15:13:32.240Z",
+  "timestamp": "2026-03-27T15:34:29.372Z",
   "expenses": [
     {
       "id": "1774623261469zz4fo16d4",
@@ -90,6 +90,15 @@
       "day": 1,
       "person": "Andrea",
       "updated": 1774624388604
+    },
+    {
+      "id": "17746256693656pe7gahdi",
+      "description": "Sfo",
+      "category": "Voli",
+      "amount": 438.76,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774625669365
     }
   ],
   "payments": [
@@ -104,7 +113,7 @@
     }
   ],
   "summary": {
-    "total": -2929.5100000000016,
-    "count": 10
+    "total": -2490.750000000002,
+    "count": 11
   }
 }
