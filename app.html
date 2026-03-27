@@ -3623,7 +3623,10 @@ function addTimestampToPayments(payments) {
         }
 
         async function uploadToGitHub(token, user, repo, fileName, base64Content) {
-            const uploadUrl = `https://api.github.com/repos/${user}/${repo}/contents/${fileName}.json`;
+            // URL SENZA .json - GitHub API lo aggiunge automaticamente
+            const uploadUrl = `https://api.github.com/repos/${user}/${repo}/contents/${fileName}`;
+            
+            console.log("📤 Tentativo upload su:", uploadUrl);
             
             // Controlla se il file esiste
             let sha = null;
@@ -3638,16 +3641,26 @@ function addTimestampToPayments(payments) {
                 if (checkResponse.ok) {
                     const fileData = await checkResponse.json();
                     sha = fileData.sha;
+                    console.log("✅ File esiste, SHA:", sha);
+                } else {
+                    console.log("ℹ️ File non esiste, sarà creato nuovo");
                 }
             } catch (e) {
-                // File non esiste
+                console.log("ℹ️ Errore check file (normale se primo upload):", e.message);
             }
 
             const uploadPayload = {
                 message: `Sincronizzazione spese - ${new Date().toLocaleString('it-IT')}`,
-                content: base64Content,
-                ...(sha && { sha })
+                content: base64Content
             };
+            
+            // Aggiungi SHA SOLO se il file esiste
+            if (sha) {
+                uploadPayload.sha = sha;
+                console.log("🔄 Aggiornamento file esistente");
+            } else {
+                console.log("✨ Creazione nuovo file");
+            }
 
             const response = await fetch(uploadUrl, {
                 method: 'PUT',
@@ -3661,10 +3674,13 @@ function addTimestampToPayments(payments) {
 
             if (!response.ok) {
                 const error = await response.json();
+                console.error("❌ Errore upload:", error);
                 throw new Error(error.message || 'Errore upload a GitHub');
             }
 
-            return response.json();
+            const result = await response.json();
+            console.log("✅ Upload completato:", result.commit.message);
+            return result;
         }
 
         async function createRepoIfNeeded(token, user, repo) {
@@ -3897,4 +3913,3 @@ function addTimestampToPayments(payments) {
 
 </body>
 </html>
- 
