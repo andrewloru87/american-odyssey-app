@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T14:58:01.385Z",
+  "timestamp": "2026-03-27T14:58:29.092Z",
   "expenses": [
     {
       "id": "1774623261469zz4fo16d4",
@@ -9,6 +9,15 @@
       "day": 1,
       "person": "Monica",
       "updated": 1774623261469
+    },
+    {
+      "id": "1774623509086lzg157jdd",
+      "description": "Zion ",
+      "category": "Hotel",
+      "amount": 114.69,
+      "day": 21,
+      "person": "Andrea",
+      "updated": 1774623509086
     }
   ],
   "payments": [
@@ -23,7 +32,7 @@
     }
   ],
   "summary": {
-    "total": -5588,
-    "count": 1
+    "total": -5473.31,
+    "count": 2
   }
 }
