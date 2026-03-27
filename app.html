@@ -3393,12 +3393,22 @@ function addTimestampToPayments(payments) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
             render();
+            
+            // ⚡ Auto-sync quando clicchi "Spese"
+            if (tab === 'costs') {
+                console.log("💰 Auto-sync dopo apertura Spese...");
+                autoSyncNewExpense();
+            }
         }
 
         function nextDay() {
             if (currentDay < days.length - 1) {
                 currentDay++;
                 render();
+                
+                // ⚡ Auto-sync quando navighi
+                console.log("➡️ Auto-sync dopo next day...");
+                autoSyncNewExpense();
             }
         }
 
@@ -3406,6 +3416,10 @@ function addTimestampToPayments(payments) {
             if (currentDay > 0) {
                 currentDay--;
                 render();
+                
+                // ⚡ Auto-sync quando navighi
+                console.log("⬅️ Auto-sync dopo previous day...");
+                autoSyncNewExpense();
             }
         }
 
@@ -3441,6 +3455,10 @@ function addTimestampToPayments(payments) {
             currentDay = dayIdx;
             toggleMenu();
             render();
+            
+            // ⚡ Auto-sync quando cambi giorno
+            console.log("📅 Auto-sync dopo cambio giorno...");
+            autoSyncNewExpense();
         }
 
         function toggleDetails(btn) {
