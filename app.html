@@ -3474,8 +3474,8 @@ function addTimestampToPayments(payments) {
             const credentials = {
                 token: document.getElementById('githubToken').value.trim(),
                 user: document.getElementById('githubUser').value.trim(),
-                repo: document.getElementById('githubRepo').value.trim(),
-                fileName: document.getElementById('backupFileName').value.trim()
+                repo: document.getElementById('githubRepo').value.trim()
+                // fileName rimosso - fisso su "spese-backup"
             };
             localStorage.setItem('odysseyGitHubCredentials', JSON.stringify(credentials));
             console.log("✅ Credenziali salvate nel browser");
@@ -3489,7 +3489,8 @@ function addTimestampToPayments(payments) {
                     document.getElementById('githubToken').value = credentials.token || '';
                     document.getElementById('githubUser').value = credentials.user || '';
                     document.getElementById('githubRepo').value = credentials.repo || 'american-odyssey-expenses';
-                    document.getElementById('backupFileName').value = credentials.fileName || 'spese-backup';
+                    // fileName sempre "spese-backup" - non caricato
+                    document.getElementById('backupFileName').value = 'spese-backup';
                     console.log("✅ Credenziali caricate da localStorage");
                 } catch (e) {
                     console.warn("⚠️ Errore caricamento credenziali");
@@ -3529,10 +3530,13 @@ function addTimestampToPayments(payments) {
             const token = document.getElementById('githubToken').value.trim();
             const user = document.getElementById('githubUser').value.trim();
             const repo = document.getElementById('githubRepo').value.trim();
-            const fileName = document.getElementById('backupFileName').value.trim();
+            
+            // ⚠️ IMPORTANTE: Forza il nome file SEMPRE "spese-backup"
+            // per garantire sincronizzazione corretta su UN UNICO FILE
+            const fileName = 'spese-backup';
 
-            if (!token || !user || !repo || !fileName) {
-                showBackupStatus('❌ Compila tutti i campi', 'error');
+            if (!token || !user || !repo) {
+                showBackupStatus('❌ Compila Token, Username e Repo', 'error');
                 return;
             }
 
@@ -3567,7 +3571,7 @@ function addTimestampToPayments(payments) {
                 // 1. Crea il repository se non esiste
                 await createRepoIfNeeded(token, user, repo);
 
-                // 2. Carica il file
+                // 2. Carica il file (SEMPRE lo stesso: spese-backup.json)
                 await uploadToGitHub(token, user, repo, fileName, base64Content);
 
                 showBackupStatus(`✅ Backup completato! <br/>📍 <a href="https://github.com/${user}/${repo}/blob/main/${fileName}.json" target="_blank" style="color: #667eea; text-decoration: underline;">Visualizza su GitHub</a>`, 'success');
@@ -3683,10 +3687,12 @@ function addTimestampToPayments(payments) {
     const token = document.getElementById('githubToken').value.trim();
     const user = document.getElementById('githubUser').value.trim();
     const repo = document.getElementById('githubRepo').value.trim();
-    const fileName = document.getElementById('backupFileName').value.trim();
+    
+    // ⚠️ IMPORTANTE: Forza il nome file SEMPRE "spese-backup"
+    const fileName = 'spese-backup';
  
-    if (!token || !user || !repo || !fileName) {
-        showBackupStatus('❌ Compila tutti i campi', 'error');
+    if (!token || !user || !repo) {
+        showBackupStatus('❌ Compila Token, Username e Repo', 'error');
         return;
     }
  
@@ -3814,8 +3820,9 @@ function addTimestampToPayments(payments) {
             </div>
 
             <div class="form-group" style="margin-bottom: 12px;">
-                <label style="font-size: 11px; font-weight: 600; margin-bottom: 4px; color: #666; text-transform: uppercase; display: block;">Nome File</label>
-                <input type="text" id="backupFileName" placeholder="es. spese-backup" style="padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 12px; font-family: 'Montserrat', sans-serif; width: 100%; margin-top: 4px;" value="spese-backup">
+                <label style="font-size: 11px; font-weight: 600; margin-bottom: 4px; color: #666; text-transform: uppercase; display: block;">📌 Nome File (Fisso)</label>
+                <input type="text" id="backupFileName" placeholder="es. spese-backup" style="padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 12px; font-family: 'Montserrat', sans-serif; width: 100%; margin-top: 4px; background-color: #f5f5f5; color: #999;" value="spese-backup" disabled readonly>
+                <p style="font-size: 10px; color: #888; margin-top: 4px;">✓ Fisso su "spese-backup.json" per sincronizzazione multi-dispositivo</p>
             </div>
 
             <div style="margin-bottom: 12px; padding: 8px; background: #f0f7ff; border-radius: 6px; border-left: 3px solid #667eea;">
