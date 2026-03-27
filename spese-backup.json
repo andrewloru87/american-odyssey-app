@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T14:20:13.556Z",
+  "timestamp": "2026-03-27T14:20:28.607Z",
   "expenses": [
     {
       "id": "1774604614139c662xvd1h",
@@ -29,17 +29,7 @@
       "updated": 1774621114691
     }
   ],
-  "payments": [
-    {
-      "id": "1774621213553q7w7p9b7e",
-      "from": "Andrea",
-      "to": "Monica",
-      "amount": 10,
-      "description": "Hhh",
-      "date": "27/03/2026",
-      "updated": 1774621213553
-    }
-  ],
+  "payments": [],
   "summary": {
     "total": 13,
     "count": 3
