@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-27T15:12:18.170Z",
+  "timestamp": "2026-03-27T15:12:44.326Z",
   "expenses": [
     {
       "id": "1774623261469zz4fo16d4",
@@ -79,6 +79,15 @@
       "amount": 1714.36,
       "day": 1,
       "person": "Andrea"
+    },
+    {
+      "id": "1774624364322lz3c1f13v",
+      "description": "Cirque Du Soleil",
+      "category": "Attività",
+      "amount": 291.35,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1774624364322
     }
   ],
   "payments": [
@@ -93,7 +102,7 @@
     }
   ],
   "summary": {
-    "total": -1576.9900000000014,
-    "count": 9
+    "total": -1285.6400000000012,
+    "count": 10
   }
 }
