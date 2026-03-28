@@ -1209,112 +1209,6 @@
     
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
     
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2>American Odyssey</h2>
-            <p>25 giorni • 5000+ km</p>
-        </div>
-        
-        <!-- COUNTDOWN DAYS -->
-        <div class="sidebar-section">
-            <div class="sidebar-section-title">⏳ Countdown</div>
-            <div id="countdownDays"></div>
-        </div>
-        
-        <div class="sidebar-section">
-            <div class="sidebar-section-title">📍 Giorni per Stato</div>
-            
-            <!-- NEW YORK -->
-            <div class="sidebar-accordion-item">
-                <div class="sidebar-accordion-header active" onclick="toggleSidebarAccordion(this)">
-                    <span>🗽 New York (5 giorni)</span>
-                    <span class="sidebar-accordion-toggle">▼</span>
-                </div>
-                <div class="sidebar-accordion-content active">
-                    <div class="sidebar-day-item" onclick="goToDay(1, event)">Day 01 - Il grande salto</div>
-                    <div class="sidebar-day-item" onclick="goToDay(2, event)">Day 02 - Central Park</div>
-                    <div class="sidebar-day-item" onclick="goToDay(3, event)">Day 03 - Statua Libertà</div>
-                    <div class="sidebar-day-item" onclick="goToDay(4, event)">Day 04 - Broadway</div>
-                    <div class="sidebar-day-item" onclick="goToDay(5, event)">Day 05 - MoMA & Top</div>
-                </div>
-            </div>
-
-            <!-- CALIFORNIA -->
-            <div class="sidebar-accordion-item">
-                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
-                    <span>🌉 California (12 giorni)</span>
-                    <span class="sidebar-accordion-toggle">▼</span>
-                </div>
-                <div class="sidebar-accordion-content">
-                    <div class="sidebar-day-item" onclick="goToDay(6, event)">Day 06 - Coast to Coast</div>
-                    <div class="sidebar-day-item" onclick="goToDay(7, event)">Day 07 - San Francisco</div>
-                    <div class="sidebar-day-item" onclick="goToDay(8, event)">Day 08 - Road Trip!</div>
-                    <div class="sidebar-day-item" onclick="goToDay(9, event)">Day 09 - Yosemite</div>
-                    <div class="sidebar-day-item" onclick="goToDay(10, event)">Day 10 - Sequoie</div>
-                    <div class="sidebar-day-item" onclick="goToDay(11, event)">Day 11 - → LA</div>
-                    <div class="sidebar-day-item" onclick="goToDay(12, event)">Day 12 - Hollywood</div>
-                    <div class="sidebar-day-item" onclick="goToDay(13, event)">Day 13 - Disneyland</div>
-                    <div class="sidebar-day-item" onclick="goToDay(14, event)">Day 14 - Universal</div>
-                    <div class="sidebar-day-item" onclick="goToDay(15, event)">Day 15 - CA Adventure</div>
-                    <div class="sidebar-day-item" onclick="goToDay(16, event)">Day 16 - Route 66</div>
-                </div>
-            </div>
-
-            <!-- ARIZONA -->
-            <div class="sidebar-accordion-item">
-                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
-                    <span>🏜️ Arizona (4 giorni)</span>
-                    <span class="sidebar-accordion-toggle">▼</span>
-                </div>
-                <div class="sidebar-accordion-content">
-                    <div class="sidebar-day-item" onclick="goToDay(17, event)">Day 17 - → Grand Canyon</div>
-                    <div class="sidebar-day-item" onclick="goToDay(18, event)">Day 18 - Grand Canyon</div>
-                    <div class="sidebar-day-item" onclick="goToDay(19, event)">Day 19 - Antelope Canyon</div>
-                    <div class="sidebar-day-item" onclick="goToDay(20, event)">Day 20 - Monument Valley</div>
-                </div>
-            </div>
-
-            <!-- UTAH & NEVADA -->
-            <div class="sidebar-accordion-item">
-                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
-                    <span>🎰 Utah & Nevada (4 giorni)</span>
-                    <span class="sidebar-accordion-toggle">▼</span>
-                </div>
-                <div class="sidebar-accordion-content">
-                    <div class="sidebar-day-item" onclick="goToDay(21, event)">Day 21 - Bryce & Zion</div>
-                    <div class="sidebar-day-item" onclick="goToDay(22, event)">Day 22 - → Las Vegas</div>
-                    <div class="sidebar-day-item" onclick="goToDay(23, event)">Day 23 - Las Vegas</div>
-                    <div class="sidebar-day-item" onclick="goToDay(24, event)">Day 24 - Death Valley</div>
-                </div>
-            </div>
-
-            <!-- RIENTRO -->
-            <div class="sidebar-accordion-item">
-                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
-                    <span>✈️ Rientro (1 giorno)</span>
-                    <span class="sidebar-accordion-toggle">▼</span>
-                </div>
-                <div class="sidebar-accordion-content">
-                    <div class="sidebar-day-item" onclick="goToDay(25, event)">Day 25 - Si torna a casa</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="sidebar-section">
-            <div class="sidebar-section-title">Info Viaggio</div>
-            <div class="sidebar-item">📍 Vienna → New York</div>
-            <div class="sidebar-item">🗓️ 18 Aprile - 12 Maggio</div>
-            <div class="sidebar-item">✈️ 3 voli internazionali</div>
-            <div class="sidebar-item">🏨 13 hotel prenotati</div>
-        </div>
-
-        <div class="sidebar-section">
-            <div class="sidebar-section-title">Backup Dati</div>
-            <div class="sidebar-item" onclick="openBackupModal()" style="background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%); color: white; font-weight: 600; cursor: pointer;">
-                ☁️ Backup Spese → GitHub
-            </div>
-        </div>
-    </div>
     
     <header id="header">
         <h1>AMERICAN ODYSSEY</h1>
@@ -5706,6 +5600,25 @@ function addTimestampToPayments(payments) {
             </div>
         </div>
     </div>
+
+    <!-- CARICA SIDEBAR CONDIVISA -->
+    <script>
+        // Carica sidebar.html dinamicamente
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                // Estrai solo il contenuto della sidebar (senza script)
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+                const sidebarDiv = doc.querySelector('.sidebar');
+                
+                if (sidebarDiv) {
+                    // Inserisci la sidebar nel body
+                    document.body.insertBefore(sidebarDiv, document.body.firstChild);
+                }
+            })
+            .catch(error => console.error('Errore caricamento sidebar:', error));
+    </script>
 
 </body>
 </html>
