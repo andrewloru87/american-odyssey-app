@@ -569,19 +569,114 @@
 </head>
 <body>
     <!-- MENU BUTTON + SIDEBAR -->
-    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
 
+    <!-- SIDEBAR CONDIVISA -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>American Odyssey</h2>
+            <p>25 giorni • 5000+ km</p>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">🏠 Navigazione</div>
+            <div class="sidebar-item" onclick="window.location.href='app.html'">🏠 Home</div>
+            <div class="sidebar-item" onclick="window.location.href='app.html?tab=costs'">💰 Spese</div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">📍 Giorni per Stato</div>
+
+            <!-- NEW YORK -->
+            <div class="sidebar-accordion-item">
+                <div class="sidebar-accordion-header active" onclick="toggleSidebarAccordion(this)">
+                    <span>🗽 New York (5 giorni)</span>
+                    <span class="sidebar-accordion-toggle">▼</span>
+                </div>
+                <div class="sidebar-accordion-content active">
+                    <div class="sidebar-day-item" onclick="goToDay(1)">Day 01 - Il grande salto</div>
+                    <div class="sidebar-day-item" onclick="goToDay(2)">Day 02 - Central Park</div>
+                    <div class="sidebar-day-item" onclick="goToDay(3)">Day 03 - Statua Libertà</div>
+                    <div class="sidebar-day-item" onclick="goToDay(4)">Day 04 - Broadway</div>
+                    <div class="sidebar-day-item" onclick="goToDay(5)">Day 05 - MoMA & Top</div>
+                </div>
+            </div>
+
+            <!-- CALIFORNIA -->
+            <div class="sidebar-accordion-item">
+                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                    <span>🌉 California (12 giorni)</span>
+                    <span class="sidebar-accordion-toggle">▼</span>
+                </div>
+                <div class="sidebar-accordion-content">
+                    <div class="sidebar-day-item" onclick="goToDay(6)">Day 06 - Coast to Coast</div>
+                    <div class="sidebar-day-item" onclick="goToDay(7)">Day 07 - San Francisco</div>
+                    <div class="sidebar-day-item" onclick="goToDay(8)">Day 08 - Road Trip!</div>
+                    <div class="sidebar-day-item" onclick="goToDay(9)">Day 09 - Yosemite</div>
+                    <div class="sidebar-day-item" onclick="goToDay(10)">Day 10 - Sequoie</div>
+                    <div class="sidebar-day-item" onclick="goToDay(11)">Day 11 - → LA</div>
+                    <div class="sidebar-day-item" onclick="goToDay(12)">Day 12 - Hollywood</div>
+                    <div class="sidebar-day-item" onclick="goToDay(13)">Day 13 - Disneyland</div>
+                    <div class="sidebar-day-item" onclick="goToDay(14)">Day 14 - Universal</div>
+                    <div class="sidebar-day-item" onclick="goToDay(15)">Day 15 - CA Adventure</div>
+                    <div class="sidebar-day-item" onclick="goToDay(16)">Day 16 - Route 66</div>
+                </div>
+            </div>
+
+            <!-- ARIZONA -->
+            <div class="sidebar-accordion-item">
+                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                    <span>🏜️ Arizona (4 giorni)</span>
+                    <span class="sidebar-accordion-toggle">▼</span>
+                </div>
+                <div class="sidebar-accordion-content">
+                    <div class="sidebar-day-item" onclick="goToDay(17)">Day 17 - → Grand Canyon</div>
+                    <div class="sidebar-day-item" onclick="goToDay(18)">Day 18 - Grand Canyon</div>
+                    <div class="sidebar-day-item" onclick="goToDay(19)">Day 19 - Antelope Canyon</div>
+                    <div class="sidebar-day-item" onclick="goToDay(20)">Day 20 - Monument Valley</div>
+                </div>
+            </div>
+
+            <!-- UTAH & NEVADA -->
+            <div class="sidebar-accordion-item">
+                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                    <span>🎰 Utah & Nevada (4 giorni)</span>
+                    <span class="sidebar-accordion-toggle">▼</span>
+                </div>
+                <div class="sidebar-accordion-content">
+                    <div class="sidebar-day-item" onclick="goToDay(21)">Day 21 - Bryce & Zion</div>
+                    <div class="sidebar-day-item" onclick="goToDay(22)">Day 22 - → Las Vegas</div>
+                    <div class="sidebar-day-item" onclick="goToDay(23)">Day 23 - Las Vegas</div>
+                    <div class="sidebar-day-item" onclick="goToDay(24)">Day 24 - Death Valley</div>
+                </div>
+            </div>
+
+            <!-- RIENTRO -->
+            <div class="sidebar-accordion-item">
+                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                    <span>✈️ Rientro (1 giorno)</span>
+                    <span class="sidebar-accordion-toggle">▼</span>
+                </div>
+                <div class="sidebar-accordion-content">
+                    <div class="sidebar-day-item" onclick="goToDay(25)">Day 25 - Si torna a casa</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Info Viaggio</div>
+            <div class="sidebar-item">📍 Vienna → New York</div>
+            <div class="sidebar-item">🗓️ 18 Aprile - 12 Maggio</div>
+            <div class="sidebar-item">✈️ 3 voli internazionali</div>
+            <div class="sidebar-item">🏨 13 hotel prenotati</div>
+        </div>
+    </div>
+
     <!-- HEADER -->
-    <header>
-        <h1>📅 Day 1</h1>
-        <button class="menu-btn" onclick="toggleMenu()" id="menuBtn2">
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: white; border-bottom: 1px solid #e8e8e8; position: sticky; top: 0; z-index: 100;">
+        <h1 style="margin: 0; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #2d2d2d;">📅 Day 1</h1>
+        <button class="menu-btn" onclick="toggleMenu()" id="menuBtn">
             <span></span>
             <span></span>
             <span></span>
@@ -590,7 +685,8 @@
 
     <!-- CONTENT -->
     <div class="content">
-        <!-- HEADER CARD -->
+
+        <!-- DAY HEADER CARD -->
         <div class="day-header-card">
             <h1>🗽 Vienna → Newark → Manhattan</h1>
             <p>Sabato, 18 Aprile 2026</p>
@@ -1189,12 +1285,10 @@
     <script>
         function toggleMenu() {
             const menuBtn = document.getElementById('menuBtn');
-            const menuBtn2 = document.getElementById('menuBtn2');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
 
             menuBtn.classList.toggle('open');
-            menuBtn2.classList.toggle('open');
             sidebar.classList.toggle('open');
             overlay.classList.toggle('open');
         }
@@ -1234,25 +1328,6 @@
         function goToDay(dayNum) {
             window.location.href = `day-${String(dayNum).padStart(2, '0')}.html`;
         }
-    </script>
-
-    <!-- CARICA SIDEBAR CONDIVISA -->
-    <script>
-        // Carica sidebar.html dinamicamente
-        fetch('sidebar.html')
-            .then(response => response.text())
-            .then(data => {
-                // Estrai solo il contenuto della sidebar (senza script)
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(data, 'text/html');
-                const sidebarDiv = doc.querySelector('.sidebar');
-                
-                if (sidebarDiv) {
-                    // Inserisci la sidebar nel body
-                    document.body.insertBefore(sidebarDiv, document.body.firstChild);
-                }
-            })
-            .catch(error => console.error('Errore caricamento sidebar:', error));
     </script>
 
 </body>
