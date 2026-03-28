@@ -25,8 +25,188 @@
             -ms-user-select: none;
         }
 
+        /* MENU BUTTON */
+        .menu-btn {
+            padding: 8px;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            background: transparent;
+            position: relative;
+            z-index: 100;
+        }
+
+        .menu-btn span {
+            width: 20px;
+            height: 2px;
+            background: #2d2d2d;
+            border-radius: 1px;
+            transition: all 0.3s;
+        }
+
+        .menu-btn.open span:nth-child(1) { transform: rotate(45deg) translateY(8px); }
+        .menu-btn.open span:nth-child(2) { opacity: 0; }
+        .menu-btn.open span:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e0e0e0;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1999;
+            overflow-y: auto;
+            overflow-x: hidden;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 60px;
+        }
+
+        .sidebar.open { transform: translateX(0); }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1998;
+        }
+
+        .overlay.open { display: block; }
+
+        .sidebar-header {
+            padding: 24px 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .sidebar-header h2 {
+            font-size: 20px;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 4px;
+            color: #2d2d2d;
+            font-weight: 700;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .sidebar-section {
+            padding: 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .sidebar-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #888;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .sidebar-item {
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            color: #666;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-item:active {
+            background: #e8e8e8;
+            color: #2d2d2d;
+            border-left-color: #2d2d2d;
+        }
+
+        /* SIDEBAR ACCORDION */
+        .sidebar-accordion-item {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-accordion-header {
+            padding: 10px 12px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2d2d2d;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .sidebar-accordion-header:hover {
+            background: #efefef;
+        }
+
+        .sidebar-accordion-header.active {
+            background: #7FECE5;
+            color: white;
+        }
+
+        .sidebar-accordion-toggle {
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+
+        .sidebar-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease;
+        }
+
+        .sidebar-accordion-content.active {
+            max-height: 1000px;
+        }
+
+        .sidebar-day-item {
+            padding: 8px 12px;
+            margin-left: 8px;
+            margin-bottom: 4px;
+            background: white;
+            border-left: 3px solid #7FECE5;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .sidebar-day-item:hover {
+            background: #f5f5f5;
+            color: #2d2d2d;
+        }
+
+        /* HEADER */
         header {
-            padding: 16px 16px;
+            padding: 16px;
             background: white;
             border-bottom: 1px solid #e8e8e8;
             position: sticky;
@@ -45,37 +225,15 @@
             color: #2d2d2d;
         }
 
-        .menu-btn {
-            width: 44px;
-            height: 44px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 4px;
-            border-radius: 8px;
-        }
-
-        .menu-btn span {
-            width: 20px;
-            height: 2px;
-            background: #2d2d2d;
-            border-radius: 1px;
-            transition: all 0.3s;
-        }
-
+        /* CONTENT */
         .content {
             padding: 16px;
             max-width: 600px;
             margin: 0 auto;
-            padding-top: 90px;
             padding-bottom: 40px;
         }
 
-        /* HEADER CARD */
+        /* DAY HEADER CARD */
         .day-header-card {
             background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%);
             color: white;
@@ -126,12 +284,6 @@
             font-size: 13px;
         }
 
-        .highlight-item strong {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
         /* TIPS SECTION */
         .tips-section {
             background: white;
@@ -177,84 +329,71 @@
             line-height: 1.6;
         }
 
-        .tip-card li {
-            margin-bottom: 6px;
-        }
-
-        /* TIMELINE */
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(to bottom, #7FECE5, #FFBBE2);
-        }
-
+        /* TIMELINE COMPATTA */
         .timeline-item {
-            margin-bottom: 30px;
-            position: relative;
-            margin-left: 60px;
             background: white;
-            padding: 16px;
-            border-radius: 8px;
             border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
         }
 
-        .timeline-marker {
-            position: absolute;
-            left: -40px;
-            top: 18px;
-            width: 30px;
-            height: 30px;
-            background: white;
-            border: 3px solid #7FECE5;
-            border-radius: 50%;
+        .timeline-item-header {
+            padding: 16px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            z-index: 10;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid #f0f0f0;
         }
 
-        .timeline-time {
-            display: inline-block;
-            background: #7FECE5;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 16px;
-            font-weight: 700;
+        .timeline-emoji {
+            font-size: 32px;
+        }
+
+        .timeline-item-time {
             font-size: 11px;
-            margin-bottom: 10px;
+            color: #888;
+            background: #f5f5f5;
+            padding: 4px 10px;
+            border-radius: 12px;
+            order: -1;
         }
 
-        .timeline-item h3 {
-            font-size: 14px;
+        .timeline-item-title {
             font-weight: 700;
+            font-size: 14px;
             color: #2d2d2d;
-            margin-bottom: 6px;
+            text-align: center;
         }
 
-        .timeline-subtitle {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 12px;
+        .timeline-item-duration {
+            font-size: 11px;
+            color: #999;
+            background: #fafafa;
+            padding: 4px 10px;
+            border-radius: 12px;
+            order: 1;
         }
 
-        .timeline-details {
+        .timeline-item-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .timeline-item-content.active {
+            max-height: 2000px;
+        }
+
+        .timeline-body {
+            padding: 16px;
+            background: white;
             font-size: 12px;
             color: #555;
             line-height: 1.6;
-        }
-
-        .timeline-details p {
-            margin-bottom: 8px;
         }
 
         .info-grid {
@@ -309,45 +448,19 @@
             color: #856404;
         }
 
-        /* ACCORDION */
-        .accordion-header {
-            background: #f5f5f5;
-            padding: 12px;
+        .maps-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%);
+            color: white;
+            padding: 10px 14px;
             border-radius: 6px;
-            cursor: pointer;
+            border: none;
             font-weight: 600;
             font-size: 12px;
-            color: #2d2d2d;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
             margin-top: 10px;
-            user-select: none;
-        }
-
-        .accordion-toggle {
-            font-size: 12px;
-            transition: transform 0.3s;
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .accordion-content.active {
-            max-height: 500px;
-        }
-
-        .accordion-body {
-            background: #fafafa;
-            padding: 12px;
-            border-radius: 6px;
-            margin-top: 8px;
-            font-size: 12px;
-            color: #555;
-            line-height: 1.6;
+            transition: all 0.2s;
         }
 
         /* SUMMARY */
@@ -394,57 +507,187 @@
             color: #2d2d2d;
         }
 
-        .summary-status {
-            font-size: 10px;
-            color: #2e7d32;
-            margin-top: 4px;
-            font-weight: 600;
-        }
-
-        .maps-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%);
-            color: white;
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: none;
+        .completion-message {
+            background: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 14px;
+            border-radius: 6px;
+            margin-top: 12px;
+            color: #1565c0;
             font-weight: 600;
             font-size: 13px;
+        }
+
+        /* ACCORDION DENTRO TIMELINE */
+        .accordion-header {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 6px;
             cursor: pointer;
-            text-decoration: none;
-            margin-top: 12px;
-            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 12px;
+            color: #2d2d2d;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
+            margin-bottom: 8px;
+            user-select: none;
             transition: all 0.2s;
-            width: 100%;
-            text-align: center;
-            justify-content: center;
         }
 
-        .maps-button:active {
-            transform: scale(0.98);
-            opacity: 0.9;
+        .accordion-header:hover {
+            background: #efefef;
         }
 
-        @media (max-width: 480px) {
-            .maps-button {
-                width: 100%;
-            }
+        .accordion-toggle {
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .accordion-content.active {
+            max-height: 1000px;
+        }
+
+        .accordion-body {
+            background: #fafafa;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
+    <!-- MENU BUTTON + SIDEBAR -->
+    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>American Odyssey</h2>
+            <p>25 giorni • 5000+ km</p>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">🏠 Navigazione</div>
+            <div class="sidebar-item" onclick="goToApp()">← Back to App</div>
+            <div class="sidebar-item" onclick="toggleMenu()">🏠 Home</div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">📍 Giorni per Stato</div>
+
+            <!-- NEW YORK -->
+            <div class="sidebar-accordion-item">
+                <div class="sidebar-accordion-header active" onclick="toggleSidebarAccordion(this)">
+                    <span>🗽 New York (5 giorni)</span>
+                    <span class="sidebar-accordion-toggle">▼</span>
+                </div>
+                <div class="sidebar-accordion-content active">
+                    <div class="sidebar-day-item" onclick="goToDay(1)">Day 01 - Il grande salto</div>
+                    <div class="sidebar-day-item" onclick="goToDay(2)">Day 02 - Central Park</div>
+                    <div class="sidebar-day-item" onclick="goToDay(3)">Day 03 - Statua Libertà</div>
+                    <div class="sidebar-day-item" onclick="goToDay(4)">Day 04 - Broadway</div>
+                    <div class="sidebar-day-item" onclick="goToDay(5)">Day 05 - MoMA & Top</div>
+                </div>
+            </div>
+
+            <!-- CALIFORNIA -->
+            <div class="sidebar-accordion-item">
+                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                    <span>🌉 California (12 giorni)</span>
+                    <span class="sidebar-accordion-toggle">▼</span>
+                </div>
+                <div class="sidebar-accordion-content">
+                    <div class="sidebar-day-item" onclick="goToDay(6)">Day 06 - Coast to Coast</div>
+                    <div class="sidebar-day-item" onclick="goToDay(7)">Day 07 - San Francisco</div>
+                    <div class="sidebar-day-item" onclick="goToDay(8)">Day 08 - Road Trip!</div>
+                    <div class="sidebar-day-item" onclick="goToDay(9)">Day 09 - Yosemite</div>
+                    <div class="sidebar-day-item" onclick="goToDay(10)">Day 10 - Sequoie</div>
+                    <div class="sidebar-day-item" onclick="goToDay(11)">Day 11 - → LA</div>
+                    <div class="sidebar-day-item" onclick="goToDay(12)">Day 12 - Hollywood</div>
+                    <div class="sidebar-day-item" onclick="goToDay(13)">Day 13 - Disneyland</div>
+                    <div class="sidebar-day-item" onclick="goToDay(14)">Day 14 - Universal</div>
+                    <div class="sidebar-day-item" onclick="goToDay(15)">Day 15 - CA Adventure</div>
+                    <div class="sidebar-day-item" onclick="goToDay(16)">Day 16 - Route 66</div>
+                </div>
+            </div>
+
+            <!-- ARIZONA -->
+            <div class="sidebar-accordion-item">
+                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                    <span>🏜️ Arizona (4 giorni)</span>
+                    <span class="sidebar-accordion-toggle">▼</span>
+                </div>
+                <div class="sidebar-accordion-content">
+                    <div class="sidebar-day-item" onclick="goToDay(17)">Day 17 - → Grand Canyon</div>
+                    <div class="sidebar-day-item" onclick="goToDay(18)">Day 18 - Grand Canyon</div>
+                    <div class="sidebar-day-item" onclick="goToDay(19)">Day 19 - Antelope Canyon</div>
+                    <div class="sidebar-day-item" onclick="goToDay(20)">Day 20 - Monument Valley</div>
+                </div>
+            </div>
+
+            <!-- UTAH & NEVADA -->
+            <div class="sidebar-accordion-item">
+                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                    <span>🎰 Utah & Nevada (4 giorni)</span>
+                    <span class="sidebar-accordion-toggle">▼</span>
+                </div>
+                <div class="sidebar-accordion-content">
+                    <div class="sidebar-day-item" onclick="goToDay(21)">Day 21 - Bryce & Zion</div>
+                    <div class="sidebar-day-item" onclick="goToDay(22)">Day 22 - → Las Vegas</div>
+                    <div class="sidebar-day-item" onclick="goToDay(23)">Day 23 - Las Vegas</div>
+                    <div class="sidebar-day-item" onclick="goToDay(24)">Day 24 - Death Valley</div>
+                </div>
+            </div>
+
+            <!-- RIENTRO -->
+            <div class="sidebar-accordion-item">
+                <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                    <span>✈️ Rientro (1 giorno)</span>
+                    <span class="sidebar-accordion-toggle">▼</span>
+                </div>
+                <div class="sidebar-accordion-content">
+                    <div class="sidebar-day-item" onclick="goToDay(25)">Day 25 - Si torna a casa</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Info Viaggio</div>
+            <div class="sidebar-item">📍 Vienna → New York</div>
+            <div class="sidebar-item">🗓️ 18 Aprile - 12 Maggio</div>
+            <div class="sidebar-item">✈️ 3 voli internazionali</div>
+            <div class="sidebar-item">🏨 13 hotel prenotati</div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
     <header>
         <h1>📅 Day 1</h1>
-        <button class="menu-btn" onclick="goBack()">
+        <button class="menu-btn" onclick="toggleMenu()" id="menuBtn2">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </header>
 
+    <!-- CONTENT -->
     <div class="content">
         <!-- HEADER CARD -->
         <div class="day-header-card">
@@ -453,152 +696,175 @@
             <p style="font-size: 12px; margin-top: 8px; opacity: 0.9;">Il viaggio inizia! Partenza da Vienna alle 06:35, arrivo a NYC pomeriggio</p>
         </div>
 
-        <!-- HIGHLIGHTS -->
-        <div class="highlights-section">
-            <h2>⭐ Highlights della Giornata</h2>
-            <div class="highlight-item">
-                <strong>✈️ Volo OS37 – Austrian Airlines</strong>
-                Vienna → Newark | 9h 10m | Boeing 777-200
+        <!-- HIGHLIGHTS AS ACCORDION -->
+        <div style="margin-bottom: 20px;">
+            <div class="accordion-header" onclick="toggleAccordion(this)" style="background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%); color: white; font-size: 14px; margin-bottom: 0; border-radius: 6px;">
+                ⭐ Highlights della Giornata
+                <span class="accordion-toggle">▼</span>
             </div>
-            <div class="highlight-item">
-                <strong>🛬 Immigrazione ESTA</strong>
-                Newark EWR | Mobile Passport Control
-            </div>
-            <div class="highlight-item">
-                <strong>🏨 Check-in Sofitel</strong>
-                45 W 44th St | Midtown Manhattan
-            </div>
-            <div class="highlight-item">
-                <strong>🌃 Times Square</strong>
-                Prima immersione NYC | Foto & video
+            <div class="accordion-content" style="border-radius: 0 0 6px 6px; border: 1px solid #e0e0e0; border-top: none;">
+                <div style="padding: 16px;">
+                    <div class="highlight-item" style="background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%); color: white; padding: 12px; border-radius: 6px; margin-bottom: 8px; font-size: 12px;">
+                        <strong>✈️ Volo OS37 – Austrian Airlines</strong><br/>
+                        Vienna → Newark | 9h 10m | Boeing 777-200
+                    </div>
+                    <div class="highlight-item" style="background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%); color: white; padding: 12px; border-radius: 6px; margin-bottom: 8px; font-size: 12px;">
+                        <strong>🛬 Immigrazione ESTA</strong><br/>
+                        Newark EWR | Mobile Passport Control
+                    </div>
+                    <div class="highlight-item" style="background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%); color: white; padding: 12px; border-radius: 6px; margin-bottom: 8px; font-size: 12px;">
+                        <strong>🏨 Check-in Sofitel</strong><br/>
+                        45 W 44th St | Midtown Manhattan
+                    </div>
+                    <div class="highlight-item" style="background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%); color: white; padding: 12px; border-radius: 6px; margin-bottom: 0; font-size: 12px;">
+                        <strong>🌃 Times Square</strong><br/>
+                        Prima immersione NYC | Foto & video
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- TIPS -->
-        <div class="tips-section">
-            <h2>💡 Consigli Pratici</h2>
-            
-            <div class="tips-grid">
-                <div class="tip-card" style="border-left-color: #2e7d32;">
-                    <h3>🟢 Per Monica (Fit & Recovery)</h3>
-                    <ul>
-                        <li><strong>Hydration:</strong> bere ogni 1–2 ore durante volo</li>
-                        <li><strong>Movimento:</strong> alzarsi ogni 2–3 ore per gambe</li>
-                        <li><strong>Stretching:</strong> 10 min di stretching al rientro in hotel</li>
-                        <li><strong>Sleep:</strong> restare svegli fino a 22:00 NYC time</li>
-                        <li><strong>NO:</strong> evitare alcool e caffeina sul volo</li>
-                    </ul>
-                </div>
-
-                <div class="tip-card" style="border-left-color: #d32f2f;">
-                    <h3>🟣 Per Andrea (Content & Video)</h3>
-                    <ul>
-                        <li><strong>Telefono:</strong> 100% carico + power bank per backup</li>
-                        <li><strong>4K + Stabilizzatore:</strong> sempre ON per travel footage</li>
-                        <li><strong>Times Square:</strong> Golden hour 18:00–19:30</li>
-                        <li><strong>Audio:</strong> raccogliete suoni ambientali</li>
-                        <li><strong>Backup:</strong> caricamento su Google Drive sera</li>
-                    </ul>
-                </div>
+        <!-- TIPS AS ACCORDION -->
+        <div style="margin-bottom: 24px;">
+            <div class="accordion-header" onclick="toggleAccordion(this)" style="background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%); color: white; font-size: 14px; margin-bottom: 0; border-radius: 6px;">
+                💡 Consigli Pratici
+                <span class="accordion-toggle">▼</span>
             </div>
+            <div class="accordion-content" style="border-radius: 0 0 6px 6px; border: 1px solid #e0e0e0; border-top: none;">
+                <div style="padding: 16px;">
+                    <div class="tip-card" style="border-left-color: #2e7d32; background: #f9f9f9; margin-bottom: 12px;">
+                        <h3 style="font-size: 13px;">🟢 Per Monica (Fit & Recovery)</h3>
+                        <ul style="margin-left: 16px; font-size: 12px;">
+                            <li><strong>Hydration:</strong> bere ogni 1–2 ore durante volo</li>
+                            <li><strong>Movimento:</strong> alzarsi ogni 2–3 ore per gambe</li>
+                            <li><strong>Stretching:</strong> 10 min di stretching al rientro in hotel</li>
+                            <li><strong>Sleep:</strong> restare svegli fino a 22:00 NYC time</li>
+                        </ul>
+                    </div>
 
-            <div class="tip-card" style="background: #fff3cd; border-left-color: #ffc107; margin-top: 12px;">
-                <h3 style="color: #856404;">⚠️ Consigli Generali</h3>
-                <ul>
-                    <li><strong>Documenti:</strong> passaporti + ESTA a portata di mano</li>
-                    <li><strong>Valuta:</strong> non cambiate euro in aeroporto (caro)</li>
-                    <li><strong>Orologio:</strong> mettetelo all'ora USA (EDT, -6 ore)</li>
-                    <li><strong>Vestiario:</strong> portare giacca (sera a NYC = 12–18°C)</li>
-                    <li><strong>Jet lag:</strong> chiave = restare svegli fino a sera (NYC time)</li>
-                    <li><strong>Mancia:</strong> negli USA è 15–20% (non inclusa nel conto)</li>
-                </ul>
+                    <div class="tip-card" style="border-left-color: #d32f2f; background: #f9f9f9; margin-bottom: 12px;">
+                        <h3 style="font-size: 13px;">🟣 Per Andrea (Content & Video)</h3>
+                        <ul style="margin-left: 16px; font-size: 12px;">
+                            <li><strong>Telefono:</strong> 100% carico + power bank per backup</li>
+                            <li><strong>4K + Stabilizzatore:</strong> sempre ON per travel footage</li>
+                            <li><strong>Times Square:</strong> Golden hour 18:00–19:30</li>
+                            <li><strong>Backup:</strong> caricamento su Google Drive sera</li>
+                        </ul>
+                    </div>
+
+                    <div class="tip-card" style="background: #fff3cd; border-left-color: #ffc107;">
+                        <h3 style="color: #856404; font-size: 13px;">⚠️ Consigli Generali</h3>
+                        <ul style="margin-left: 16px; font-size: 12px;">
+                            <li><strong>Documenti:</strong> passaporti + ESTA a portata di mano</li>
+                            <li><strong>Orologio:</strong> mettetelo all'ora USA (EDT, -6 ore)</li>
+                            <li><strong>Vestiario:</strong> portare giacca (sera a NYC = 12–18°C)</li>
+                            <li><strong>Jet lag:</strong> chiave = restare svegli fino a sera (NYC time)</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- TIMELINE -->
-        <div class="timeline">
+        <!-- TIMELINE COMPATTA -->
+        <div style="margin-top: 24px;">
+            <h2 style="font-size: 16px; font-weight: 700; color: #7FECE5; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.3px;">⏰ Timeline Giornaliera</h2>
+
             <!-- ITEM 1 -->
             <div class="timeline-item">
-                <div class="timeline-marker">🕖</div>
-                <div class="timeline-time">06:35 – 1h</div>
-                <h3>Preparazione & Partenza Vienna</h3>
-                <div class="timeline-subtitle">Metro S7 → Vienna International Airport (VIE)</div>
-                <div class="timeline-details">
-                    <p><strong>Partenza da:</strong> Geiselbergstraße</p>
-                    <p><strong>Destinazione:</strong> Vienna International Airport</p>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <span class="info-label">Trasporto</span>
-                            <span class="info-value">Metro S7</span>
+                <div class="timeline-item-header" onclick="toggleTimelineItem(this)">
+                    <div class="timeline-item-time">06:35</div>
+                    <div class="timeline-emoji">🕖</div>
+                    <div class="timeline-item-title">Preparazione & Partenza Vienna</div>
+                    <div class="timeline-item-duration">Durata: 1h</div>
+                </div>
+                <div class="timeline-item-content">
+                    <div class="timeline-body">
+                        <p><strong>Metro S7 → Vienna International Airport (VIE)</strong></p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Trasporto</span>
+                                <span class="info-value">Metro S7</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Durata</span>
+                                <span class="info-value">~25 min</span>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <span class="info-label">Durata</span>
-                            <span class="info-value">~25 min</span>
-                        </div>
-                    </div>
-                    <a href="https://maps.google.com/?q=Vienna+International+Airport+VIE" target="_blank" class="maps-button">
-                        📍 Vienna International Airport on Google Maps
-                    </a>
-                    <span class="cost-badge cost-free">FREE</span>
+                        <a href="https://maps.google.com/?q=Vienna+International+Airport+VIE" target="_blank" class="maps-button">📍 Visualizza su Maps</a>
+                        <div><span class="cost-badge cost-free">FREE</span></div>
 
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        ✓ Zaino a Mano Checklist
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul style="margin-left: 16px;">
-                                <li>Passaporti (Andrea + Monica)</li>
-                                <li>ESTA screenshot</li>
-                                <li>Biglietti aereo</li>
-                                <li>Power bank carico 100%</li>
-                                <li>Caricabatterie USB-C</li>
-                                <li>Cuffie/AirPods</li>
-                            </ul>
+                        <!-- ACCORDION: Checklist -->
+                        <div style="margin-top: 12px; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                ✓ Zaino a Mano Checklist
+                                <span class="accordion-toggle">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <ul style="margin-left: 16px; font-size: 12px;">
+                                        <li>Passaporti (Andrea + Monica)</li>
+                                        <li>ESTA screenshot</li>
+                                        <li>Biglietti aereo</li>
+                                        <li>Power bank carico 100%</li>
+                                        <li>Caricabatterie USB-C</li>
+                                        <li>Cuffie/AirPods</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- BOTTONE SPESA -->
                     </div>
                 </div>
             </div>
 
             <!-- ITEM 2 -->
             <div class="timeline-item">
-                <div class="timeline-marker">🏢</div>
-                <div class="timeline-time">07:15 – 3h</div>
-                <h3>Check-in & Sicurezza Aeroporto</h3>
-                <div class="timeline-subtitle">Terminal 3 – Preparazione per il decollo</div>
-                <div class="timeline-details">
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <span class="info-label">Check-in</span>
-                            <span class="info-value">07:25–07:45</span>
+                <div class="timeline-item-header" onclick="toggleTimelineItem(this)">
+                    <div class="timeline-item-time">07:15</div>
+                    <div class="timeline-emoji">🏢</div>
+                    <div class="timeline-item-title">Check-in & Sicurezza Aeroporto</div>
+                    <div class="timeline-item-duration">Durata: 3h</div>
+                </div>
+                <div class="timeline-item-content">
+                    <div class="timeline-body">
+                        <p><strong>Terminal 3 – Preparazione per il decollo</strong></p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Check-in</span>
+                                <span class="info-value">07:25–07:45</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Sicurezza</span>
+                                <span class="info-value">07:45–08:15</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Lounge relax</span>
+                                <span class="info-value">08:15–10:30</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Boarding call</span>
+                                <span class="info-value">~10:15</span>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <span class="info-label">Sicurezza</span>
-                            <span class="info-value">07:45–08:15</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Lounge relax</span>
-                            <span class="info-value">08:15–10:30</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Boarding call</span>
-                            <span class="info-value">~10:15</span>
-                        </div>
-                    </div>
-                    <span class="cost-badge cost-free">Incluso nel biglietto</span>
+                        <div><span class="cost-badge cost-free">Incluso nel biglietto</span></div>
 
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        📋 Documenti al Check-in
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul style="margin-left: 16px;">
-                                <li>2 bagagli da stiva (23kg + 23kg)</li>
-                                <li>1 zaino cabina (incluso)</li>
-                                <li>Passaporti di entrambi</li>
-                                <li>Codice prenotazione: OS37</li>
-                            </ul>
+                        <!-- ACCORDION: Documenti al Check-in -->
+                        <div style="margin-top: 12px; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                📋 Documenti al Check-in
+                                <span class="accordion-toggle">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <ul style="margin-left: 16px; font-size: 12px;">
+                                        <li>2 bagagli da stiva (23kg + 23kg)</li>
+                                        <li>1 zaino cabina (incluso)</li>
+                                        <li>Passaporti di entrambi</li>
+                                        <li>Codice prenotazione: OS37</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -606,94 +872,110 @@
 
             <!-- ITEM 3 -->
             <div class="timeline-item">
-                <div class="timeline-marker">✈️</div>
-                <div class="timeline-time">10:45 – 9h 10m</div>
-                <h3>Volo Intercontinentale</h3>
-                <div class="timeline-subtitle">Austrian Airlines OS37 – Vienna (VIE) → Newark (EWR)</div>
-                <div class="timeline-details">
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <span class="info-label">Aereo</span>
-                            <span class="info-value">Boeing 777-200</span>
+                <div class="timeline-item-header" onclick="toggleTimelineItem(this)">
+                    <div class="timeline-item-time">10:45</div>
+                    <div class="timeline-emoji">✈️</div>
+                    <div class="timeline-item-title">Volo Intercontinentale</div>
+                    <div class="timeline-item-duration">Durata: 9h 10m</div>
+                </div>
+                <div class="timeline-item-content">
+                    <div class="timeline-body">
+                        <p><strong>Austrian Airlines OS37 – Vienna (VIE) → Newark (EWR)</strong></p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Aereo</span>
+                                <span class="info-value">Boeing 777-200</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Classe</span>
+                                <span class="info-value">Economy</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Distanza</span>
+                                <span class="info-value">6,822 km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Arrivo previsto</span>
+                                <span class="info-value">13:55 EDT</span>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <span class="info-label">Classe</span>
-                            <span class="info-value">Economy</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Distanza</span>
-                            <span class="info-value">6,822 km</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Arrivo previsto</span>
-                            <span class="info-value">13:55 EDT</span>
-                        </div>
-                    </div>
-                    <span class="cost-badge cost-paid">1.714,36 € – Pagato</span>
+                        <div><span class="cost-badge cost-paid">1.714,36 € – Pagato</span></div>
 
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        💤 Strategia Durante il Volo
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul style="margin-left: 16px;">
-                                <li><strong>Idratazione:</strong> bere ogni 1–2 ore (aria secca)</li>
-                                <li><strong>Movimento:</strong> alzarsi e camminare ogni 2–3 ore</li>
-                                <li><strong>Sonno:</strong> dormire quando possibile</li>
-                                <li><strong>Orologio:</strong> metterlo subito all'ora USA</li>
-                                <li><strong>Evitare:</strong> alcool, caffeina</li>
-                                <li><strong>Compressione:</strong> calzini compressivi se possibile</li>
-                            </ul>
+                        <!-- ACCORDION: Strategia Durante il Volo -->
+                        <div style="margin-top: 12px; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                💤 Strategia Durante il Volo
+                                <span class="accordion-toggle">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <ul style="margin-left: 16px; font-size: 12px;">
+                                        <li><strong>Idratazione:</strong> bere ogni 1–2 ore (aria secca)</li>
+                                        <li><strong>Movimento:</strong> alzarsi e camminare ogni 2–3 ore</li>
+                                        <li><strong>Sonno:</strong> dormire quando possibile</li>
+                                        <li><strong>Orologio:</strong> metterlo subito all'ora USA</li>
+                                        <li><strong>Evitare:</strong> alcool, caffeina</li>
+                                        <li><strong>Compressione:</strong> calzini compressivi se possibile</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- BOTTONE SPESA -->
                     </div>
                 </div>
             </div>
 
             <!-- ITEM 4 -->
             <div class="timeline-item">
-                <div class="timeline-marker">🛬</div>
-                <div class="timeline-time">13:55 – 1h 40m</div>
-                <h3>Arrivo Newark & Procedure Dogana (ESTA)</h3>
-                <div class="timeline-subtitle">Terminal B – Immigration, dogana, ritiro bagagli</div>
-                <div class="timeline-details">
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <span class="info-label">Atterraggio</span>
-                            <span class="info-value">13:55 EDT</span>
+                <div class="timeline-item-header" onclick="toggleTimelineItem(this)">
+                    <div class="timeline-item-time">13:55</div>
+                    <div class="timeline-emoji">🛬</div>
+                    <div class="timeline-item-title">Arrivo Newark & Procedure Dogana (ESTA)</div>
+                    <div class="timeline-item-duration">Durata: 1h 40m</div>
+                </div>
+                <div class="timeline-item-content">
+                    <div class="timeline-body">
+                        <p><strong>Terminal B – Immigration, dogana, ritiro bagagli</strong></p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Atterraggio</span>
+                                <span class="info-value">13:55 EDT</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Uscita aeroporto</span>
+                                <span class="info-value">15:10–15:35</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Con MPC app</span>
+                                <span class="info-value">20–35 min ⚡</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Senza MPC</span>
+                                <span class="info-value">45–70 min</span>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <span class="info-label">Uscita aeroporto</span>
-                            <span class="info-value">15:10–15:35</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Con MPC app</span>
-                            <span class="info-value">20–35 min ⚡</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Senza MPC</span>
-                            <span class="info-value">45–70 min</span>
-                        </div>
-                    </div>
-                    <a href="https://maps.google.com/?q=Newark+Liberty+International+Airport+EWR" target="_blank" class="maps-button">
-                        📍 Newark Airport (EWR) on Google Maps
-                    </a>
-                    <span class="cost-badge cost-free">FREE – Mobile Passport Control</span>
+                        <a href="https://maps.google.com/?q=Newark+Liberty+International+Airport+EWR" target="_blank" class="maps-button">📍 Visualizza su Maps</a>
+                        <div><span class="cost-badge cost-free">FREE – Mobile Passport Control</span></div>
 
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        📱 Mobile Passport Control Setup
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul style="margin-left: 16px;">
-                                <li><strong>1. Scaricate app:</strong> "Mobile Passport Control" (GRATIS)</li>
-                                <li><strong>2. Create profilo:</strong> nome, numero passaporto, nazionalità, data di nascita</li>
-                                <li><strong>⚠️ IMPORTANTE:</strong> NON compilate dichiarazione prima di atterrare</li>
-                                <li><strong>3. Ad arrivo:</strong> accendete WiFi, compilate dichiarazione + selfie → QR Code valido 4 ore</li>
-                                <li><strong>4. In aeroporto:</strong> cercate cartelli "MPC" → passaporto + QR → niente modulo cartaceo</li>
-                                <li><strong>Beneficio:</strong> risparmiate 20–40 minuti!</li>
-                            </ul>
+                        <!-- ACCORDION: Mobile Passport Control Setup -->
+                        <div style="margin-top: 12px; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                📱 Mobile Passport Control Setup
+                                <span class="accordion-toggle">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <ul style="margin-left: 16px; font-size: 12px;">
+                                        <li><strong>1. Scaricate app:</strong> "Mobile Passport Control" (GRATIS)</li>
+                                        <li><strong>2. Create profilo:</strong> nome, numero passaporto, nazionalità, data di nascita</li>
+                                        <li><strong>⚠️ IMPORTANTE:</strong> NON compilate dichiarazione prima di atterrare</li>
+                                        <li><strong>3. Ad arrivo:</strong> accendete WiFi, compilate dichiarazione + selfie → QR Code valido 4 ore</li>
+                                        <li><strong>4. In aeroporto:</strong> cercate cartelli "MPC" → passaporto + QR → niente modulo cartaceo</li>
+                                        <li><strong>Beneficio:</strong> risparmiate 20–40 minuti!</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -701,144 +983,169 @@
 
             <!-- ITEM 5 -->
             <div class="timeline-item">
-                <div class="timeline-marker">🚕</div>
-                <div class="timeline-time">15:35 – 1h 10m</div>
-                <h3>Trasferimento Newark → Manhattan</h3>
-                <div class="timeline-subtitle">Sofitel New York, 45 W 44th St (Times Square)</div>
-                <div class="timeline-details">
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <span class="info-label">Partenza da</span>
-                            <span class="info-value">EWR Arrivals</span>
+                <div class="timeline-item-header" onclick="toggleTimelineItem(this)">
+                    <div class="timeline-item-time">15:35</div>
+                    <div class="timeline-emoji">🚕</div>
+                    <div class="timeline-item-title">Trasferimento Newark → Manhattan</div>
+                    <div class="timeline-item-duration">Durata: 1h 10m</div>
+                </div>
+                <div class="timeline-item-content">
+                    <div class="timeline-body">
+                        <p><strong>Sofitel New York, 45 W 44th St (Times Square)</strong></p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Partenza da</span>
+                                <span class="info-value">EWR Arrivals</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Distanza</span>
+                                <span class="info-value">~25 km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Durata</span>
+                                <span class="info-value">45–60 min</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Arrivo hotel</span>
+                                <span class="info-value">16:15–17:00</span>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <span class="info-label">Distanza</span>
-                            <span class="info-value">~25 km</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Durata</span>
-                            <span class="info-value">45–60 min</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Arrivo hotel</span>
-                            <span class="info-value">16:15–17:00</span>
-                        </div>
-                    </div>
-                    <span class="cost-badge cost-pending">70–100 € | Uber/Taxi</span>
+                        <div><span class="cost-badge cost-pending">70–100 € | Uber/Taxi</span></div>
 
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        🚗 Opzioni Trasporto
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <p><strong>1️⃣ Uber/Lyft (CONSIGLIATO)</strong><br/>
-                            💰 60–88 € | Niente carta USA | Massima comodità</p>
-                            <p style="margin-top: 8px;"><strong>2️⃣ Taxi Tradizionale</strong><br/>
-                            💰 78–101 € | Accanto Arrivals | Mancia 15–20% obbligatoria</p>
+                        <!-- ACCORDION: Opzioni Trasporto -->
+                        <div style="margin-top: 12px; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                🚗 Opzioni Trasporto
+                                <span class="accordion-toggle">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p style="font-size: 12px;"><strong>1️⃣ Uber/Lyft (CONSIGLIATO)</strong><br/>💰 60–88 € | Niente carta USA | Massima comodità</p>
+                                    <p style="margin-top: 8px; font-size: 12px;"><strong>2️⃣ Taxi Tradizionale</strong><br/>💰 78–101 € | Accanto Arrivals | Mancia 15–20% obbligatoria</p>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- BOTTONE SPESA -->
                     </div>
                 </div>
             </div>
 
             <!-- ITEM 6 -->
             <div class="timeline-item">
-                <div class="timeline-marker">🏨</div>
-                <div class="timeline-time">16:45 – 45m</div>
-                <h3>Hotel Check-in</h3>
-                <div class="timeline-subtitle">Sofitel New York – Midtown Manhattan</div>
-                <div class="timeline-details">
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <span class="info-label">Indirizzo</span>
-                            <span class="info-value">45 W 44th St</span>
+                <div class="timeline-item-header" onclick="toggleTimelineItem(this)">
+                    <div class="timeline-item-time">16:45</div>
+                    <div class="timeline-emoji">🏨</div>
+                    <div class="timeline-item-title">Hotel Check-in</div>
+                    <div class="timeline-item-duration">Durata: 45m</div>
+                </div>
+                <div class="timeline-item-content">
+                    <div class="timeline-body">
+                        <p><strong>Sofitel New York – Midtown Manhattan</strong></p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Indirizzo</span>
+                                <span class="info-value">45 W 44th St</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Zona</span>
+                                <span class="info-value">Midtown Manhattan</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Notti a NYC</span>
+                                <span class="info-value">5 notti</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Check-in</span>
+                                <span class="info-value">Dalle 15:00</span>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <span class="info-label">Zona</span>
-                            <span class="info-value">Midtown Manhattan</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Notti a NYC</span>
-                            <span class="info-value">5 notti</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Check-in</span>
-                            <span class="info-value">Dalle 15:00</span>
-                        </div>
-                    </div>
-                    <a href="https://maps.google.com/?q=Sofitel+New+York+45+W+44th+St" target="_blank" class="maps-button">
-                        📍 Sofitel New York on Google Maps
-                    </a>
-                    <span class="cost-badge cost-pending">Prenotazione confermata</span>
+                        <a href="https://maps.google.com/?q=Sofitel+New+York+45+W+44th+St" target="_blank" class="maps-button">📍 Visualizza su Maps</a>
+                        <div><span class="cost-badge cost-pending">Prenotazione confermata</span></div>
 
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        ✓ Check-in Checklist
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul style="margin-left: 16px;">
-                                <li>Portare passaporti per registrazione (obbligatorio)</li>
-                                <li>Avere carta di credito per cauzione</li>
-                                <li>Se camera non pronta, depositare bagagli alla reception</li>
-                                <li>Chiedere: WiFi password, accesso 24/7, mappa zone, orari colazione</li>
-                            </ul>
+                        <!-- ACCORDION: Check-in Checklist -->
+                        <div style="margin-top: 12px; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                ✓ Check-in Checklist
+                                <span class="accordion-toggle">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <ul style="margin-left: 16px; font-size: 12px;">
+                                        <li>Portare passaporti per registrazione (obbligatorio)</li>
+                                        <li>Avere carta di credito per cauzione</li>
+                                        <li>Se camera non pronta, depositare bagagli alla reception</li>
+                                        <li>Chiedere: WiFi password, accesso 24/7, mappa zone, orari colazione</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- BOTTONE SPESA -->
                     </div>
                 </div>
             </div>
 
             <!-- ITEM 7 -->
             <div class="timeline-item">
-                <div class="timeline-marker">🌃</div>
-                <div class="timeline-time">17:30 – 1h</div>
-                <h3>Prima Immersione: Times Square</h3>
-                <div class="timeline-subtitle">Foto, video, luci, energia di NYC</div>
-                <div class="timeline-details">
-                    <a href="https://maps.google.com/?q=Times+Square+New+York" target="_blank" class="maps-button">
-                        📍 Times Square on Google Maps
-                    </a>
-                    <span class="cost-badge cost-free">FREE</span>
+                <div class="timeline-item-header" onclick="toggleTimelineItem(this)">
+                    <div class="timeline-item-time">17:30</div>
+                    <div class="timeline-emoji">🌃</div>
+                    <div class="timeline-item-title">Prima Immersione: Times Square</div>
+                    <div class="timeline-item-duration">Durata: 1h</div>
+                </div>
+                <div class="timeline-item-content">
+                    <div class="timeline-body">
+                        <p><strong>Foto, video, luci, energia di NYC</strong></p>
+                        <a href="https://maps.google.com/?q=Times+Square+New+York" target="_blank" class="maps-button">📍 Visualizza su Maps</a>
+                        <div><span class="cost-badge cost-free">FREE</span></div>
 
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        📸 Photo/Video Tips
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <p><strong>🎥 Andrea (Videomaker):</strong></p>
-                            <ul style="margin-left: 16px;">
-                                <li>Filmate in 4K, stabilizzatore ON</li>
-                                <li>Hyperlapse dei LED walls (10–15 sec)</li>
-                                <li>Dettagli neon e persone in timelapse</li>
-                                <li>Riprese slow motion traffico notturno</li>
-                                <li>Audio: suoni ambientali (folla, clacson, musica)</li>
-                                <li>Golden hour: inizia tramonto ~19:00</li>
-                            </ul>
-                            <p style="margin-top: 12px;"><strong>📷 Monica (Fotografa):</strong></p>
-                            <ul style="margin-left: 16px;">
-                                <li>Posa davanti al nome Times Square</li>
-                                <li>Skyline di notte (18:30–19:30, ora blu)</li>
-                                <li>Close-up insegne neon illuminati</li>
-                                <li>Gioco di luci riflesse su volto</li>
-                                <li>Silhouette contro maxischermi luminosi</li>
-                            </ul>
+                        <!-- ACCORDION: Photo/Video Tips -->
+                        <div style="margin-top: 12px; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                📸 Photo/Video Tips
+                                <span class="accordion-toggle">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p><strong>🟣 Andrea (Videomaker):</strong></p>
+                                    <ul style="margin-left: 16px; font-size: 12px;">
+                                        <li>Filmate in 4K, stabilizzatore ON</li>
+                                        <li>Hyperlapse dei LED walls (10–15 sec)</li>
+                                        <li>Dettagli neon e persone in timelapse</li>
+                                        <li>Riprese slow motion traffico notturno</li>
+                                        <li>Audio: suoni ambientali (folla, clacson, musica)</li>
+                                        <li>Golden hour: inizia tramonto ~19:00</li>
+                                    </ul>
+                                    <p style="margin-top: 12px;"><strong>🟢 Monica (Fotografa):</strong></p>
+                                    <ul style="margin-left: 16px; font-size: 12px;">
+                                        <li>Posa davanti al nome Times Square</li>
+                                        <li>Skyline di notte (18:30–19:30, ora blu)</li>
+                                        <li>Close-up insegne neon illuminati</li>
+                                        <li>Gioco di luci riflesse su volto</li>
+                                        <li>Silhouette contro maxischermi luminosi</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        ⚠️ Avvertimenti Sicurezza
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul style="margin-left: 16px;">
-                                <li><strong>Folle enormi:</strong> 200k+ persone, stare vicini al partner</li>
-                                <li><strong>Borsaioli:</strong> zaino davanti, non distaccatevi</li>
-                                <li><strong>Touristi in costumi:</strong> chiedono soldi per foto → evitate</li>
-                                <li><strong>Temperatura:</strong> aprile = 12–18°C, sera più fredda</li>
-                                <li><strong>Selfie stick:</strong> proibiti in alcune aree</li>
-                            </ul>
+                        <!-- ACCORDION: Avvertimenti Sicurezza -->
+                        <div style="margin-top: 12px;">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                ⚠️ Avvertimenti Sicurezza
+                                <span class="accordion-toggle">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <ul style="margin-left: 16px; font-size: 12px;">
+                                        <li><strong>Folle enormi:</strong> 200k+ persone, stare vicini al partner</li>
+                                        <li><strong>Borsaioli:</strong> zaino davanti, non distaccatevi</li>
+                                        <li><strong>Touristi in costumi:</strong> chiedono soldi per foto → evitate</li>
+                                        <li><strong>Temperatura:</strong> aprile = 12–18°C, sera più fredda</li>
+                                        <li><strong>Selfie stick:</strong> proibiti in alcune aree</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -846,106 +1153,101 @@
 
             <!-- ITEM 8 -->
             <div class="timeline-item">
-                <div class="timeline-marker">🛏️</div>
-                <div class="timeline-time">18:30 – 1h 30m</div>
-                <h3>Recupero & Riposo Pomeridiano</h3>
-                <div class="timeline-subtitle">Preparazione anti-jet lag</div>
-                <div class="timeline-details">
-                    <span class="cost-badge cost-free">FREE</span>
+                <div class="timeline-item-header" onclick="toggleTimelineItem(this)">
+                    <div class="timeline-item-time">20:00</div>
+                    <div class="timeline-emoji">🍽️</div>
+                    <div class="timeline-item-title">Cena in Zona Times Square</div>
+                    <div class="timeline-item-duration">Durata: 1h 30m</div>
+                </div>
+                <div class="timeline-item-content">
+                    <div class="timeline-body">
+                        <p><strong>Primo pasto a New York</strong></p>
+                        <div><span class="cost-badge cost-pending">23–37 € a persona | Da pagare</span></div>
 
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        💤 Strategia Jet Lag – Day 1
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul style="margin-left: 16px;">
-                                <li><strong>Rientro in hotel:</strong> doccia veloce, cambio d'abiti</li>
-                                <li><strong>Backup digitale:</strong> Andrea carica foto/video su Google Drive</li>
-                                <li><strong>Snack leggero:</strong> banana + acqua (no pasti pesanti)</li>
-                                <li><strong>NON dormire troppo:</strong> riposo light 20–30 min max</li>
-                                <li><strong>Stare svegli fino a 22:00+:</strong> è la CHIAVE per il jet lag!</li>
-                            </ul>
+                        <!-- ACCORDION: Opzioni Cena -->
+                        <div style="margin-top: 12px; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                🍴 Opzioni Cena
+                                <span class="accordion-toggle">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p style="font-size: 12px;"><strong>🟢 Per Monica (leggera, sana):</strong></p>
+                                    <ul style="margin-left: 16px; font-size: 12px; margin-bottom: 12px;">
+                                        <li><strong>Chick-fil-A o Sweetgreen</strong> – 11–16 € | Veloce, sano</li>
+                                        <li><strong>Thai/Italian casual</strong> – 16–26 € | Pasta leggera, noodles</li>
+                                    </ul>
+                                    <p style="font-size: 12px;"><strong>🟣 Per Andrea (atmosfera, content):</strong></p>
+                                    <ul style="margin-left: 16px; font-size: 12px;">
+                                        <li><strong>Deli NYC Classico</strong> – 9–14 € | Iconico, perfetto per video</li>
+                                        <li><strong>Ristorante con vibes</strong> – 16–26 € | Luci notturne, dettagli</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- ACCORDION: Consigli Cena -->
+                        <div style="margin-top: 12px;">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                💡 Consigli Cena
+                                <span class="accordion-toggle">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <ul style="margin-left: 16px; font-size: 12px;">
+                                        <li><strong>Niente prenotazione obbligatoria:</strong> ristoranti casual accettano walk-in</li>
+                                        <li><strong>Portare contanti:</strong> mancia 15–20% è normale</li>
+                                        <li><strong>Acqua gratis:</strong> fornita di default</li>
+                                        <li><strong>Porzioni enormi:</strong> dividere un piatto tra due è possibile</li>
+                                        <li><strong>Alcool:</strong> dosate, domani visita intensa</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BOTTONE SPESA -->
                     </div>
                 </div>
             </div>
 
             <!-- ITEM 9 -->
             <div class="timeline-item">
-                <div class="timeline-marker">🍽️</div>
-                <div class="timeline-time">20:00 – 1h 30m</div>
-                <h3>Cena in Zona Times Square</h3>
-                <div class="timeline-subtitle">Primo pasto a New York</div>
-                <div class="timeline-details">
-                    <span class="cost-badge cost-pending">23–37 € a persona | Da pagare</span>
-
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        🍴 Opzioni Cena
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <p><strong>🟢 Per Monica (leggera, sana):</strong></p>
-                            <ul style="margin-left: 16px;">
-                                <li><strong><a href="https://maps.google.com/?q=Chick-fil-A+Times+Square+New+York" target="_blank" style="color: #2e7d32; text-decoration: none;">Chick-fil-A o Sweetgreen 📍</a></strong> – 11–16 € | Veloce, sano</li>
-                                <li><strong><a href="https://maps.google.com/?q=Thai+Italian+restaurant+Times+Square+New+York" target="_blank" style="color: #2e7d32; text-decoration: none;">Thai/Italian casual 📍</a></strong> – 16–26 € | Pasta leggera, noodles</li>
-                            </ul>
-                            <p style="margin-top: 12px;"><strong>🟣 Per Andrea (atmosfera, content):</strong></p>
-                            <ul style="margin-left: 16px;">
-                                <li><strong><a href="https://maps.google.com/?q=NYC+Deli+sandwich+restaurant+Times+Square" target="_blank" style="color: #d32f2f; text-decoration: none;">Deli NYC Classico 📍</a></strong> – 9–14 € | Iconico, perfetto per video</li>
-                                <li><strong><a href="https://maps.google.com/?q=restaurant+neon+lights+Times+Square+New+York" target="_blank" style="color: #d32f2f; text-decoration: none;">Ristorante con vibes 📍</a></strong> – 16–26 € | Luci notturne, dettagli</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        💡 Consigli Cena
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul style="margin-left: 16px;">
-                                <li><strong>Niente prenotazione obbligatoria:</strong> ristoranti casual accettano walk-in</li>
-                                <li><strong>Portare contanti:</strong> mancia 15–20% è normale</li>
-                                <li><strong>Acqua gratis:</strong> fornita di default</li>
-                                <li><strong>Porzioni enormi:</strong> dividere un piatto tra due è possibile</li>
-                                <li><strong>Alcool:</strong> dosate, domani visita intensa</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="timeline-item-header" onclick="toggleTimelineItem(this)">
+                    <div class="timeline-item-time">21:30</div>
+                    <div class="timeline-emoji">😴</div>
+                    <div class="timeline-item-title">Fine Giornata & Sonno</div>
+                    <div class="timeline-item-duration">Durata: 2h+</div>
                 </div>
-            </div>
+                <div class="timeline-item-content">
+                    <div class="timeline-body">
+                        <p><strong>Rientro hotel, preparazione Day 2</strong></p>
 
-            <!-- ITEM 10 -->
-            <div class="timeline-item">
-                <div class="timeline-marker">😴</div>
-                <div class="timeline-time">21:30 – 2h+</div>
-                <h3>Fine Giornata & Sonno</h3>
-                <div class="timeline-subtitle">Rientro hotel, preparazione Day 2</div>
-                <div class="timeline-details">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        ✓ Checklist Finale Day 1
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul style="margin-left: 16px;">
-                                <li>✓ Rientro hotel (5 min di walk)</li>
-                                <li>✓ Doccia rilassante</li>
-                                <li>✓ Organizzare foto/video nei telefoni</li>
-                                <li>✓ Carica power bank & telefoni 100%</li>
-                                <li>✓ Preparare abbigliamento domani (strati!)</li>
-                                <li>✓ Controllare meteo NYC per domani</li>
-                                <li>✓ Dormire tra 22:00–23:00 (fondamentale!)</li>
-                            </ul>
+                        <!-- ACCORDION: Checklist Finale -->
+                        <div style="margin-top: 12px; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                ✓ Checklist Finale Day 1
+                                <span class="accordion-toggle">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <ul style="margin-left: 16px; font-size: 12px;">
+                                        <li>✓ Rientro hotel (5 min di walk)</li>
+                                        <li>✓ Doccia rilassante</li>
+                                        <li>✓ Organizzare foto/video nei telefoni</li>
+                                        <li>✓ Carica power bank & telefoni 100%</li>
+                                        <li>✓ Preparare abbigliamento domani (strati!)</li>
+                                        <li>✓ Controllare meteo NYC per domani</li>
+                                        <li>✓ Dormire tra 22:00–23:00 (fondamentale!)</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div style="background: #e3f2fd; border-left: 4px solid #1976d2; padding: 14px; border-radius: 6px; margin-top: 12px; color: #1565c0; font-weight: 600; font-size: 13px;">
-                        💪 <strong>COMPLETATO!</strong> Benvenuti in USA! 🗽<br>
-                        Domani inizia la vera avventura: Central Park, 5th Avenue, musei.<br>
-                        Riposate bene! Buonanotte! 🌃
+                        <div class="completion-message">
+                            💪 COMPLETATO! Benvenuti in USA! 🗽<br>
+                            Domani inizia la vera avventura: Central Park, 5th Avenue, musei.<br>
+                            Riposate bene! Buonanotte! 🌃
+                        </div>
                     </div>
                 </div>
             </div>
@@ -958,44 +1260,88 @@
                 <div class="summary-item">
                     <div class="summary-label">✈️ Voli (2 persone)</div>
                     <div class="summary-value">1.714,36 €</div>
-                    <div class="summary-status">✓ Pagato</div>
                 </div>
                 <div class="summary-item">
                     <div class="summary-label">🚕 Trasferimento</div>
                     <div class="summary-value">70–100 €</div>
-                    <div class="summary-status">⏳ Da pagare</div>
                 </div>
                 <div class="summary-item">
                     <div class="summary-label">🏨 Hotel (5 notti)</div>
                     <div class="summary-value">1.350,00 €</div>
-                    <div class="summary-status">⏳ Da pagare</div>
                 </div>
                 <div class="summary-item">
                     <div class="summary-label">🍽️ Cena</div>
                     <div class="summary-value">46–74 €</div>
-                    <div class="summary-status">⏳ Da pagare</div>
                 </div>
+            </div>
+
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e0e0e0; text-align: center;">
+                <a href="app.html#costs" style="background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 12px; text-decoration: none; display: inline-block;">
+                    💰 Gestisci Spese
+                </a>
             </div>
         </div>
 
-        <div style="height: 20px;"></div>
+        <div style="height: 40px;"></div>
     </div>
 
     <script>
-        function goBack() {
-            window.history.back();
+        function toggleMenu() {
+            const menuBtn = document.getElementById('menuBtn');
+            const menuBtn2 = document.getElementById('menuBtn2');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            menuBtn.classList.toggle('open');
+            menuBtn2.classList.toggle('open');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
+
+        function toggleSidebarAccordion(header) {
+            const content = header.nextElementSibling;
+            const isActive = header.classList.contains('active');
+
+            document.querySelectorAll('.sidebar-accordion-header').forEach(h => {
+                h.classList.remove('active');
+                h.nextElementSibling.classList.remove('active');
+            });
+
+            if (!isActive) {
+                header.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+
+        function toggleTimelineItem(header) {
+            const content = header.nextElementSibling;
+            content.classList.toggle('active');
         }
 
         function toggleAccordion(header) {
             const content = header.nextElementSibling;
+            const toggle = header.querySelector('.accordion-toggle');
             content.classList.toggle('active');
             
-            const toggle = header.querySelector('.accordion-toggle');
             if (content.classList.contains('active')) {
                 toggle.style.transform = 'rotate(180deg)';
             } else {
                 toggle.style.transform = 'rotate(0deg)';
             }
+        }
+
+        function goToApp() {
+            window.location.href = 'app.html';
+        }
+
+        function goToDay(dayNum) {
+            window.location.href = `day-${String(dayNum).padStart(2, '0')}.html`;
+        }
+
+        function goToAppExpenses(category) {
+            // Apri app.html con tab spese
+            const url = `app.html?tab=costs&category=${category}`;
+            window.location.href = url;
         }
     </script>
 </body>
