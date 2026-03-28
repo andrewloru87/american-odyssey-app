@@ -1330,7 +1330,7 @@
         <button class="tab" onclick="switchTab(event, 'timeline')">⏰ Timeline</button>
         <button class="tab" onclick="switchTab(event, 'bookings')">🎫 Prenotazioni</button>
         <button class="tab" onclick="switchTab(event, 'restaurants')">🍽️ Ristoranti</button>
-        <button class="tab" onclick="switchTab(event, 'costs')">💰 Spese</button>
+        <button class="tab" id="costs-tab" onclick="switchTab(event, 'costs')">💰 Spese</button>
     </div>
     
     <div class="content" id="content"></div>
@@ -3205,6 +3205,25 @@ function addTimestampToPayments(payments) {
         let currentTab = 'home';
         let lastScrollY = 0;
         let headerHidden = false;
+
+        // Leggi i parametri dall'URL (per link da day-XX.html)
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab');
+        const categoryParam = urlParams.get('category');
+        
+        if (tabParam) {
+            currentTab = tabParam;
+        }
+        
+        let selectedExpenseCategory = categoryParam || 'Cibo';
+
+        // Apri il tab al caricamento se passato un parametro
+        window.addEventListener('load', () => {
+            if (tabParam === 'costs') {
+                currentTab = 'costs';
+                render();
+            }
+        });
 
         // Calcola automaticamente quale giorno mostrare in base alla data odierna
         function initializeCurrentDay() {
