@@ -585,8 +585,8 @@
 
         <div class="sidebar-section">
             <div class="sidebar-section-title">🏠 Navigazione</div>
-            <div class="sidebar-item" onclick="goToApp()">← Back to App</div>
-            <div class="sidebar-item" onclick="toggleMenu()">🏠 Home</div>
+            <div class="sidebar-item" onclick="window.location.href='app.html'">🏠 Home</div>
+            <div class="sidebar-item" onclick="window.location.href='app.html?tab=costs'">💰 Spese</div>
         </div>
 
         <div class="sidebar-section">
@@ -790,7 +790,7 @@
                                 <span class="info-value">~25 min</span>
                             </div>
                         </div>
-                        <a href="https://maps.google.com/?q=Vienna+International+Airport+VIE" target="_blank" class="maps-button">📍 Visualizza su Maps</a>
+                        <a href="https://maps.google.com/?q=Vienna+International+Airport+VIE" target="_blank" class="maps-button">📍 Vienna International Airport</a>
                         <div><span class="cost-badge cost-free">FREE</span></div>
 
                         <!-- ACCORDION: Checklist -->
@@ -955,7 +955,7 @@
                                 <span class="info-value">45–70 min</span>
                             </div>
                         </div>
-                        <a href="https://maps.google.com/?q=Newark+Liberty+International+Airport+EWR" target="_blank" class="maps-button">📍 Visualizza su Maps</a>
+                        <a href="https://maps.google.com/?q=Newark+Liberty+International+Airport+EWR" target="_blank" class="maps-button">📍 Newark Airport (EWR)</a>
                         <div><span class="cost-badge cost-free">FREE – Mobile Passport Control</span></div>
 
                         <!-- ACCORDION: Mobile Passport Control Setup -->
@@ -1060,7 +1060,7 @@
                                 <span class="info-value">Dalle 15:00</span>
                             </div>
                         </div>
-                        <a href="https://maps.google.com/?q=Sofitel+New+York+45+W+44th+St" target="_blank" class="maps-button">📍 Visualizza su Maps</a>
+                        <a href="https://maps.google.com/?q=Sofitel+New+York+45+W+44th+St" target="_blank" class="maps-button">📍 Sofitel New York</a>
                         <div><span class="cost-badge cost-pending">Prenotazione confermata</span></div>
 
                         <!-- ACCORDION: Check-in Checklist -->
@@ -1097,7 +1097,7 @@
                 <div class="timeline-item-content">
                     <div class="timeline-body">
                         <p><strong>Foto, video, luci, energia di NYC</strong></p>
-                        <a href="https://maps.google.com/?q=Times+Square+New+York" target="_blank" class="maps-button">📍 Visualizza su Maps</a>
+                        <a href="https://maps.google.com/?q=Times+Square+New+York" target="_blank" class="maps-button">📍 Times Square</a>
                         <div><span class="cost-badge cost-free">FREE</span></div>
 
                         <!-- ACCORDION: Photo/Video Tips -->
@@ -1330,18 +1330,8 @@
             }
         }
 
-        function goToApp() {
-            window.location.href = 'app.html';
-        }
-
         function goToDay(dayNum) {
             window.location.href = `day-${String(dayNum).padStart(2, '0')}.html`;
-        }
-
-        function goToAppExpenses(category) {
-            // Apri app.html con tab spese
-            const url = `app.html?tab=costs&category=${category}`;
-            window.location.href = url;
         }
     </script>
 </body>
