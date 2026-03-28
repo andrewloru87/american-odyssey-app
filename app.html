@@ -1326,7 +1326,8 @@
             <span></span>
             <span></span>
         </button>
-        <button class="tab active" onclick="switchTab(event, 'timeline')">⏰ Timeline</button>
+        <button class="tab active" onclick="switchTab(event, 'home')">🏠 Home</button>
+        <button class="tab" onclick="switchTab(event, 'timeline')">⏰ Timeline</button>
         <button class="tab" onclick="switchTab(event, 'bookings')">🎫 Prenotazioni</button>
         <button class="tab" onclick="switchTab(event, 'restaurants')">🍽️ Ristoranti</button>
         <button class="tab" onclick="switchTab(event, 'costs')">💰 Spese</button>
@@ -3201,7 +3202,7 @@ function addTimestampToPayments(payments) {
         ];
 
         let currentDay = 0;
-        let currentTab = 'timeline';
+        let currentTab = 'home';
         let lastScrollY = 0;
         let headerHidden = false;
 
@@ -3846,6 +3847,94 @@ function addTimestampToPayments(payments) {
         }
 
         
+        // ===== RENDER HOME TAB =====
+        function renderHome() {
+            const dayIcons = ['🏠', '🗽', '🏙️', '🗽', '🎭', '✈️', '🌉', '🚗', '🏔️', '🌲', '🛣️', '🎢', '🎬', '🏖️', '🎪', '🌅', '🏜️', '🎰', '✨', '🏜️', '🪨', '⛰️', '⛰️', '🌈', '✈️'];
+            const dayTitles = ['Home', 'Il grande salto', 'Central Park', 'Statua Libertà', 'Broadway', 'Coast to Coast', 'Golden Gate', 'Yosemite', 'Sequoie', 'Route 66', 'Disneyland', 'Hollywood', 'CA Adventure', 'Route 66', 'Mojave', 'Grand Canyon', 'Antelope', 'Las Vegas', 'Cirque', 'Monument', 'Bryce+Zion', 'Vegas', 'Death Valley', 'Rientro', 'Home'];
+            
+            let html = `
+                <div style="padding: 20px; text-align: center;">
+                    <div style="margin-bottom: 24px;">
+                        <h1 style="font-size: 32px; margin-bottom: 8px; color: #2d2d2d;">🗽 AMERICAN ODYSSEY</h1>
+                        <p style="color: #888; font-size: 14px; margin: 0;">25 Giorni • 5000+ km • Avventura Straordinaria</p>
+                    </div>
+                    
+                    <div id="homeCountdown" style="background: linear-gradient(135deg, #7FECE5 0%, #FFBBE2 100%); border-radius: 12px; padding: 20px; margin-bottom: 24px; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <div style="font-size: 48px; margin-bottom: 12px;" id="homeCountdownEmoji">⏳</div>
+                        <div style="font-size: 28px; font-weight: 700; margin-bottom: 8px;" id="homeCountdownText">Caricamento...</div>
+                        <div style="font-size: 14px; opacity: 0.9;">18 Aprile - 12 Maggio 2026</div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+                        <div style="background: #f0f0f0; border-radius: 8px; padding: 12px;">
+                            <div style="font-size: 24px; font-weight: 700; color: #7FECE5;">25</div>
+                            <div style="font-size: 12px; color: #888; margin-top: 4px;">GIORNI</div>
+                        </div>
+                        <div style="background: #f0f0f0; border-radius: 8px; padding: 12px;">
+                            <div style="font-size: 24px; font-weight: 700; color: #7FECE5;">5000+</div>
+                            <div style="font-size: 12px; color: #888; margin-top: 4px;">KM</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="padding: 16px;">
+                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #888; margin-bottom: 12px; letter-spacing: 0.5px;">📅 I 25 Giorni</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            `;
+            
+            // Aggiungi i 25 bottoni giorno
+            for (let i = 1; i <= 25; i++) {
+                const emoji = dayIcons[i] || '📍';
+                const title = dayTitles[i] || `Day ${i}`;
+                
+                html += `
+                    <button onclick="goToDay(${i - 1}, event)" style="padding: 12px; background: white; border: 1px solid #e0e0e0; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                        <div style="font-size: 24px;">${emoji}</div>
+                        <div style="font-size: 10px; font-weight: 600; color: #333; text-align: center; line-height: 1.2; height: 20px; overflow: hidden; text-overflow: ellipsis;">${title.substring(0, 20)}</div>
+                        <div style="font-size: 9px; color: #888;">Day ${String(i).padStart(2, '0')}</div>
+                    </button>
+                `;
+            }
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('content').innerHTML = html;
+            updateHomeCountdown();
+        }
+        
+        // ===== UPDATE HOME COUNTDOWN =====
+        function updateHomeCountdown() {
+            const countdown = setInterval(() => {
+                const tripStart = new Date(2026, 3, 18, 10, 45, 0);
+                const now = new Date();
+                const timeRemaining = tripStart - now;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(countdown);
+                    document.getElementById('homeCountdownEmoji').textContent = '🚀';
+                    document.getElementById('homeCountdownText').textContent = 'IL VIAGGIO È INIZIATO!';
+                    return;
+                }
+                
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                let emoji = '⏳';
+                if (days <= 7) emoji = '🚀';
+                if (days <= 3) emoji = '✈️';
+                if (days === 1) emoji = '🎉';
+                if (days === 0) emoji = '🌍';
+                
+                document.getElementById('homeCountdownEmoji').textContent = emoji;
+                document.getElementById('homeCountdownText').innerHTML = `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m<span style="font-size: 18px; display: block; margin-top: 4px;">${String(seconds).padStart(2, '0')}s</span>`;
+            }, 1000);
+        }
+
         // ✅ Funzione per renderizzare il grafico a torta
         function renderCategoryChart() {
             if (!window.categoryChartData || window.categoryChartData.data.length === 0) return;
@@ -4262,6 +4351,11 @@ function addTimestampToPayments(payments) {
         }
 
         function render() {
+            if (currentTab === 'home') {
+                renderHome();
+                return;
+            }
+            
             if (currentTab === 'costs') {
                 renderExpenses();
                 return;
