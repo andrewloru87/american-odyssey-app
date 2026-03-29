@@ -1,33 +1,6 @@
 {
-  "timestamp": "2026-03-29T19:13:31.834Z",
+  "timestamp": "2026-03-29T19:13:44.704Z",
   "expenses": [
-    {
-      "id": "177460317033486estiq6r",
-      "description": "we",
-      "category": "Attività",
-      "amount": 12,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774603170334
-    },
-    {
-      "id": "1774603416876qkxczsiha",
-      "description": "ee",
-      "category": "Attività",
-      "amount": 50,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774603416876
-    },
-    {
-      "id": "1774623261469zz4fo16d4",
-      "description": "Bonifici ",
-      "category": "💸 Pagamenti",
-      "amount": -5588,
-      "day": 1,
-      "person": "Monica",
-      "updated": 1774623261469
-    },
     {
       "id": "1774623509086lzg157jdd",
       "description": "Zion ",
@@ -51,9 +24,8 @@
       "description": "Moulin Rouge",
       "category": "Tour",
       "amount": 269.37,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774624041481
+      "day": 4,
+      "person": "Andrea"
     },
     {
       "id": "1774624078270sygqkz9g0",
@@ -106,8 +78,7 @@
       "category": "Biglietti",
       "amount": 70.49,
       "day": 1,
-      "person": "Andrea",
-      "updated": 1774624388604
+      "person": "Andrea"
     },
     {
       "id": "17746256693656pe7gahdi",
@@ -164,15 +135,6 @@
       "updated": 1774625789664
     },
     {
-      "id": "17746259629344q3rnc79j",
-      "description": "Hh",
-      "category": "💸 Pagamenti",
-      "amount": -5888,
-      "day": 1,
-      "person": "Monica",
-      "updated": 1774625962934
-    },
-    {
       "id": "17746260376102q6ceoh3e",
       "description": "Usa",
       "category": "Voli",
@@ -180,24 +142,6 @@
       "day": 1,
       "person": "Andrea",
       "updated": 1774626037610
-    },
-    {
-      "id": "17746349150241zkmdsm8p",
-      "description": "Bonifici ",
-      "category": "💸 Pagamenti",
-      "amount": -5588,
-      "day": 25,
-      "person": "Monica",
-      "updated": 1774634915025
-    },
-    {
-      "id": "1774803636046v6q1vdfma",
-      "description": "Bonifici",
-      "category": "💸 Pagamenti",
-      "amount": -5888,
-      "day": 1,
-      "person": "Monica",
-      "updated": 1774803636047
     },
     {
       "id": "17748071846059ue29cms7",
@@ -209,19 +153,9 @@
       "updated": 1774807184605
     }
   ],
-  "payments": [
-    {
-      "id": "1774622352165q21aacwuf",
-      "from": "Monica",
-      "to": "Andrea",
-      "amount": 5588,
-      "description": "Bonifici ",
-      "date": "27/03/2026",
-      "updated": 1774622352165
-    }
-  ],
+  "payments": [],
   "summary": {
-    "total": -22326.390000000003,
-    "count": 23
+    "total": 563.6099999999997,
+    "count": 17
   }
 }
