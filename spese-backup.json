@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-29T17:35:26.764Z",
+  "timestamp": "2026-03-29T17:39:08.747Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -79,8 +79,7 @@
       "category": "Biglietti",
       "amount": 70.49,
       "day": 1,
-      "person": "Andrea",
-      "updated": 1774624388604
+      "person": "Andrea"
     },
     {
       "id": "17746256693656pe7gahdi",
