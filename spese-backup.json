@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-29T19:17:23.743Z",
+  "timestamp": "2026-03-29T19:17:33.244Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -89,9 +89,8 @@
       "description": "Sixt",
       "category": "Auto",
       "amount": 1029.37,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774625696051
+      "day": 8,
+      "person": "Andrea"
     },
     {
       "id": "1774625723073a7y4t4xyl",
