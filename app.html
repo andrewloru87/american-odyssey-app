@@ -1201,14 +1201,108 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
 <body>
-    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
     
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>American Odyssey</h2>
+            <p>25 giorni • 5000+ km</p>
+        </div>
+        
+        <div class="sidebar-section">
+            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                <button class="nav-btn" onclick="currentDay = 0; switchTab(event, 'timeline'); toggleMenu(); render();" style="flex: 1; padding: 10px; background: #2d2d2d; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;">🏠 Home</button>
+                <button class="nav-btn" onclick="switchTab(event, 'costs'); toggleMenu();" style="flex: 1; padding: 10px; background: #2d2d2d; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;">💰 Spese</button>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                <span>🗽 NEW YORK</span>
+                <span class="sidebar-accordion-toggle">▼</span>
+            </div>
+            <div class="sidebar-accordion-content">
+                <div class="sidebar-item" onclick="goToDay(0, event)">Day 01 - Il grande salto</div>
+                <div class="sidebar-item" onclick="goToDay(1, event)">Day 02 - Central Park</div>
+                <div class="sidebar-item" onclick="goToDay(2, event)">Day 03 - Statua Libertà</div>
+                <div class="sidebar-item" onclick="goToDay(3, event)">Day 04 - Broadway</div>
+                <div class="sidebar-item" onclick="goToDay(4, event)">Day 05 - MoMA & Top of Rock</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                <span>✈️ TRANSATLANTIC</span>
+                <span class="sidebar-accordion-toggle">▼</span>
+            </div>
+            <div class="sidebar-accordion-content">
+                <div class="sidebar-item" onclick="goToDay(5, event)">Day 06 - Coast to Coast</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                <span>🌉 CALIFORNIA</span>
+                <span class="sidebar-accordion-toggle">▼</span>
+            </div>
+            <div class="sidebar-accordion-content">
+                <div class="sidebar-item" onclick="goToDay(6, event)">Day 07 - San Francisco</div>
+                <div class="sidebar-item" onclick="goToDay(7, event)">Day 08 - Road Trip!</div>
+                <div class="sidebar-item" onclick="goToDay(8, event)">Day 09 - Yosemite</div>
+                <div class="sidebar-item" onclick="goToDay(9, event)">Day 10 - Sequoie giganti</div>
+                <div class="sidebar-item" onclick="goToDay(10, event)">Day 11 - → Los Angeles</div>
+                <div class="sidebar-item" onclick="goToDay(11, event)">Day 12 - Hollywood</div>
+                <div class="sidebar-item" onclick="goToDay(12, event)">Day 13 - Disneyland</div>
+                <div class="sidebar-item" onclick="goToDay(13, event)">Day 14 - Universal VIP</div>
+                <div class="sidebar-item" onclick="goToDay(14, event)">Day 15 - California Adventure</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                <span>🏜️ SOUTHWEST</span>
+                <span class="sidebar-accordion-toggle">▼</span>
+            </div>
+            <div class="sidebar-accordion-content">
+                <div class="sidebar-item" onclick="goToDay(15, event)">Day 16 - Route 66</div>
+                <div class="sidebar-item" onclick="goToDay(16, event)">Day 17 - → Grand Canyon</div>
+                <div class="sidebar-item" onclick="goToDay(17, event)">Day 18 - Grand Canyon</div>
+                <div class="sidebar-item" onclick="goToDay(18, event)">Day 19 - Antelope Canyon</div>
+                <div class="sidebar-item" onclick="goToDay(19, event)">Day 20 - Monument Valley</div>
+                <div class="sidebar-item" onclick="goToDay(20, event)">Day 21 - Bryce & Zion</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                <span>🎰 NEVADA</span>
+                <span class="sidebar-accordion-toggle">▼</span>
+            </div>
+            <div class="sidebar-accordion-content">
+                <div class="sidebar-item" onclick="goToDay(21, event)">Day 22 - → Las Vegas</div>
+                <div class="sidebar-item" onclick="goToDay(22, event)">Day 23 - Las Vegas</div>
+                <div class="sidebar-item" onclick="goToDay(23, event)">Day 24 - Death Valley</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
+                <span>🏠 RIENTRO</span>
+                <span class="sidebar-accordion-toggle">▼</span>
+            </div>
+            <div class="sidebar-accordion-content">
+                <div class="sidebar-item" onclick="goToDay(24, event)">Day 25 - Si torna a casa</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Info Viaggio</div>
+            <div class="sidebar-item">📍 Vienna → New York</div>
+            <div class="sidebar-item">🗓️ 18 Aprile - 12 Maggio</div>
+            <div class="sidebar-item">✈️ 3 voli internazionali</div>
+            <div class="sidebar-item">🏨 13 hotel prenotati</div>
+        </div>
+    </div>
     
     <header id="header">
         <h1>AMERICAN ODYSSEY</h1>
@@ -1220,8 +1314,7 @@
             <span></span>
             <span></span>
         </button>
-        <button class="tab active" onclick="switchTab(event, 'home')">🏠 Home</button>
-        <button class="tab" onclick="switchTab(event, 'timeline')">⏰ Timeline</button>
+        <button class="tab active" onclick="switchTab(event, 'timeline')">⏰ Timeline</button>
         <button class="tab" onclick="switchTab(event, 'bookings')">🎫 Prenotazioni</button>
         <button class="tab" onclick="switchTab(event, 'restaurants')">🍽️ Ristoranti</button>
         <button class="tab" id="costs-tab" onclick="switchTab(event, 'costs')">💰 Spese</button>
@@ -3096,7 +3189,7 @@ function addTimestampToPayments(payments) {
         ];
 
         let currentDay = 0;
-        let currentTab = 'home';
+        let currentTab = 'timeline';
         let lastScrollY = 0;
         let headerHidden = false;
 
@@ -4265,11 +4358,6 @@ function addTimestampToPayments(payments) {
         }
 
         function render() {
-            if (currentTab === 'home') {
-                renderHome();
-                return;
-            }
-            
             if (currentTab === 'costs') {
                 renderExpenses();
                 return;
