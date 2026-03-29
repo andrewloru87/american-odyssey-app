@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-29T17:45:48.876Z",
+  "timestamp": "2026-03-29T17:48:18.123Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -23,27 +23,24 @@
       "description": "Moulin Rouge",
       "category": "Tour",
       "amount": 269.37,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774624041481
+      "day": 4,
+      "person": "Andrea"
     },
     {
       "id": "1774624078270sygqkz9g0",
       "description": "Top of the rock",
       "category": "Tour",
       "amount": 104.11,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774624078270
+      "day": 5,
+      "person": "Andrea"
     },
     {
       "id": "1774624226059hz2do7q18",
-      "description": "Statua Libertà ",
+      "description": "Statua Libertà",
       "category": "Tour",
       "amount": 58.73,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774624226059
+      "day": 3,
+      "person": "Andrea"
     },
     {
       "id": "1774624249470mhzgk6zfn",
