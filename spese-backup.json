@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-29T19:18:02.881Z",
+  "timestamp": "2026-03-29T19:18:13.194Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -30,7 +30,7 @@
     {
       "id": "1774624078270sygqkz9g0",
       "description": "Top of the rock",
-      "category": "Tour",
+      "category": "Attività",
       "amount": 104.11,
       "day": 5,
       "person": "Andrea"
