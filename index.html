@@ -7127,8 +7127,11 @@ function addTimestampToPayments(payments) {
                 return;
             }
             
+            // ✅ CORREZIONE: Preserva l'id originale quando salvi
+            const originalId = payments[idx].id;
             // Aggiorna il pagamento
             payments[idx] = { 
+                id: originalId,
                 from, 
                 to, 
                 amount, 
@@ -7143,7 +7146,7 @@ function addTimestampToPayments(payments) {
             
             // ⚡ Auto-sync quando modifichi
             console.log("✏️ Auto-sync dopo modifica pagamento...");
-            autoSyncNewExpense();
+            syncData();
         }
 
         function deletePayment(idx) {
@@ -7179,7 +7182,7 @@ function addTimestampToPayments(payments) {
             
             // ⚡ Auto-sync quando elimini
             console.log("🗑️ Auto-sync dopo eliminazione pagamento...");
-            autoSyncNewExpense();
+            syncData();
         }
 
         function renderCountdownInSidebar() {
