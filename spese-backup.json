@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-29T17:48:18.123Z",
+  "timestamp": "2026-03-29T17:50:39.451Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -44,56 +44,51 @@
     },
     {
       "id": "1774624249470mhzgk6zfn",
-      "description": "Disneyland ",
+      "description": "Disneyland",
       "category": "Attività",
       "amount": 782.71,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774624249470
+      "day": 13,
+      "person": "Andrea"
     },
     {
       "id": "1774624270141fq5i1s91h",
       "description": "Universal",
       "category": "Attività",
       "amount": 740.3,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774624270141
+      "day": 14,
+      "person": "Andrea"
     },
     {
       "id": "1774624364322lz3c1f13v",
       "description": "Cirque Du Soleil",
       "category": "Attività",
       "amount": 291.35,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774624364322
+      "day": 23,
+      "person": "Andrea"
     },
     {
       "id": "1774624388604ff4p7ihoe",
       "description": "Parchi pass",
       "category": "Biglietti",
       "amount": 70.49,
-      "day": 1,
+      "day": 8,
       "person": "Andrea"
     },
     {
       "id": "17746256693656pe7gahdi",
-      "description": "Sfo",
+      "description": "NYC to SFO",
       "category": "Voli",
       "amount": 438.76,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774625669365
+      "day": 6,
+      "person": "Andrea"
     },
     {
       "id": "1774625696051gmtqhdbm8",
       "description": "Sixt",
       "category": "Auto",
       "amount": 1029.37,
-      "day": 1,
-      "person": "Andrea",
-      "updated": 1774625696051
+      "day": 8,
+      "person": "Andrea"
     },
     {
       "id": "1774625723073a7y4t4xyl",
