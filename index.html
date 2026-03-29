@@ -6976,8 +6976,9 @@ function addTimestampToPayments(payments) {
                 amount = -amount;
             }
             
-            // Aggiorna la spesa
-            expenses[idx] = { description: desc, category, amount, day, person };
+            // ✅ CORREZIONE: Preserva l'id originale quando salvi
+            const originalId = expenses[idx].id;
+            expenses[idx] = { id: originalId, description: desc, category, amount, day, person };
             
             // Salva e sincronizza
             saveExpenses(expenses);
@@ -6986,7 +6987,7 @@ function addTimestampToPayments(payments) {
             
             // ⚡ Auto-sync quando modifichi
             console.log("✏️ Auto-sync dopo modifica spesa...");
-            autoSyncNewExpense();
+            syncData();
         }
 
         function deleteExpense(idx) {
@@ -7022,7 +7023,7 @@ function addTimestampToPayments(payments) {
             
             // ⚡ Auto-sync quando elimini
             console.log("🗑️ Auto-sync dopo eliminazione spesa...");
-            autoSyncNewExpense();
+            syncData();
         }
 
         async function addPayment() {
