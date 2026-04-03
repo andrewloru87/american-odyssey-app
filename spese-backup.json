@@ -1,1 +1,9 @@
-[]
+{
+  "timestamp": "2026-04-03T16:16:51.365Z",
+  "expenses": [],
+  "payments": [],
+  "summary": {
+    "total": 0,
+    "count": 0
+  }
+}
