@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-16T16:38:26.048Z",
+  "timestamp": "2026-04-16T16:39:06.093Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -157,11 +157,20 @@
       "day": 1,
       "person": "Monica",
       "updated": 1775492414219
+    },
+    {
+      "id": "1776357546086hihr5wrpg",
+      "description": "Bargeld ",
+      "category": "💸 Pagamenti",
+      "amount": -120,
+      "day": 1,
+      "person": "Monica",
+      "updated": 1776357546087
     }
   ],
   "payments": [],
   "summary": {
-    "total": -786.3900000000003,
-    "count": 19
+    "total": -906.3900000000003,
+    "count": 20
   }
 }
