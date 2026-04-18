@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-18T07:04:03.717Z",
+  "timestamp": "2026-04-18T07:05:03.390Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -174,11 +174,20 @@
       "day": 0,
       "person": "Andrea",
       "updated": 1776442861051
+    },
+    {
+      "id": "1776495903382tex7tkjgm",
+      "description": "Squaw Valley",
+      "category": "Hotel",
+      "amount": 93.22,
+      "day": 10,
+      "person": "Andrea",
+      "updated": 1776495903382
     }
   ],
   "payments": [],
   "summary": {
-    "total": -808.4700000000004,
-    "count": 21
+    "total": -715.2500000000003,
+    "count": 22
   }
 }
