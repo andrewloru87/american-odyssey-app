@@ -1,13 +1,14 @@
 {
-  "timestamp": "2026-04-19T00:20:16.574Z",
+  "timestamp": "2026-04-19T07:12:31.952Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
-      "description": "Zion",
+      "description": "Zion ",
       "category": "Hotel",
       "amount": 114.69,
       "day": 21,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1774623509086
     },
     {
       "id": "17746235418157xiss27d4",
