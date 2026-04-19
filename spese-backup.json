@@ -1,14 +1,13 @@
 {
-  "timestamp": "2026-04-19T17:05:51.674Z",
+  "timestamp": "2026-04-19T19:03:56.133Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
-      "description": "Zion ",
+      "description": "Zion",
       "category": "Hotel",
       "amount": 114.69,
       "day": 21,
-      "person": "Andrea",
-      "updated": 1774623509086
+      "person": "Andrea"
     },
     {
       "id": "17746235418157xiss27d4",
@@ -180,15 +179,14 @@
       "id": "1776495903382tex7tkjgm",
       "description": "Squaw Valley",
       "category": "Hotel",
-      "amount": 93.22,
+      "amount": 95.29,
       "day": 10,
-      "person": "Andrea",
-      "updated": 1776495903382
+      "person": "Andrea"
     }
   ],
   "payments": [],
   "summary": {
-    "total": -715.2500000000003,
+    "total": -713.1800000000004,
     "count": 22
   }
 }
