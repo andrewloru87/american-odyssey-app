@@ -1,13 +1,14 @@
 {
-  "timestamp": "2026-04-20T21:01:35.727Z",
+  "timestamp": "2026-04-20T21:01:36.568Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
-      "description": "Zion",
+      "description": "Zion ",
       "category": "Hotel",
       "amount": 114.69,
       "day": 21,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1774623509086
     },
     {
       "id": "17746235418157xiss27d4",
@@ -179,9 +180,10 @@
       "id": "1776495903382tex7tkjgm",
       "description": "Squaw Valley",
       "category": "Hotel",
-      "amount": 95.29,
+      "amount": 93.22,
       "day": 10,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1776495903382
     },
     {
       "id": "17766855080779jqyxf1fu",
@@ -203,11 +205,12 @@
     },
     {
       "id": "17766895581633vv6uc18z",
-      "description": "Wraps + Target",
+      "description": "Wraps Target ",
       "category": "Pasti",
-      "amount": 44,
+      "amount": 6.36,
       "day": 1,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1776689558163
     },
     {
       "id": "17767179515794n07uqd5a",
@@ -249,9 +252,10 @@
       "id": "1776718322999f65h6y83r",
       "description": "Prelievo cash",
       "category": "Attività",
-      "amount": 258.5,
+      "amount": 258,
       "day": 1,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1776718322999
     },
     {
       "id": "177671835730167lhk6zp1",
@@ -265,7 +269,7 @@
   ],
   "payments": [],
   "summary": {
-    "total": 22.40999999999958,
+    "total": -17.80000000000034,
     "count": 31
   }
 }
