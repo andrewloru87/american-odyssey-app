@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-20T11:44:21.386Z",
+  "timestamp": "2026-04-20T11:45:08.084Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -182,11 +182,20 @@
       "amount": 95.29,
       "day": 10,
       "person": "Andrea"
+    },
+    {
+      "id": "17766855080779jqyxf1fu",
+      "description": "Uber NYC",
+      "category": "Taxi",
+      "amount": 71.32,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1776685508078
     }
   ],
   "payments": [],
   "summary": {
-    "total": -713.1800000000004,
-    "count": 22
+    "total": -641.8600000000004,
+    "count": 23
   }
 }
