@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-20T20:47:55.397Z",
+  "timestamp": "2026-04-20T20:49:54.966Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -236,11 +236,20 @@
       "day": 2,
       "person": "Andrea",
       "updated": 1776718075390
+    },
+    {
+      "id": "1776718194959w4g6ux13p",
+      "description": "Handcraft smash Burger ",
+      "category": "Pasti",
+      "amount": 28,
+      "day": 2,
+      "person": "Andrea",
+      "updated": 1776718194959
     }
   ],
   "payments": [],
   "summary": {
-    "total": -316.9300000000004,
-    "count": 28
+    "total": -288.9300000000004,
+    "count": 29
   }
 }
