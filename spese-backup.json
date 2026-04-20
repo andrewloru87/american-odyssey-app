@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-20T12:49:08.327Z",
+  "timestamp": "2026-04-20T12:49:32.928Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -191,11 +191,20 @@
       "day": 1,
       "person": "Andrea",
       "updated": 1776685508078
+    },
+    {
+      "id": "1776689372918lxiapc59a",
+      "description": "Joes Pizza",
+      "category": "Pasti",
+      "amount": 35.41,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1776689372919
     }
   ],
   "payments": [],
   "summary": {
-    "total": -641.8600000000004,
-    "count": 23
+    "total": -606.4500000000004,
+    "count": 24
   }
 }
