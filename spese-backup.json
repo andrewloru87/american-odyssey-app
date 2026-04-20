@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-20T20:52:37.312Z",
+  "timestamp": "2026-04-20T20:53:56.000Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -250,10 +250,9 @@
       "id": "1776718322999f65h6y83r",
       "description": "Prelievo cash",
       "category": "Attività",
-      "amount": 258,
+      "amount": 258.5,
       "day": 1,
-      "person": "Andrea",
-      "updated": 1776718322999
+      "person": "Andrea"
     },
     {
       "id": "177671835730167lhk6zp1",
@@ -267,7 +266,7 @@
   ],
   "payments": [],
   "summary": {
-    "total": -15.730000000000405,
+    "total": -15.230000000000405,
     "count": 31
   }
 }
