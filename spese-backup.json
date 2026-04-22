@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-22T11:13:30.324Z",
+  "timestamp": "2026-04-22T11:13:45.463Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -211,12 +211,11 @@
     },
     {
       "id": "17767179515794n07uqd5a",
-      "description": "The Smith - lunch ",
+      "description": "The Smith - lunch",
       "category": "Pasti",
-      "amount": 120.88,
+      "amount": 89.72,
       "day": 3,
-      "person": "Andrea",
-      "updated": 1776717951579
+      "person": "Andrea"
     },
     {
       "id": "1776718007285jix5y68gu",
@@ -263,7 +262,7 @@
   ],
   "payments": [],
   "summary": {
-    "total": 9.299999999999624,
+    "total": -21.860000000000344,
     "count": 31
   }
 }
