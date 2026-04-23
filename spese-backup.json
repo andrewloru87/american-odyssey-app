@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-23T18:56:19.965Z",
+  "timestamp": "2026-04-23T19:01:38.787Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -257,11 +257,29 @@
       "day": 3,
       "person": "Monica",
       "updated": 1776718357301
+    },
+    {
+      "id": "1776970632749o9j2mrqzc",
+      "description": "Vessel",
+      "category": "Attività",
+      "amount": 32.13,
+      "day": 4,
+      "person": "Andrea",
+      "updated": 1776970632749
+    },
+    {
+      "id": "1776970898778fval7hlb9",
+      "description": "Carnegie ",
+      "category": "Pasti",
+      "amount": 49.3,
+      "day": 3,
+      "person": "Andrea",
+      "updated": 1776970898778
     }
   ],
   "payments": [],
   "summary": {
-    "total": -29.630000000000326,
-    "count": 31
+    "total": 51.79999999999967,
+    "count": 33
   }
 }
