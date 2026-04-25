@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-25T01:02:30.324Z",
+  "timestamp": "2026-04-25T01:04:24.780Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -311,11 +311,20 @@
       "day": 5,
       "person": "Andrea",
       "updated": 1777078950315
+    },
+    {
+      "id": "1777079064768tvptvnkdn",
+      "description": "Sofitel",
+      "category": "Hotel",
+      "amount": 2017.81,
+      "day": 1,
+      "person": "Andrea",
+      "updated": 1777079064768
     }
   ],
   "payments": [],
   "summary": {
-    "total": 482.58999999999963,
-    "count": 37
+    "total": 2500.3999999999996,
+    "count": 38
   }
 }
