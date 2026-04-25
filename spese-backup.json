@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-25T00:59:08.791Z",
+  "timestamp": "2026-04-25T01:01:05.311Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
@@ -293,11 +293,20 @@
       "day": 9,
       "person": "Andrea",
       "updated": 1777078736007
+    },
+    {
+      "id": "1777078865300ydi25gyuv",
+      "description": "Junior's",
+      "category": "Pasti",
+      "amount": 27.88,
+      "day": 5,
+      "person": "Andrea",
+      "updated": 1777078865300
     }
   ],
   "payments": [],
   "summary": {
-    "total": 416.27999999999963,
-    "count": 35
+    "total": 444.1599999999996,
+    "count": 36
   }
 }
