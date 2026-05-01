@@ -1,13 +1,14 @@
 {
-  "timestamp": "2026-04-30T01:06:32.890Z",
+  "timestamp": "2026-05-01T10:36:57.250Z",
   "expenses": [
     {
       "id": "1774623509086lzg157jdd",
-      "description": "Zion",
+      "description": "Zion ",
       "category": "Hotel",
       "amount": 114.69,
       "day": 21,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1774623509086
     },
     {
       "id": "17746235418157xiss27d4",
@@ -179,9 +180,10 @@
       "id": "1776495903382tex7tkjgm",
       "description": "Squaw Valley",
       "category": "Hotel",
-      "amount": 95.29,
+      "amount": 93.22,
       "day": 10,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1776495903382
     },
     {
       "id": "17766855080779jqyxf1fu",
@@ -203,51 +205,57 @@
     },
     {
       "id": "17766895581633vv6uc18z",
-      "description": "Wraps + Target",
+      "description": "Wraps Target ",
       "category": "Pasti",
-      "amount": 44,
+      "amount": 6.36,
       "day": 1,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1776689558163
     },
     {
       "id": "17767179515794n07uqd5a",
-      "description": "The Smith - lunch",
+      "description": "The Smith - lunch ",
       "category": "Pasti",
-      "amount": 89.72,
+      "amount": 120.88,
       "day": 3,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1776717951579
     },
     {
       "id": "1776718007285jix5y68gu",
       "description": "Salswee",
       "category": "Pasti",
-      "amount": 44.51,
+      "amount": 52.28,
       "day": 3,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1776718007285
     },
     {
       "id": "17767180753903ixzm8oxa",
       "description": "Abercrombie",
       "category": "Shopping",
-      "amount": 95.34,
+      "amount": 110,
       "day": 2,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1776718075390
     },
     {
       "id": "1776718194959w4g6ux13p",
-      "description": "Handcraft smash Burger",
+      "description": "Handcraft smash Burger ",
       "category": "Pasti",
-      "amount": 29.55,
+      "amount": 28,
       "day": 2,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1776718194959
     },
     {
       "id": "1776718322999f65h6y83r",
       "description": "Prelievo cash",
       "category": "Attività",
-      "amount": 258.5,
+      "amount": 258,
       "day": 1,
-      "person": "Andrea"
+      "person": "Andrea",
+      "updated": 1776718322999
     },
     {
       "id": "177671835730167lhk6zp1",
@@ -350,7 +358,7 @@
   ],
   "payments": [],
   "summary": {
-    "total": 2791.7699999999995,
+    "total": 2803.5999999999995,
     "count": 41
   }
 }
