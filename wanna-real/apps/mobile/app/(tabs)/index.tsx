@@ -18,8 +18,7 @@ export default function HomeScreen(){
 
   return <Screen>
     <View style={s.top}><Muted style={s.date}>{today}</Muted><Text style={s.profileDot}>◉</Text></View>
-    <H1>Good morning,{'
-'}{currentUser.name}</H1>
+    <H1>{'Good morning,\\n'+currentUser.name}</H1>
 
     <Card>
       <Muted style={s.eyebrow}>QUICK START</Muted>
