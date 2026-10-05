@@ -1,0 +1,1 @@
+export const tokens={color:{bg:'#F7F7F5',surface:'#FFFFFF',text:'#171717',muted:'#6F716C',line:'#E7E7E2',accent:'#FF5C5C',accentSoft:'#FFE8E5',positive:'#2E7D5B',warning:'#A26A00'},radius:{sm:12,md:18,lg:28,pill:999},space:{xs:6,sm:10,md:16,lg:24,xl:32},type:{title:30,h2:21,body:16,small:13}} as const;

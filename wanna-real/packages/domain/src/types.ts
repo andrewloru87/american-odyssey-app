@@ -1,0 +1,11 @@
+export type PlanStatus='IDEA'|'PROPOSED'|'PLANNING'|'READY_TO_CONFIRM'|'CONFIRMED'|'COMPLETED'|'MEMORY'|'DECLINED'|'CANCELLED'|'ARCHIVED';
+export type VoteValue='YES'|'MAYBE'|'NO';
+export type PlanMode='SIMPLE'|'ADVANCED';
+export type PlanCategory='FOOD'|'DRINKS'|'TRAVEL'|'CINEMA'|'OUTDOOR'|'CONCERT'|'ACTIVITY'|'OTHER';
+export interface UserSummary{id:string;name:string;handle:string;avatar?:string}
+export interface TimeOption{id:string;startsAt:string;endsAt?:string;votes:Record<string,VoteValue>}
+export interface PlaceSummary{id:string;name:string;address?:string;category?:string;groupRating?:number;visitedCount?:number;travelMinutes?:number}
+export interface Plan{id:string;title:string;emoji:string;mode:PlanMode;category:PlanCategory;status:PlanStatus;organizerId:string;participants:UserSummary[];timeOptions:TimeOption[];confirmedStartsAt?:string;confirmedEndsAt?:string;place?:PlaceSummary;description?:string;priority?:'LOW'|'MEDIUM'|'HIGH';timeframe?:'SOMEDAY'|'SOON'|'THIS_MONTH'|'THIS_WEEK';autoConfirm?:boolean}
+export interface DiscoverCard{id:string;title:string;emoji:string;subtitle:string;category:PlanCategory;priceLevel?:1|2|3|4;recommendationScore:number;reason:string;place?:PlaceSummary;interestedUserIds:string[]}
+export type AvailabilityVisibility='NONE'|'BUSY_FREE';
+export interface AvailabilityRule{subjectType:'GLOBAL'|'USER'|'GROUP'|'CIRCLE';subjectId?:string;visibility:AvailabilityVisibility;weekdays?:number[];startHour?:number;endHour?:number;horizonDays?:number}

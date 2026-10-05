@@ -1,0 +1,14 @@
+{
+  "name": "wanna",
+  "private": true,
+  "version": "0.3.0",
+  "packageManager": "npm@10.9.2",
+  "workspaces": ["apps/*","packages/*"],
+  "scripts": {
+    "dev:mobile": "npm --workspace @wanna/mobile run start",
+    "dev:web": "npm --workspace @wanna/mobile run web",
+    "build:web": "npm --workspace @wanna/mobile run export:web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  }
+}

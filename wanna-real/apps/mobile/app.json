@@ -1,0 +1,3 @@
+{
+  "expo":{"name":"Wanna","slug":"wanna","scheme":"wanna","version":"0.3.0","orientation":"portrait","userInterfaceStyle":"light","plugins":["expo-router"],"ios":{"supportsTablet":true,"bundleIdentifier":"app.wanna.mobile"},"android":{"package":"app.wanna.mobile"},"web":{"bundler":"metro","output":"single"},"experiments":{"typedRoutes":true}}
+}
