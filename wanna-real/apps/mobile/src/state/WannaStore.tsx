@@ -1,18 +1,22 @@
 import { createContext,useCallback,useContext,useEffect,useMemo,useState,type ReactNode } from 'react';
-import { demoPlans,discoverCards,me,benny,mokya,type Plan,type PlanCategory,type PlanStatus,type UserSummary,type VoteValue } from '@wanna/domain';
+import { discoverCards,type Plan,type PlanCategory,type PlanStatus,type UserSummary,type VoteValue } from '@wanna/domain';
 import { isSupabaseConfigured,supabase } from '../lib/supabase';
 
 type DiscoverDecision='PASS'|'SAVE'|'WANNA';
 type CreatePlanInput={title:string;emoji?:string;participantIds?:string[];startsAt?:string;endsAt?:string;sourceDiscoverItemId?:string};
 type WannaStoreValue={
  ready:boolean;backendError:string|null;currentUser:UserSummary|null;people:UserSummary[];plans:Plan[];discoverDecisions:Record<string,DiscoverDecision>;
- getPlan(id:string):Plan|undefined;claimProfile(handle:string):Promise<void>;chooseDiscover(itemId:string,decision:DiscoverDecision):void;
+ getPlan(id:string):Plan|undefined;
+ signInWithEmail(email:string,password:string):Promise<void>;
+ signUpWithEmail(email:string,password:string):Promise<'ok'|'confirm_email'>;
+ signInWithApple():Promise<void>;
+ signOut():Promise<void>;
+ chooseDiscover(itemId:string,decision:DiscoverDecision):void;
  createPlan(input:CreatePlanInput):Promise<Plan>;vote(planId:string,optionId:string,vote:VoteValue):Promise<void>;
  markReady(planId:string,optionId?:string):Promise<void>;confirmPlan(planId:string,optionId?:string):Promise<void>;
  setPlanStatus(planId:string,status:PlanStatus):Promise<void>;refresh():Promise<void>;
 };
 const WannaStore=createContext<WannaStoreValue|null>(null);
-const FALLBACK_PEOPLE=[me,benny,mokya];
 const PLAN_SELECT=`id,title,emoji,category,status,organizer_id,confirmed_starts_at,confirmed_ends_at,created_at,
 plan_members(user_id,role,profiles(id,handle,display_name,avatar_url)),
 plan_time_options(id,starts_at,ends_at,created_by,plan_time_votes(user_id,vote))`;
@@ -27,49 +31,44 @@ function toPlan(row:any):Plan{
 
 export function WannaProvider({children}:{children:ReactNode}){
  const [ready,setReady]=useState(false);const [backendError,setBackendError]=useState<string|null>(null);const [currentUser,setCurrentUser]=useState<UserSummary|null>(null);
- const [people,setPeople]=useState<UserSummary[]>(FALLBACK_PEOPLE);const [plans,setPlans]=useState<Plan[]>(isSupabaseConfigured?[]:demoPlans);
- const [discoverDecisions,setDiscoverDecisions]=useState<Record<string,DiscoverDecision>>({});
+ const [people,setPeople]=useState<UserSummary[]>([]);const [plans,setPlans]=useState<Plan[]>([]);const [discoverDecisions,setDiscoverDecisions]=useState<Record<string,DiscoverDecision>>({});
 
- const ensureSession=useCallback(async()=>{if(!isSupabaseConfigured)return null;const {data:s}=await supabase.auth.getSession();if(s.session?.user)return s.session.user;const {data,error}=await supabase.auth.signInAnonymously();if(error)throw error;if(!data.user)throw new Error('Could not create a beta session.');return data.user},[]);
- const loadPeople=useCallback(async()=>{if(!isSupabaseConfigured)return FALLBACK_PEOPLE;const {data,error}=await supabase.from('profiles').select('id,handle,display_name,avatar_url').order('display_name');if(error)throw error;const next=(data??[]).map(toUser);setPeople(next);return next},[]);
- const loadIdentity=useCallback(async(userId?:string)=>{if(!isSupabaseConfigured){setCurrentUser(me);return me}const user=userId?{id:userId}:await ensureSession();if(!user)return null;
-  const {data,error}=await supabase.from('beta_devices').select('profile_id').eq('auth_user_id',user.id).maybeSingle();if(error)throw error;
-  if(!data?.profile_id){setCurrentUser(null);return null}
-  const {data:row,error:e}=await supabase.from('profiles').select('id,handle,display_name,avatar_url').eq('id',data.profile_id).single();if(e)throw e;const profile=toUser(row);setCurrentUser(profile);return profile;
- },[ensureSession]);
- const loadPlans=useCallback(async()=>{if(!isSupabaseConfigured){setPlans(demoPlans);return demoPlans}const {data,error}=await supabase.from('plans').select(PLAN_SELECT).order('created_at',{ascending:false});if(error)throw error;const next=(data??[]).map(toPlan);setPlans(next);return next},[]);
- const refresh=useCallback(async()=>{if(!currentUser&&isSupabaseConfigured)return;await loadPlans()},[currentUser,loadPlans]);
+ const loadIdentity=useCallback(async(userId?:string)=>{if(!isSupabaseConfigured){setCurrentUser(null);return null}
+  const id=userId??(await supabase.auth.getUser()).data.user?.id;if(!id){setCurrentUser(null);return null}
+  const {data,error}=await supabase.from('profiles').select('id,handle,display_name,avatar_url').eq('id',id).single();if(error)throw error;
+  const profile=toUser(data);setCurrentUser(profile);return profile;
+ },[]);
+ const loadPeople=useCallback(async()=>{if(!isSupabaseConfigured)return[];const {data,error}=await supabase.from('profiles').select('id,handle,display_name,avatar_url').order('display_name');if(error)throw error;const next=(data??[]).map(toUser);setPeople(next);return next},[]);
+ const loadPlans=useCallback(async()=>{if(!isSupabaseConfigured)return[];const {data,error}=await supabase.from('plans').select(PLAN_SELECT).order('created_at',{ascending:false});if(error)throw error;const next=(data??[]).map(toPlan);setPlans(next);return next},[]);
+ const hydrate=useCallback(async(userId?:string)=>{const profile=await loadIdentity(userId);if(profile){await Promise.all([loadPeople(),loadPlans()]);}else{setPeople([]);setPlans([])}},[loadIdentity,loadPeople,loadPlans]);
 
- useEffect(()=>{let cancelled=false;(async()=>{try{if(!isSupabaseConfigured){if(!cancelled){setBackendError('Supabase environment variables are missing.');setReady(true)}return}
-   const user=await ensureSession();await loadPeople();const identity=await loadIdentity(user?.id);if(identity)await loadPlans();
-  }catch(error:any){if(!cancelled)setBackendError(error?.message??'Could not connect to Wanna Cloud.')}finally{if(!cancelled)setReady(true)}})();return()=>{cancelled=true}},[ensureSession,loadIdentity,loadPeople,loadPlans]);
+ useEffect(()=>{let cancelled=false;(async()=>{try{if(!isSupabaseConfigured)throw new Error('Supabase environment variables are missing.');const {data}=await supabase.auth.getSession();if(data.session?.user)await hydrate(data.session.user.id)}
+  catch(error:any){if(!cancelled)setBackendError(error?.message??'Could not connect to Wanna.')}finally{if(!cancelled)setReady(true)}})();
+  const {data:sub}=supabase.auth.onAuthStateChange((_event,session)=>{setBackendError(null);void hydrate(session?.user?.id)});
+  return()=>{cancelled=true;sub.subscription.unsubscribe()}},[hydrate]);
 
- useEffect(()=>{if(!isSupabaseConfigured||!currentUser)return;const reload=()=>{void loadPlans()};const channel=supabase.channel(`wanna-plans-${currentUser.id}`)
+ useEffect(()=>{if(!currentUser)return;const reload=()=>void loadPlans();const channel=supabase.channel(`wanna-plans-${currentUser.id}`)
   .on('postgres_changes',{event:'*',schema:'public',table:'plans'},reload).on('postgres_changes',{event:'*',schema:'public',table:'plan_members'},reload)
   .on('postgres_changes',{event:'*',schema:'public',table:'plan_time_options'},reload).on('postgres_changes',{event:'*',schema:'public',table:'plan_time_votes'},reload).subscribe();
   return()=>{void supabase.removeChannel(channel)}},[currentUser,loadPlans]);
 
- const claimProfile=useCallback(async(handle:string)=>{setBackendError(null);if(!isSupabaseConfigured)return;const {error}=await supabase.rpc('claim_beta_profile',{p_handle:handle});if(error){setBackendError(error.message);return}const identity=await loadIdentity();if(identity)await loadPlans()},[loadIdentity,loadPlans]);
- const chooseDiscover=useCallback((itemId:string,decision:DiscoverDecision)=>{setDiscoverDecisions(c=>({...c,[itemId]:decision}));if(!isSupabaseConfigured||!currentUser)return;void supabase.from('discover_swipes').upsert({item_id:itemId,user_id:currentUser.id,decision},{onConflict:'item_id,user_id'})},[currentUser]);
+ const signInWithEmail=useCallback(async(email:string,password:string)=>{const {error}=await supabase.auth.signInWithPassword({email,password});if(error)throw error},[]);
+ const signUpWithEmail=useCallback(async(email:string,password:string):Promise<'ok'|'confirm_email'>=>{const redirectTo=typeof window!=='undefined'?window.location.origin:undefined;const {data,error}=await supabase.auth.signUp({email,password,options:redirectTo?{emailRedirectTo:redirectTo}:undefined});if(error)throw error;return data.session?'ok':'confirm_email'},[]);
+ const signInWithApple=useCallback(async()=>{const redirectTo=typeof window!=='undefined'?window.location.origin:undefined;const {error}=await supabase.auth.signInWithOAuth({provider:'apple',options:redirectTo?{redirectTo}:undefined});if(error)throw error},[]);
+ const signOut=useCallback(async()=>{await supabase.auth.signOut();setCurrentUser(null);setPeople([]);setPlans([])},[]);
+ const refresh=useCallback(async()=>{if(currentUser)await Promise.all([loadPeople(),loadPlans()])},[currentUser,loadPeople,loadPlans]);
 
- const createPlan=useCallback(async(input:CreatePlanInput):Promise<Plan>=>{if(!currentUser)throw new Error('Choose your beta profile first.');
-  if(!isSupabaseConfigured){const source=input.sourceDiscoverItemId?discoverCards.find(c=>c.id===input.sourceDiscoverItemId):undefined;const ids=new Set([currentUser.id,...(input.participantIds??[])]);const plan:Plan={id:`plan-${Date.now()}`,title:input.title.trim(),emoji:input.emoji??source?.emoji??'✨',mode:'SIMPLE',category:source?.category??'OTHER',status:input.startsAt?'PLANNING':'IDEA',organizerId:currentUser.id,participants:people.filter(p=>ids.has(p.id)),timeOptions:input.startsAt?[{id:`time-${Date.now()}`,startsAt:input.startsAt,endsAt:input.endsAt,votes:{[currentUser.id]:'YES'}}]:[]};setPlans(c=>[plan,...c]);return plan}
-  const source=input.sourceDiscoverItemId?discoverCards.find(c=>c.id===input.sourceDiscoverItemId):undefined;const {data,error}=await supabase.rpc('create_plan',{p_title:input.title.trim(),p_emoji:input.emoji??source?.emoji??'✨',p_category:(source?.category??'OTHER') as PlanCategory,p_participant_ids:input.participantIds??[],p_starts_at:input.startsAt??null,p_ends_at:input.endsAt??null});if(error)throw error;
+ const chooseDiscover=useCallback((itemId:string,decision:DiscoverDecision)=>{setDiscoverDecisions(c=>({...c,[itemId]:decision}));if(!currentUser)return;void supabase.from('discover_swipes').upsert({item_id:itemId,user_id:currentUser.id,decision},{onConflict:'item_id,user_id'})},[currentUser]);
+ const createPlan=useCallback(async(input:CreatePlanInput):Promise<Plan>=>{if(!currentUser)throw new Error('Sign in first.');const source=input.sourceDiscoverItemId?discoverCards.find(c=>c.id===input.sourceDiscoverItemId):undefined;
+  const {data,error}=await supabase.rpc('create_plan',{p_title:input.title.trim(),p_emoji:input.emoji??source?.emoji??'✨',p_category:(source?.category??'OTHER') as PlanCategory,p_participant_ids:input.participantIds??[],p_starts_at:input.startsAt??null,p_ends_at:input.endsAt??null});if(error)throw error;
   const {data:row,error:e}=await supabase.from('plans').select(PLAN_SELECT).eq('id',data).single();if(e)throw e;const plan=toPlan(row);setPlans(c=>[plan,...c.filter(x=>x.id!==plan.id)]);return plan;
- },[currentUser,people]);
+ },[currentUser]);
+ const vote=useCallback(async(planId:string,optionId:string,voteValue:VoteValue)=>{if(!currentUser)return;const {error}=await supabase.from('plan_time_votes').upsert({option_id:optionId,user_id:currentUser.id,vote:voteValue,updated_at:new Date().toISOString()},{onConflict:'option_id,user_id'});if(error)throw error;await loadPlans()},[currentUser,loadPlans]);
+ const updatePlanStatus=useCallback(async(planId:string,status:PlanStatus,optionId?:string)=>{const plan=plans.find(p=>p.id===planId);const option=plan?.timeOptions.find(o=>o.id===optionId)??plan?.timeOptions[0];const patch:Record<string,any>={status,updated_at:new Date().toISOString()};if(status==='READY_TO_CONFIRM'||status==='CONFIRMED'){patch.confirmed_starts_at=option?.startsAt??plan?.confirmedStartsAt??null;patch.confirmed_ends_at=option?.endsAt??plan?.confirmedEndsAt??null}const {error}=await supabase.from('plans').update(patch).eq('id',planId);if(error)throw error;await loadPlans()},[loadPlans,plans]);
 
- const vote=useCallback(async(planId:string,optionId:string,voteValue:VoteValue)=>{if(!currentUser)return;if(!isSupabaseConfigured){setPlans(c=>c.map(p=>p.id===planId?{...p,timeOptions:p.timeOptions.map(o=>o.id===optionId?{...o,votes:{...o.votes,[currentUser.id]:voteValue}}:o)}:p));return}
-  const {error}=await supabase.from('plan_time_votes').upsert({option_id:optionId,user_id:currentUser.id,vote:voteValue,updated_at:new Date().toISOString()},{onConflict:'option_id,user_id'});if(error)throw error;await loadPlans();
- },[currentUser,loadPlans]);
-
- const updatePlanStatus=useCallback(async(planId:string,status:PlanStatus,optionId?:string)=>{const plan=plans.find(p=>p.id===planId);const option=plan?.timeOptions.find(o=>o.id===optionId)??plan?.timeOptions[0];if(!isSupabaseConfigured){setPlans(c=>c.map(p=>p.id===planId?{...p,status,confirmedStartsAt:option?.startsAt??p.confirmedStartsAt,confirmedEndsAt:option?.endsAt??p.confirmedEndsAt}:p));return}
-  const patch:Record<string,any>={status,updated_at:new Date().toISOString()};if(status==='READY_TO_CONFIRM'||status==='CONFIRMED'){patch.confirmed_starts_at=option?.startsAt??plan?.confirmedStartsAt??null;patch.confirmed_ends_at=option?.endsAt??plan?.confirmedEndsAt??null}
-  const {error}=await supabase.from('plans').update(patch).eq('id',planId);if(error)throw error;await loadPlans();
- },[loadPlans,plans]);
-
- const value=useMemo<WannaStoreValue>(()=>({ready,backendError,currentUser,people,plans,discoverDecisions,getPlan:(id)=>plans.find(p=>p.id===id),claimProfile,chooseDiscover,createPlan,vote,
+ const value=useMemo<WannaStoreValue>(()=>({ready,backendError,currentUser,people,plans,discoverDecisions,getPlan:(id)=>plans.find(p=>p.id===id),signInWithEmail,signUpWithEmail,signInWithApple,signOut,chooseDiscover,createPlan,vote,
   markReady:(planId,optionId)=>updatePlanStatus(planId,'READY_TO_CONFIRM',optionId),confirmPlan:(planId,optionId)=>updatePlanStatus(planId,'CONFIRMED',optionId),setPlanStatus:(planId,status)=>updatePlanStatus(planId,status),refresh
- }),[backendError,claimProfile,chooseDiscover,createPlan,currentUser,discoverDecisions,people,plans,ready,refresh,updatePlanStatus,vote]);
+ }),[backendError,chooseDiscover,createPlan,currentUser,discoverDecisions,people,plans,ready,refresh,signInWithApple,signInWithEmail,signOut,signUpWithEmail,updatePlanStatus,vote]);
  return <WannaStore.Provider value={value}>{children}</WannaStore.Provider>;
 }
 export function useWanna(){const value=useContext(WannaStore);if(!value)throw new Error('useWanna must be used inside WannaProvider');return value}
